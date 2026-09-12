@@ -1,0 +1,267 @@
+<!DOCTYPE html>
+<html lang="tr">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+  <title>İtalya Gezisi — Milano, Floransa, Roma Rehberi & Checklist</title>
+  <meta name="description" content="Milano, Floransa ve Roma için interaktif gezilecek yerler, müzeler, alışveriş noktaları ve yeme içme rehberi ve checklist.">
+  <meta name="theme-color" content="#121216">
+  <link rel="manifest" href="manifest.json">
+  <link rel="apple-touch-icon" href="https://fav.farm/🇮🇹">
+  <link rel="icon" href="https://fav.farm/🇮🇹">
+  
+  <!-- Fonts -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:ital,wght@0,400;0,500;0,600;0,700;0,800;1,400&family=Playfair+Display:ital,wght@0,600;0,700;1,600&display=swap" rel="stylesheet">
+  
+  <!-- FontAwesome icons (via cdn) -->
+  <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+  
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+
+  <!-- App Header -->
+  <header class="app-header">
+    <div class="header-top">
+      <div class="brand">
+        <span class="flag-icon">🇮🇹</span>
+        <div>
+          <h1>İtalya Turu</h1>
+          <span class="subtitle">Milano • Floransa • Roma</span>
+        </div>
+      </div>
+      <div class="header-actions">
+        <button id="themeToggleBtn" class="icon-btn" title="Tema Değiştir">
+          <i class="fa-solid fa-moon"></i>
+        </button>
+        <button id="addCustomBtn" class="icon-btn" title="Yeni Ekle">
+          <i class="fa-solid fa-plus"></i>
+        </button>
+        <button id="menuBtn" class="icon-btn" title="Menü">
+          <i class="fa-solid fa-ellipsis-vertical"></i>
+        </button>
+      </div>
+    </div>
+
+    <!-- Overall Progress Stats -->
+    <div class="overall-progress-card">
+      <div class="progress-info">
+        <div class="progress-label">
+          <span class="title"><i class="fa-solid fa-location-dot text-gold"></i> Toplam Tamamlanan</span>
+          <span id="progressText" class="count">0 / 0</span>
+        </div>
+        <div class="progress-percentage" id="progressPercentage">0%</div>
+      </div>
+      <div class="progress-bar-container">
+        <div class="progress-bar-fill" id="progressBarFill" style="width: 0%;"></div>
+      </div>
+      <div class="city-mini-stats">
+        <div class="mini-stat" id="statMilano"><span>🇮🇹 Milano:</span> <strong>0/0</strong></div>
+        <div class="mini-stat" id="statFloransa"><span>⚜️ Floransa:</span> <strong>0/0</strong></div>
+        <div class="mini-stat" id="statRoma"><span>🏛️ Roma:</span> <strong>0/0</strong></div>
+      </div>
+    </div>
+
+    <!-- Main Navigation Tabs -->
+    <nav class="city-tabs" id="cityTabs">
+      <button class="tab-btn active" data-city="all">
+        <i class="fa-solid fa-globe"></i> Tümü
+      </button>
+      <button class="tab-btn" data-city="mustsee">
+        <i class="fa-solid fa-star text-gold"></i> Mutlaka (25)
+      </button>
+      <button class="tab-btn" data-city="milano">
+        <span class="tab-icon">🏙️</span> Milano
+      </button>
+      <button class="tab-btn" data-city="floransa">
+        <span class="tab-icon">⚜️</span> Floransa
+      </button>
+      <button class="tab-btn" data-city="roma">
+        <span class="tab-icon">🏛️</span> Roma
+      </button>
+    </nav>
+
+    <!-- Search & Secondary Filters -->
+    <div class="search-filter-section">
+      <div class="search-box">
+        <i class="fa-solid fa-magnifying-glass search-icon"></i>
+        <input type="text" id="searchInput" placeholder="Yer, yemek veya mekan ara..." autocomplete="off">
+        <button id="clearSearchBtn" class="clear-search-btn hidden"><i class="fa-solid fa-xmark"></i></button>
+      </div>
+
+      <div class="category-pills" id="categoryPills">
+        <button class="pill-btn active" data-category="all">Tümü</button>
+        <button class="pill-btn" data-category="sights"><i class="fa-solid fa-landmark"></i> Tarih & Şehir</button>
+        <button class="pill-btn" data-category="museums"><i class="fa-solid fa-palette"></i> Müze & Sanat</button>
+        <button class="pill-btn" data-category="food"><i class="fa-solid fa-utensils"></i> Yeme & İçme</button>
+        <button class="pill-btn" data-category="shopping"><i class="fa-solid fa-bag-shopping"></i> Alışveriş</button>
+        <button class="pill-btn" data-category="outlets"><i class="fa-solid fa-tags"></i> Outlet</button>
+      </div>
+
+      <div class="status-filters">
+        <span class="filter-label">Durum:</span>
+        <button class="status-btn active" data-status="all">Hepsi</button>
+        <button class="status-btn" data-status="todo">Gezilecekler</button>
+        <button class="status-btn" data-status="done">Tamamlananlar</button>
+      </div>
+    </div>
+  </header>
+
+  <!-- Main Content Container -->
+  <main class="app-main">
+    <!-- City Info Card Banner (Dynamic based on selected city) -->
+    <div id="cityBanner" class="city-banner hidden">
+      <div class="banner-content">
+        <h2 id="bannerTitle">Milano</h2>
+        <p id="bannerDuration" class="banner-duration"><i class="fa-regular fa-clock"></i> 1 tam gün yeterli — 2 gece ideal</p>
+        <p id="bannerDesc" class="banner-desc">Moda ve tasarımın başkenti. Duomo, Galleria ve Brera merkezde yan yana.</p>
+      </div>
+    </div>
+
+    <!-- Items List Container -->
+    <div id="itemsContainer" class="items-container">
+      <!-- Dynamic list items rendered by app.js -->
+    </div>
+
+    <!-- Empty state when search or filter returns nothing -->
+    <div id="emptyState" class="empty-state hidden">
+      <div class="empty-icon"><i class="fa-solid fa-compass"></i></div>
+      <h3>Aradığınız kriterlere uygun yer bulunamadı.</h3>
+      <p>Arama terimini temizlemeyi veya filtreleri sıfırlamayı deneyin.</p>
+      <button id="resetFiltersBtn" class="secondary-btn">Filtreleri Sıfırla</button>
+    </div>
+  </main>
+
+  <!-- Bottom Quick Navigation Mobile Bar -->
+  <footer class="bottom-nav">
+    <button class="bottom-nav-item active" data-tab="all">
+      <i class="fa-solid fa-list-check"></i>
+      <span>Checklist</span>
+    </button>
+    <button class="bottom-nav-item" data-tab="mustsee">
+      <i class="fa-solid fa-star"></i>
+      <span>Top 25</span>
+    </button>
+    <button class="bottom-nav-item" data-tab="food">
+      <i class="fa-solid fa-pizza-slice"></i>
+      <span>Nerede Ne Yenir?</span>
+    </button>
+    <button class="bottom-nav-item" id="openAddModalBottom">
+      <i class="fa-solid fa-plus-circle"></i>
+      <span>Ekle</span>
+    </button>
+  </footer>
+
+  <!-- Modal: Item Detail & User Note -->
+  <div id="detailModal" class="modal-backdrop hidden">
+    <div class="modal-card">
+      <div class="modal-header">
+        <div>
+          <span id="modalCityBadge" class="badge">Milano</span>
+          <span id="modalCategoryBadge" class="badge category-badge">Müze</span>
+        </div>
+        <button class="modal-close" id="closeDetailModal"><i class="fa-solid fa-xmark"></i></button>
+      </div>
+      <div class="modal-body">
+        <h3 id="modalTitle">Son Akşam Yemeği</h3>
+        <p id="modalSubtitle" class="modal-subtitle">Santa Maria delle Grazie'deki ünlü Leonardo eseri.</p>
+        
+        <div id="modalInfoBox" class="modal-info-box">
+          <!-- Dynamic info such as advice, phone, rating -->
+        </div>
+
+        <div class="modal-note-section">
+          <label for="modalUserNote"><i class="fa-regular fa-note-sticky"></i> Kişisel Notlarım / Bilet Saati:</label>
+          <textarea id="modalUserNote" placeholder="Örn: Bilet saati 15:30, Giriş 15 dk önce başlar..." rows="3"></textarea>
+          <button id="saveNoteBtn" class="primary-btn"><i class="fa-solid fa-floppy-disk"></i> Notu Kaydet</button>
+        </div>
+      </div>
+      <div class="modal-footer">
+        <a id="modalMapBtn" href="#" target="_blank" rel="noopener" class="map-btn">
+          <i class="fa-solid fa-map-location-dot"></i> Google Maps'te Aç
+        </a>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal: Add Custom Item -->
+  <div id="addModal" class="modal-backdrop hidden">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h3><i class="fa-solid fa-plus text-gold"></i> Yeni Yer / Mekan Ekle</h3>
+        <button class="modal-close" id="closeAddModal"><i class="fa-solid fa-xmark"></i></button>
+      </div>
+      <form id="addCustomForm" class="modal-body form-body">
+        <div class="form-group">
+          <label>Şehir</label>
+          <select id="newCity" required>
+            <option value="milano">Milano 🇮🇹</option>
+            <option value="floransa">Floransa ⚜️</option>
+            <option value="roma">Roma 🏛️</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label>Kategori</label>
+          <select id="newCategory" required>
+            <option value="sights">Tarih & Şehir 🏛️</option>
+            <option value="museums">Müze & Sanat 🎨</option>
+            <option value="food">Yeme & İçme 🍝</option>
+            <option value="shopping">Alışveriş 🛍️</option>
+            <option value="outlets">Outlet 🏷️</option>
+          </select>
+        </div>
+
+        <div class="form-group">
+          <label>Başlık / Mekan Adı</label>
+          <input type="text" id="newTitle" placeholder="Örn: Osteria da Rita" required>
+        </div>
+
+        <div class="form-group">
+          <label>Açıklama / Not</label>
+          <input type="text" id="newSubtitle" placeholder="Örn: Harika tiramisu yapıyorlar">
+        </div>
+
+        <div class="form-group checkbox-group">
+          <label>
+            <input type="checkbox" id="newIsMustSee"> ⭐ Mutlaka Görülmeli (Top Highlight)
+          </label>
+        </div>
+
+        <div class="modal-footer">
+          <button type="button" class="secondary-btn" id="cancelAddModal">İptal</button>
+          <button type="submit" class="primary-btn"><i class="fa-solid fa-check"></i> Ekle</button>
+        </div>
+      </form>
+    </div>
+  </div>
+
+  <!-- Modal: Menu / Data Management -->
+  <div id="menuModal" class="modal-backdrop hidden">
+    <div class="modal-card">
+      <div class="modal-header">
+        <h3><i class="fa-solid fa-sliders text-gold"></i> Ayarlar & Veri Yönetimi</h3>
+        <button class="modal-close" id="closeMenuModal"><i class="fa-solid fa-xmark"></i></button>
+      </div>
+      <div class="modal-body menu-options">
+        <button id="exportDataBtn" class="menu-action-btn">
+          <i class="fa-solid fa-file-export"></i> Verilerimi İndir (Yedekle - JSON)
+        </button>
+        
+        <label for="importFileInput" class="menu-action-btn file-input-label">
+          <i class="fa-solid fa-file-import"></i> Veri Yükle (Yedekten Geri Yükle)
+          <input type="file" id="importFileInput" accept=".json" class="hidden">
+        </label>
+
+        <button id="resetAllBtn" class="menu-action-btn danger">
+          <i class="fa-solid fa-rotate-left"></i> İşaretleri ve Notları Sıfırla
+        </button>
+      </div>
+    </div>
+  </div>
+
+  <script src="app.js"></script>
+</body>
+</html>
