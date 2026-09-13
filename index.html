@@ -18,7 +18,7 @@
   <!-- FontAwesome icons (via cdn) -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   
-  <link rel="stylesheet" href="style.css?v=5">
+  <link rel="stylesheet" href="style.css?v=6">
 </head>
 <body>
 
@@ -290,6 +290,16 @@
       </div>
 
       <div class="modal-body border-modal-body">
+        <!-- Direction Segmented Switcher (Gidiş / Dönüş) -->
+        <div class="border-direction-toggle" id="borderDirToggle">
+          <button class="dir-btn active" data-dir="outbound">
+            🇹🇷 ➔ 🇬🇷 Gidiş <small>(Türkiye'den Çıkış)</small>
+          </button>
+          <button class="dir-btn" data-dir="inbound">
+            🇬🇷 ➔ 🇹🇷 Dönüş <small>(Yurda Giriş)</small>
+          </button>
+        </div>
+
         <div class="border-refresh-bar">
           <span class="live-indicator">
             <span class="live-dot"></span> Canlı Akış <small class="auto-refresh-label">(30 dk'da bir otomatik yenilenir)</small>
@@ -308,15 +318,8 @@
           <!-- Dynamic rendering by app.js -->
         </div>
 
-        <div class="border-tips-box">
-          <h4><i class="fa-solid fa-passport text-gold"></i> Türkiye - Yunanistan Geçiş Notları:</h4>
-          <ul>
-            <li><strong>📄 Yeşil Sigorta:</strong> Uluslararası trafik sigortası (Green Card) zorunludur. Kapıda da yaptırılabilir.</li>
-            <li><strong>🪪 Ehliyet:</strong> Çipli T.C. Ehliyeti veya Uluslararası Sürücü Belgesi geçerlidir.</li>
-            <li><strong>🚗 Araç Ruhsatı:</strong> Ruhsat sahibi araçta yoksa noter onaylı vekaletname gereklidir.</li>
-            <li><strong>📸 Sürücü Paylaşımları:</strong> Anlık canlı sürücü hikayeleri ve sınır sıra durumları için <a href="https://www.instagram.com/trakyasinirkapilari/" target="_blank" rel="noopener" class="ig-inline-link"><i class="fa-brands fa-instagram"></i> @trakyasinirkapilari</a> Instagram hesabını takip edebilirsiniz.</li>
-            <li><strong>💡 Tavsiye:</strong> İpsala en büyük ve otoban bağlantılı ana kapıdır. Turistik binek araçlarda Edirne yakınındaki Pazarkule Kapısı sakin bir alternatiftir.</li>
-          </ul>
+        <div class="border-tips-box" id="borderTipsBox">
+          <!-- Dynamically updated by app.js based on direction -->
         </div>
       </div>
 
@@ -331,6 +334,6 @@
     </div>
   </div>
 
-  <script src="app.js?v=5"></script>
+  <script src="app.js?v=6"></script>
 </body>
 </html>

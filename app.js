@@ -1816,6 +1816,15 @@ function setupEventListeners() {
     refreshBorderBtn.addEventListener("click", () => refreshBorderStatus());
   }
 
+  document.querySelectorAll(".border-direction-toggle .dir-btn").forEach(btn => {
+    btn.addEventListener("click", () => {
+      document.querySelectorAll(".border-direction-toggle .dir-btn").forEach(b => b.classList.remove("active"));
+      btn.classList.add("active");
+      currentBorderDirection = btn.dataset.dir;
+      refreshBorderStatus();
+    });
+  });
+
   document.getElementById("exportDataBtn").addEventListener("click", () => {
     const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(items, null, 2));
     const dlAnchorElem = document.createElement('a');
@@ -2276,11 +2285,13 @@ function registerServiceWorker() {
 window.openDetailModal = openDetailModal;
 
 // ==================== BORDER CROSSING (SINIR KAPILARI) LOGIC ====================
-const BORDER_GATES_DATA = [
+let currentBorderDirection = "outbound"; // "outbound" (TR->GR) or "inbound" (GR->TR)
+
+const BORDER_GATES_OUTBOUND = [
   {
     id: "ipsala",
-    name: "İpsala Sınır Kapısı 🇹🇷",
-    counterpart: "Kipi Border Crossing 🇬🇷",
+    name: "İpsala Sınır Kapısı 🇹🇷 (Çıkış)",
+    counterpart: "Kipi Border Crossing 🇬🇷 (Giriş)",
     status: "light",
     statusText: "🟢 Akıcı / Yoğun Değil",
     badgeClass: "status-green",
@@ -2289,12 +2300,14 @@ const BORDER_GATES_DATA = [
     carStatus: "🟢 Akıcı (10-15 dk)",
     truckStatus: "🟡 Orta (30-45 dk)",
     advice: "Otoban bağlantılı en geniş ana geçiş kapısı. Gece ve sabah ilk saatlerde son derece sakindir.",
-    cameraUrl: "https://www.google.com/maps/search/?api=1&query=Ipsala+Border+Crossing"
+    cameraUrl: "https://www.google.com/maps/search/?api=1&query=Ipsala+Border+Crossing",
+    osrmUrl: "https://router.project-osrm.org/route/v1/driving/26.3688,40.9161;26.3175,40.9481?overview=false",
+    baseDuration: 1054
   },
   {
     id: "pazarkule",
-    name: "Pazarkule Sınır Kapısı 🇹🇷",
-    counterpart: "Kastanies 🇬🇷",
+    name: "Pazarkule Sınır Kapısı 🇹🇷 (Çıkış)",
+    counterpart: "Kastanies 🇬🇷 (Giriş)",
     status: "light",
     statusText: "🟢 Çok Sakin / Hızlı Geçiş",
     badgeClass: "status-green",
@@ -2303,12 +2316,14 @@ const BORDER_GATES_DATA = [
     carStatus: "🟢 Çok Akıcı (5-10 dk)",
     truckStatus: "⚪ Ticari Tır Geçişi Yok",
     advice: "Yeni genişletilen modern kapı. Edirne şehir merkezine çok yakındır. Turistik binek araç ile seyahat edenler için en rahat ve hızlı alternatiftir.",
-    cameraUrl: "https://www.google.com/maps/search/?api=1&query=Pazarkule+Sinir+Kapisi"
+    cameraUrl: "https://www.google.com/maps/search/?api=1&query=Pazarkule+Sinir+Kapisi",
+    osrmUrl: "https://router.project-osrm.org/route/v1/driving/26.5200,41.6600;26.4858,41.6575?overview=false",
+    baseDuration: 560
   },
   {
     id: "uzunkopru",
-    name: "Uzunköprü Sınır Kapısı 🇹🇷",
-    counterpart: "Pythio 🇬🇷",
+    name: "Uzunköprü Sınır Kapısı 🇹🇷 (Çıkış)",
+    counterpart: "Pythio 🇬🇷 (Giriş)",
     status: "closed",
     statusText: "⚪ Yolcu Karayolu Geçişine Kapalı",
     badgeClass: "status-gray",
@@ -2320,6 +2335,59 @@ const BORDER_GATES_DATA = [
     cameraUrl: "https://www.google.com/maps/search/?api=1&query=Uzunkopru+Border+Crossing"
   }
 ];
+
+const BORDER_GATES_INBOUND = [
+  {
+    id: "kipi_ipsala",
+    name: "Kipi Border Crossing 🇬🇷 (Yunanistan Çıkış)",
+    counterpart: "İpsala Sınır Kapısı 🇹🇷 (Yurda Giriş)",
+    status: "light",
+    statusText: "🟢 Akıcı / Türkiye'ye Dönüş Rahat",
+    badgeClass: "status-green",
+    waitTime: "10 - 20 Dk",
+    queueLength: "~15 Araç",
+    carStatus: "🟢 Akıcı (10-15 dk)",
+    truckStatus: "🟡 Orta (30-40 dk)",
+    advice: "Dedeağaç - İpsala yönü geniş otoban bağlantısı. Yunanistan gümrük pasaport ve Duty Free çıkışından sonra Türkiye giriş gümrüğüne geçilir.",
+    cameraUrl: "https://www.google.com/maps/search/?api=1&query=Kipi+Border+Crossing",
+    osrmUrl: "https://router.project-osrm.org/route/v1/driving/26.2500,40.9200;26.3175,40.9481?overview=false",
+    baseDuration: 720
+  },
+  {
+    id: "kastanies_pazarkule",
+    name: "Kastanies 🇬🇷 (Yunanistan Çıkış)",
+    counterpart: "Pazarkule Sınır Kapısı 🇹🇷 (Edirne Giriş)",
+    status: "light",
+    statusText: "🟢 Çok Sakin / Hızlı Dönüş",
+    badgeClass: "status-green",
+    waitTime: "5 - 15 Dk",
+    queueLength: "~5 Araç",
+    carStatus: "🟢 Çok Akıcı (5-10 dk)",
+    truckStatus: "⚪ Ticari Tır Geçişi Yok",
+    advice: "Orestiada / Kastanies üzerinden Edirne Pazarkule'ye geçiş. Binek araç dönüşlerinde son derece pratik ve kuyruksuz alternatif.",
+    cameraUrl: "https://www.google.com/maps/search/?api=1&query=Kastanies+Border+Crossing",
+    osrmUrl: "https://router.project-osrm.org/route/v1/driving/26.5000,41.6400;26.4858,41.6575?overview=false",
+    baseDuration: 420
+  },
+  {
+    id: "pythio_uzunkopru",
+    name: "Pythio 🇬🇷 (Çıkış)",
+    counterpart: "Uzunköprü Sınır Kapısı 🇹🇷",
+    status: "closed",
+    statusText: "⚪ Yolcu Karayolu Geçişine Kapalı",
+    badgeClass: "status-gray",
+    waitTime: "—",
+    queueLength: "—",
+    carStatus: "🚫 Karayolu Binek Araç Geçişi Yok",
+    truckStatus: "🚫 Karayolu Geçişi Yok",
+    advice: "Demiryolu ve özel protokol kapısıdır. Yolcu karayolu araç dönüşü kapalıdır; Kipi/İpsala veya Kastanies/Pazarkule kullanınız.",
+    cameraUrl: "https://www.google.com/maps/search/?api=1&query=Pythio+Border+Crossing"
+  }
+];
+
+function getActiveBorderGates() {
+  return currentBorderDirection === "inbound" ? BORDER_GATES_INBOUND : BORDER_GATES_OUTBOUND;
+}
 
 function openBorderModal() {
   renderBorderStatus();
@@ -2338,7 +2406,6 @@ let borderAutoRefreshTimer = null;
 
 function startBorderAutoRefresh() {
   if (!borderAutoRefreshTimer) {
-    // Auto-refresh every 30 minutes (30 * 60 * 1000 ms)
     borderAutoRefreshTimer = setInterval(() => {
       console.log("30-min auto refresh triggering border status update...");
       refreshBorderStatus();
@@ -2347,57 +2414,58 @@ function startBorderAutoRefresh() {
 }
 
 async function fetchLiveOSRMData() {
-  const ipsalaUrl = "https://router.project-osrm.org/route/v1/driving/26.3688,40.9161;26.3175,40.9481?overview=false";
-  const pazarkuleUrl = "https://router.project-osrm.org/route/v1/driving/26.5200,41.6600;26.4858,41.6575?overview=false";
+  const gates = getActiveBorderGates();
+  const ipsalaGate = gates[0];
+  const pazarkuleGate = gates[1];
 
   try {
     const [ipsalaRes, pazarkuleRes] = await Promise.all([
-      fetch(ipsalaUrl).then(r => r.json()).catch(() => null),
-      fetch(pazarkuleUrl).then(r => r.json()).catch(() => null)
+      fetch(ipsalaGate.osrmUrl).then(r => r.json()).catch(() => null),
+      fetch(pazarkuleGate.osrmUrl).then(r => r.json()).catch(() => null)
     ]);
 
     if (ipsalaRes && ipsalaRes.routes && ipsalaRes.routes[0]) {
       const duration = ipsalaRes.routes[0].duration;
-      const ratio = duration / 1054;
+      const ratio = duration / (ipsalaGate.baseDuration || 1000);
 
       if (ratio > 1.35) {
-        BORDER_GATES_DATA[0].statusText = "🔴 Yoğun (Kuyruk Var - Canlı)";
-        BORDER_GATES_DATA[0].badgeClass = "status-red";
-        BORDER_GATES_DATA[0].waitTime = "45 - 75 Dk";
-        BORDER_GATES_DATA[0].queueLength = "~50+ Araç";
-        BORDER_GATES_DATA[0].carStatus = "🔴 Yoğun (40+ dk)";
+        ipsalaGate.statusText = currentBorderDirection === "inbound" ? "🔴 Yoğun (Dönüş Sırası Var)" : "🔴 Yoğun (Kuyruk Var - Canlı)";
+        ipsalaGate.badgeClass = "status-red";
+        ipsalaGate.waitTime = "45 - 75 Dk";
+        ipsalaGate.queueLength = "~50+ Araç";
+        ipsalaGate.carStatus = "🔴 Yoğun (40+ dk)";
       } else if (ratio > 1.12) {
-        BORDER_GATES_DATA[0].statusText = "🟡 Orta Yoğunluk (Canlı)";
-        BORDER_GATES_DATA[0].badgeClass = "status-yellow";
-        BORDER_GATES_DATA[0].waitTime = "20 - 35 Dk";
-        BORDER_GATES_DATA[0].queueLength = "~25-35 Araç";
-        BORDER_GATES_DATA[0].carStatus = "🟡 Orta (20-30 dk)";
+        ipsalaGate.statusText = currentBorderDirection === "inbound" ? "🟡 Orta Yoğunluk (Dönüş)" : "🟡 Orta Yoğunluk (Canlı)";
+        ipsalaGate.badgeClass = "status-yellow";
+        ipsalaGate.waitTime = "20 - 35 Dk";
+        ipsalaGate.queueLength = "~25-35 Araç";
+        ipsalaGate.carStatus = "🟡 Orta (20-30 dk)";
       } else {
-        BORDER_GATES_DATA[0].statusText = "🟢 Akıcı / Yoğun Değil (Canlı)";
-        BORDER_GATES_DATA[0].badgeClass = "status-green";
-        BORDER_GATES_DATA[0].waitTime = "10 - 15 Dk";
-        BORDER_GATES_DATA[0].queueLength = "~10-15 Araç";
-        BORDER_GATES_DATA[0].carStatus = "🟢 Akıcı (10-15 dk)";
+        ipsalaGate.statusText = currentBorderDirection === "inbound" ? "🟢 Akıcı / Yurda Dönüş Rahat" : "🟢 Akıcı / Yoğun Değil (Canlı)";
+        ipsalaGate.badgeClass = "status-green";
+        ipsalaGate.waitTime = "10 - 15 Dk";
+        ipsalaGate.queueLength = "~10-15 Araç";
+        ipsalaGate.carStatus = "🟢 Akıcı (10-15 dk)";
       }
-      BORDER_GATES_DATA[0].isLive = true;
+      ipsalaGate.isLive = true;
     }
 
     if (pazarkuleRes && pazarkuleRes.routes && pazarkuleRes.routes[0]) {
       const duration = pazarkuleRes.routes[0].duration;
-      const ratio = duration / 560;
+      const ratio = duration / (pazarkuleGate.baseDuration || 500);
 
       if (ratio > 1.25) {
-        BORDER_GATES_DATA[1].statusText = "🟡 Orta Yoğunluk (Canlı)";
-        BORDER_GATES_DATA[1].badgeClass = "status-yellow";
-        BORDER_GATES_DATA[1].waitTime = "15 - 25 Dk";
-        BORDER_GATES_DATA[1].queueLength = "~15 Araç";
+        pazarkuleGate.statusText = "🟡 Orta Yoğunluk (Canlı)";
+        pazarkuleGate.badgeClass = "status-yellow";
+        pazarkuleGate.waitTime = "15 - 25 Dk";
+        pazarkuleGate.queueLength = "~15 Araç";
       } else {
-        BORDER_GATES_DATA[1].statusText = "🟢 Çok Sakin / Hızlı Geçiş (Canlı)";
-        BORDER_GATES_DATA[1].badgeClass = "status-green";
-        BORDER_GATES_DATA[1].waitTime = "5 - 12 Dk";
-        BORDER_GATES_DATA[1].queueLength = "~5 Araç";
+        pazarkuleGate.statusText = currentBorderDirection === "inbound" ? "🟢 Çok Sakin / Hızlı Dönüş" : "🟢 Çok Sakin / Hızlı Geçiş (Canlı)";
+        pazarkuleGate.badgeClass = "status-green";
+        pazarkuleGate.waitTime = "5 - 12 Dk";
+        pazarkuleGate.queueLength = "~5 Araç";
       }
-      BORDER_GATES_DATA[1].isLive = true;
+      pazarkuleGate.isLive = true;
     }
   } catch (err) {
     console.warn("Live OSRM fetch fallback to time estimate:", err);
@@ -2419,35 +2487,65 @@ function renderBorderRecommendation() {
   const box = document.getElementById("borderRecommendationBox");
   if (!box) return;
 
-  const ipsala = BORDER_GATES_DATA.find(g => g.id === "ipsala");
-  const pazarkule = BORDER_GATES_DATA.find(g => g.id === "pazarkule");
+  const gates = getActiveBorderGates();
+  const mainGate = gates[0]; // Ipsala / Kipi
+  const secGate = gates[1];  // Pazarkule / Kastanies
 
   let rec = null;
 
-  if (pazarkule && pazarkule.badgeClass === "status-green" && ipsala && (ipsala.badgeClass === "status-red" || ipsala.badgeClass === "status-yellow")) {
-    rec = {
-      title: "Pazarkule Sınır Kapısı 🇹🇷 ➔ 🇬🇷",
-      badge: "⚡ EN HIZLI & SAKİN SEÇENEK",
-      badgeClass: "rec-green",
-      icon: "fa-bolt",
-      desc: "İpsala Sınır Kapısı'nda yoğunluk / bekleme riski var. Pazarkule'de şu an binek araçlar için beklemesiz ve çok akıcı geçiş var. Binek aracınızla Edirne üzerinden Pazarkule'yi tercih etmek zamandan tasarruf sağlar."
-    };
-  } else if (ipsala && ipsala.badgeClass === "status-green") {
-    rec = {
-      title: "İpsala Sınır Kapısı 🇹🇷 ➔ 🇬🇷",
-      badge: "⭐ EN KONFORLU OTOBAN ROTASI",
-      badgeClass: "rec-gold",
-      icon: "fa-road",
-      desc: "İpsala'da şu an trafik akıcı ve bekleme süresi minimum. Geniş otoban bağlantısı ve yüksek geçiş kapasitesi nedeniyle ilk tercihiniz İpsala olmalı."
-    };
+  if (currentBorderDirection === "inbound") {
+    if (secGate && secGate.badgeClass === "status-green" && mainGate && (mainGate.badgeClass === "status-red" || mainGate.badgeClass === "status-yellow")) {
+      rec = {
+        title: "Kastanies ➔ Pazarkule Sınır Kapısı (Dönüş)",
+        badge: "⚡ EN SAKİN DÖNÜŞ ROTASI",
+        badgeClass: "rec-green",
+        icon: "fa-bolt",
+        desc: "Kipi / İpsala yurda dönüş kapısında yoğunluk / bekleme var. Kastanies ➔ Pazarkule üzerinden Edirne'ye giriş yapmak binek araçlar için çok daha hızlı ve sakindir."
+      };
+    } else if (mainGate && mainGate.badgeClass === "status-green") {
+      rec = {
+        title: "Kipi ➔ İpsala Sınır Kapısı (Dönüş)",
+        badge: "⭐ EN HIZLI VE OTOBAN DÖNÜŞÜ",
+        badgeClass: "rec-gold",
+        icon: "fa-road",
+        desc: "Türkiye'ye dönüşte Kipi ➔ İpsala kapısında şu an kuyruk yok ve geçişler son derece akıcı. Otoban rahatlığıyla yurda giriş yapabilirsiniz."
+      };
+    } else {
+      rec = {
+        title: "Pazarkule Dönüş Rotası (Binek Araç İdeal)",
+        badge: "💡 PRATİK DÖNÜŞ KAPISI",
+        badgeClass: "rec-blue",
+        icon: "fa-car",
+        desc: "Binek araçla Türkiye'ye dönerken Pazarkule gümrük kapısı işlemlerinizi hızlı tamamlamanızı sağlar."
+      };
+    }
   } else {
-    rec = {
-      title: "Pazarkule Sınır Kapısı (Binek Araç İdeal)",
-      badge: "💡 SAKİN KAPI ALTERNATİFİ",
-      badgeClass: "rec-blue",
-      icon: "fa-car",
-      desc: "Binek araçla seyahat ediyorsanız Edirne Pazarkule Kapısı turistik araç geçişlerinde daha hızlı ve rahat bir tercih olacaktır."
-    };
+    // Outbound logic
+    if (secGate && secGate.badgeClass === "status-green" && mainGate && (mainGate.badgeClass === "status-red" || mainGate.badgeClass === "status-yellow")) {
+      rec = {
+        title: "Pazarkule Sınır Kapısı 🇹🇷 ➔ 🇬🇷",
+        badge: "⚡ EN HIZLI & SAKİN SEÇENEK",
+        badgeClass: "rec-green",
+        icon: "fa-bolt",
+        desc: "İpsala Sınır Kapısı'nda yoğunluk / bekleme riski var. Pazarkule'de şu an binek araçlar için beklemesiz ve çok akıcı geçiş var. Edirne üzerinden Pazarkule'yi tercih etmek zamandan tasarruf sağlar."
+      };
+    } else if (mainGate && mainGate.badgeClass === "status-green") {
+      rec = {
+        title: "İpsala Sınır Kapısı 🇹🇷 ➔ 🇬🇷",
+        badge: "⭐ EN KONFORLU OTOBAN ROTASI",
+        badgeClass: "rec-gold",
+        icon: "fa-road",
+        desc: "İpsala'da şu an trafik akıcı ve bekleme süresi minimum. Geniş otoban bağlantısı ve yüksek geçiş kapasitesi nedeniyle ilk tercihiniz İpsala olmalı."
+      };
+    } else {
+      rec = {
+        title: "Pazarkule Sınır Kapısı (Binek Araç İdeal)",
+        badge: "💡 SAKİN KAPI ALTERNATİFİ",
+        badgeClass: "rec-blue",
+        icon: "fa-car",
+        desc: "Binek araçla seyahat ediyorsanız Edirne Pazarkule Kapısı turistik araç geçişlerinde daha hızlı ve rahat bir tercih olacaktır."
+      };
+    }
   }
 
   box.innerHTML = `
@@ -2456,7 +2554,7 @@ function renderBorderRecommendation() {
         <div class="rec-title-group">
           <i class="fa-solid ${rec.icon} rec-icon"></i>
           <div>
-            <span class="rec-subtitle">Şu An Anlık En Mantıklı Geçiş Kapısı</span>
+            <span class="rec-subtitle">${currentBorderDirection === 'inbound' ? 'Dönüşte Anlık En Mantıklı Gümrük Kapısı' : 'Gidişte Anlık En Mantıklı Geçiş Kapısı'}</span>
             <h4 class="rec-title">${rec.title}</h4>
           </div>
         </div>
@@ -2465,6 +2563,36 @@ function renderBorderRecommendation() {
       <p class="rec-desc">${rec.desc}</p>
     </div>
   `;
+}
+
+function renderBorderTips() {
+  const box = document.getElementById("borderTipsBox");
+  if (!box) return;
+
+  if (currentBorderDirection === "inbound") {
+    box.innerHTML = `
+      <h4><i class="fa-solid fa-plane-arrival text-gold"></i> Yunanistan ➔ Türkiye Dönüş Notları & Gümrük Muafiyetleri:</h4>
+      <ul>
+        <li><strong>🛍️ Duty Free (Kipi/Kastanies):</strong> Yunan gümrük çıkışında Duty Free mağazalarından alışveriş yapabilir ve Tax Free onayınızı alabilirsiniz.</li>
+        <li><strong>📦 Gümrük Muafiyet Sınırları:</strong> Kişi başı 430 € değerinde kişisel eşya / hediyelik eşya gümrük vergisinden muaf getirilebilir.</li>
+        <li><strong>🍷 Alkollü İçecek Muafiyeti:</strong> 21 yaş üzeri yetişkin başı 1 Litre (%22'den yüksek alkollü) veya 2 Litre (%22 ve altı şarap/şampanya) hakkı bulunmaktadır.</li>
+        <li><strong>🚬 Tütün Muafiyeti:</strong> Kişi başı 200 adet sigara (1 karton) veya 50 adet puro hakkı mevcuttur.</li>
+        <li><strong>🛃 Türkiye Giriş İşlemleri:</strong> Sınırda önce Pasaport Kontrolü, ardından Araç Gümrük Kayıt / Tescil bankolarından geçilir.</li>
+        <li><strong>📸 Canlı Sürücü Hikayeleri:</strong> Dönüş sırasındaki anlık görüntüler için <a href="https://www.instagram.com/trakyasinirkapilari/" target="_blank" rel="noopener" class="ig-inline-link"><i class="fa-brands fa-instagram"></i> @trakyasinirkapilari</a> Instagram hesabını kontrol edebilirsiniz.</li>
+      </ul>
+    `;
+  } else {
+    box.innerHTML = `
+      <h4><i class="fa-solid fa-passport text-gold"></i> Türkiye ➔ Yunanistan Gidiş Notları:</h4>
+      <ul>
+        <li><strong>📄 Yeşil Sigorta:</strong> Uluslararası trafik sigortası (Green Card) zorunludur. Kapıda da yaptırılabilir.</li>
+        <li><strong>🪪 Ehliyet:</strong> Çipli T.C. Ehliyeti veya Uluslararası Sürücü Belgesi geçerlidir.</li>
+        <li><strong>🚗 Araç Ruhsatı:</strong> Ruhsat sahibi araçta yoksa noter onaylı vekaletname gereklidir.</li>
+        <li><strong>📸 Sürücü Paylaşımları:</strong> Anlık canlı sürücü hikayeleri ve sınır sıra durumları için <a href="https://www.instagram.com/trakyasinirkapilari/" target="_blank" rel="noopener" class="ig-inline-link"><i class="fa-brands fa-instagram"></i> @trakyasinirkapilari</a> Instagram hesabını takip edebilirsiniz.</li>
+        <li><strong>💡 Tavsiye:</strong> İpsala en büyük ve otoban bağlantılı ana kapıdır. Turistik binek araçlarda Edirne yakınındaki Pazarkule Kapısı sakin bir alternatiftir.</li>
+      </ul>
+    `;
+  }
 }
 
 function renderBorderStatus() {
@@ -2479,8 +2607,11 @@ function renderBorderStatus() {
   }
 
   renderBorderRecommendation();
+  renderBorderTips();
 
-  container.innerHTML = BORDER_GATES_DATA.map(gate => `
+  const gates = getActiveBorderGates();
+
+  container.innerHTML = gates.map(gate => `
     <div class="border-card ${gate.status}">
       <div class="border-card-top">
         <div class="border-title-group">
