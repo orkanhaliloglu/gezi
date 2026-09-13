@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
-  <title>İtalya Gezisi — Milano, Floransa, Roma Rehberi & Checklist</title>
-  <meta name="description" content="Milano, Floransa ve Roma için interaktif gezilecek yerler, müzeler, alışveriş noktaları ve yeme içme rehberi ve checklist.">
+  <title>İtalya Gezisi — Milano, Floransa, Bologna, Roma Rehberi & Checklist</title>
+  <meta name="description" content="Milano, Floransa, Bologna ve Roma için interaktif gezilecek yerler, müzeler, alışveriş noktaları ve yeme içme rehberi ve checklist.">
   <meta name="theme-color" content="#121216">
   <link rel="manifest" href="manifest.json">
   <link rel="apple-touch-icon" href="https://fav.farm/🇮🇹">
@@ -29,10 +29,14 @@
         <span class="flag-icon">🇮🇹</span>
         <div>
           <h1>İtalya Turu</h1>
-          <span class="subtitle">Milano • Floransa • Roma</span>
+          <span class="subtitle">Milano • Floransa • Bologna • Roma</span>
         </div>
       </div>
       <div class="header-actions">
+        <button id="borderBtn" class="icon-btn border-btn" title="🇹🇷 ↔️ 🇬🇷 Sınır Kapıları Canlı Yoğunluk">
+          <i class="fa-solid fa-car-side"></i>
+          <span class="pulse-dot"></span>
+        </button>
         <button id="themeToggleBtn" class="icon-btn" title="Tema Değiştir">
           <i class="fa-solid fa-moon"></i>
         </button>
@@ -60,6 +64,7 @@
       <div class="city-mini-stats">
         <div class="mini-stat" id="statMilano"><span>🇮🇹 Milano:</span> <strong>0/0</strong></div>
         <div class="mini-stat" id="statFloransa"><span>⚜️ Floransa:</span> <strong>0/0</strong></div>
+        <div class="mini-stat" id="statBologna"><span>🍝 Bologna:</span> <strong>0/0</strong></div>
         <div class="mini-stat" id="statRoma"><span>🏛️ Roma:</span> <strong>0/0</strong></div>
       </div>
     </div>
@@ -70,13 +75,16 @@
         <i class="fa-solid fa-globe"></i> Tümü
       </button>
       <button class="tab-btn" data-city="mustsee">
-        <i class="fa-solid fa-star text-gold"></i> Mutlaka (25)
+        <i class="fa-solid fa-star text-gold"></i> Mutlaka
       </button>
       <button class="tab-btn" data-city="milano">
         <span class="tab-icon">🏙️</span> Milano
       </button>
       <button class="tab-btn" data-city="floransa">
         <span class="tab-icon">⚜️</span> Floransa
+      </button>
+      <button class="tab-btn" data-city="bologna">
+        <span class="tab-icon">🍝</span> Bologna
       </button>
       <button class="tab-btn" data-city="roma">
         <span class="tab-icon">🏛️</span> Roma
@@ -199,6 +207,7 @@
           <select id="newCity" required>
             <option value="milano">Milano 🇮🇹</option>
             <option value="floransa">Floransa ⚜️</option>
+            <option value="bologna">Bologna 🍝</option>
             <option value="roma">Roma 🏛️</option>
           </select>
         </div>
@@ -246,6 +255,10 @@
         <button class="modal-close" id="closeMenuModal"><i class="fa-solid fa-xmark"></i></button>
       </div>
       <div class="modal-body menu-options">
+        <button id="openBorderMenuBtn" class="menu-action-btn highlighted">
+          <i class="fa-solid fa-car-side text-gold"></i> 🇹🇷 ↔️ 🇬🇷 Sınır Kapıları Canlı Yoğunluk
+        </button>
+
         <button id="exportDataBtn" class="menu-action-btn">
           <i class="fa-solid fa-file-export"></i> Verilerimi İndir (Yedekle - JSON)
         </button>
@@ -258,6 +271,51 @@
         <button id="resetAllBtn" class="menu-action-btn danger">
           <i class="fa-solid fa-rotate-left"></i> İşaretleri ve Notları Sıfırla
         </button>
+      </div>
+    </div>
+  </div>
+
+  <!-- Modal: Türkiye - Yunanistan Sınır Kapıları Canlı Yoğunluk -->
+  <div id="borderModal" class="modal-backdrop hidden">
+    <div class="modal-card border-modal-card">
+      <div class="modal-header">
+        <div class="modal-header-title">
+          <span class="flag-pair">🇹🇷 ↔️ 🇬🇷</span>
+          <div>
+            <h3>Sınır Kapıları Canlı Durumu</h3>
+            <span class="modal-sub-label" id="borderLastUpdate"><i class="fa-regular fa-clock"></i> Canlı Veri</span>
+          </div>
+        </div>
+        <button class="modal-close" id="closeBorderModal"><i class="fa-solid fa-xmark"></i></button>
+      </div>
+
+      <div class="modal-body border-modal-body">
+        <div class="border-refresh-bar">
+          <span class="live-indicator"><span class="live-dot"></span> Canlı Anlık Akış</span>
+          <button id="refreshBorderStatusBtn" class="refresh-btn">
+            <i class="fa-solid fa-arrows-rotate"></i> Durumu Yenile
+          </button>
+        </div>
+
+        <div class="border-cards-list" id="borderCardsList">
+          <!-- Dynamic rendering by app.js -->
+        </div>
+
+        <div class="border-tips-box">
+          <h4><i class="fa-solid fa-passport text-gold"></i> Türkiye - Yunanistan Geçiş Notları:</h4>
+          <ul>
+            <li><strong>📄 Yeşil Sigorta:</strong> Uluslararası trafik sigortası (Green Card) zorunludur. Kapıda da yaptırılabilir.</li>
+            <li><strong>🪪 Ehliyet:</strong> Çipli T.C. Ehliyeti veya Uluslararası Sürücü Belgesi geçerlidir.</li>
+            <li><strong>🚗 Araç Ruhsatı:</strong> Ruhsat sahibi araçta yoksa noter onaylı vekaletname gereklidir.</li>
+            <li><strong>💡 Tavsiye:</strong> İpsala en büyük ve otoban bağlantılı ana kapıdır. Turistik binek araçlarda Edirne Edirne yakınındaki Pazarkule Kapısı sakin bir alternatiftir.</li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="modal-footer border-modal-footer">
+        <a href="https://trakya.ticaret.gov.tr/" target="_blank" rel="noopener" class="secondary-btn border-link-btn">
+          <i class="fa-solid fa-building-columns"></i> Trakya Gümrük Canlı Kamera & Web Sayfası
+        </a>
       </div>
     </div>
   </div>

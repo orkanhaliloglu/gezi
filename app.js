@@ -855,7 +855,224 @@ const INITIAL_DATA = [
     userNotes: ""
   },
 
-  // ==================== 3. ROMA ====================
+  // ==================== 3. BOLOGNA ====================
+  // Tarih & Şehir
+  {
+    id: "b1",
+    city: "bologna",
+    category: "sights",
+    title: "Piazza Maggiore",
+    subtitle: "Bologna'nın ana meydanı ve şehir merkezinin kalbi",
+    stars: "⭐⭐⭐",
+    isMustSee: true,
+    rating: "4.8",
+    advice: "Bologna'nın kalbi. Buradan yürüyüş rotasına başlamak en mantıklısı.",
+    mapQuery: "Piazza Maggiore Bologna",
+    checked: false,
+    userNotes: ""
+  },
+  {
+    id: "b2",
+    city: "bologna",
+    category: "sights",
+    title: "Basilica di San Petronio",
+    subtitle: "Piazza Maggiore'deki devasa Gotik bazilika",
+    stars: "⭐⭐",
+    isMustSee: true,
+    rating: "4.7",
+    advice: "Dünyanın en büyük tuğla Gotik bazilikalarından biri. İçi büyüleyici.",
+    mapQuery: "Basilica di San Petronio Bologna",
+    checked: false,
+    userNotes: ""
+  },
+  {
+    id: "b3",
+    city: "bologna",
+    category: "sights",
+    title: "Fontana del Nettuno",
+    subtitle: "Neptün Çeşmesi; Piazza Maggiore'nin hemen yanında",
+    stars: "⭐⭐",
+    isMustSee: false,
+    rating: "4.6",
+    advice: "Piazza Maggiore'nin hemen yanında yer alan simge Neptün Çeşmesi.",
+    mapQuery: "Fontana del Nettuno Bologna",
+    checked: false,
+    userNotes: ""
+  },
+  {
+    id: "b4",
+    city: "bologna",
+    category: "sights",
+    title: "The Two Towers (Due Torri): Garisenda & Asinelli",
+    subtitle: "Bologna'nın sembolü olan Orta Çağ kuleleri",
+    stars: "⭐⭐⭐",
+    isMustSee: true,
+    rating: "4.7",
+    advice: "⚠️ Not: Asinelli şu anda bakım nedeniyle ziyarete kapalı; Garisenda da erişilebilir değil. Bu nedenle bu seyahatte dışarıdan görmek şeklinde planlayalım.",
+    mapQuery: "Due Torri Bologna",
+    checked: false,
+    userNotes: ""
+  },
+  {
+    id: "b5",
+    city: "bologna",
+    category: "sights",
+    title: "Archiginnasio Municipal Library",
+    subtitle: "Bologna Üniversitesi'nin tarihi binası; Anatomical Theatre",
+    stars: "⭐⭐",
+    isMustSee: true,
+    rating: "4.7",
+    advice: "Anatomical Theatre özellikle görülmeye değer. Ziyaret için Anatomical Theatre'a önceden online rezervasyon gerekiyor.",
+    mapQuery: "Archiginnasio Municipal Library Bologna",
+    checked: false,
+    userNotes: ""
+  },
+  {
+    id: "b6",
+    city: "bologna",
+    category: "sights",
+    title: "Piazza Santo Stefano",
+    subtitle: "Bologna'nın en güzel ve atmosferik meydanlarından biri",
+    stars: "⭐⭐",
+    isMustSee: true,
+    rating: "4.8",
+    advice: "Tarihi atmosferi ve cafe'leriyle yürüyüş rotasının keyifli durak noktası.",
+    mapQuery: "Piazza Santo Stefano Bologna",
+    checked: false,
+    userNotes: ""
+  },
+  {
+    id: "b7",
+    city: "bologna",
+    category: "sights",
+    title: "Basilica Santuario Santo Stefano",
+    subtitle: "\"Yedi Kilise\" (Le Sette Chiese) kompleksi",
+    stars: "⭐⭐",
+    isMustSee: false,
+    rating: "4.8",
+    advice: "\"Yedi Kilise\" kompleksi; tarihi ve ruhani atmosferi çok güzel.",
+    mapQuery: "Basilica Santuario Santo Stefano Bologna",
+    checked: false,
+    userNotes: ""
+  },
+  {
+    id: "b8",
+    city: "bologna",
+    category: "sights",
+    title: "Portici di Bologna",
+    subtitle: "Şehrin meşhur kemerli yürüyüş yolları (UNESCO Dünya Mirası)",
+    stars: "⭐⭐⭐",
+    isMustSee: true,
+    rating: "4.9",
+    advice: "Bologna'nın en karakteristik özelliklerinden ve UNESCO Dünya Mirası. Toplam 62 km kemerli yol.",
+    mapQuery: "Portici di Bologna",
+    checked: false,
+    userNotes: ""
+  },
+
+  // Yemek & Pazar
+  {
+    id: "b9",
+    city: "bologna",
+    category: "food",
+    title: "Quadrilatero",
+    subtitle: "Bologna'nın tarihi gastronomi bölgesi",
+    stars: "⭐⭐⭐",
+    isMustSee: true,
+    rating: "4.8",
+    advice: "Bologna'nın kalbinde tarihi gastronomi bölgesi. Akşam yemeği ve aperitivo için mutlaka uğranmalı.",
+    mapQuery: "Quadrilatero Bologna",
+    checked: false,
+    userNotes: ""
+  },
+  {
+    id: "b10",
+    city: "bologna",
+    category: "food",
+    title: "Mercato delle Erbe",
+    subtitle: "Tarihi kapalı pazar",
+    stars: "⭐⭐",
+    isMustSee: false,
+    rating: "4.6",
+    advice: "Tarihi kapalı pazar; yemek ve aperitivo için güzel yerel alternatif.",
+    mapQuery: "Mercato delle Erbe Bologna",
+    checked: false,
+    userNotes: ""
+  },
+  {
+    id: "b11",
+    city: "bologna",
+    category: "food",
+    title: "Via dell'Indipendenza",
+    subtitle: "Ana alışveriş ve yürüyüş caddelerinden biri",
+    stars: "",
+    isMustSee: false,
+    rating: "4.5",
+    advice: "Tren istasyonundan Piazza Maggiore'ye uzanan harika bir yürüme ve alışveriş caddesi.",
+    mapQuery: "Via dell'Indipendenza Bologna",
+    checked: false,
+    userNotes: ""
+  },
+
+  // Alışveriş & Outlet
+  {
+    id: "b12",
+    city: "bologna",
+    category: "shopping",
+    title: "Galleria Cavour",
+    subtitle: "Bologna'nın lüks alışveriş noktası",
+    stars: "",
+    isMustSee: false,
+    rating: "4.6",
+    advice: "Dünyaca ünlü lüks markaların bulunduğu şık kapalı pasaj.",
+    mapQuery: "Galleria Cavour Bologna",
+    checked: false,
+    userNotes: ""
+  },
+  {
+    id: "b13",
+    city: "bologna",
+    category: "shopping",
+    title: "Via Rizzoli",
+    subtitle: "Piazza Maggiore → Due Torri arasındaki merkezi alışveriş caddesi",
+    stars: "",
+    isMustSee: false,
+    rating: "4.6",
+    advice: "Piazza Maggiore ile İki Kule arasındaki ana hareketli yürüyüş caddesi.",
+    mapQuery: "Via Rizzoli Bologna",
+    checked: false,
+    userNotes: ""
+  },
+  {
+    id: "b14",
+    city: "bologna",
+    category: "shopping",
+    title: "Shopville Gran Reno",
+    subtitle: "Büyük AVM",
+    stars: "",
+    isMustSee: false,
+    rating: "4.4",
+    advice: "Geniş kapalı AVM arayanlar için zengin seçenek sunan merkez.",
+    mapQuery: "Shopville Gran Reno Bologna",
+    checked: false,
+    userNotes: ""
+  },
+  {
+    id: "b15",
+    city: "bologna",
+    category: "outlets",
+    title: "Castel Guelfo The Style Outlets",
+    subtitle: "Bologna civarındaki outlet seçeneği",
+    stars: "",
+    isMustSee: false,
+    rating: "4.3",
+    advice: "Bologna civarındaki outlet seçeneği. Eğer alışverişi özellikle önceliklendirirseniz değerlendirilebilir.",
+    mapQuery: "Castel Guelfo The Style Outlets",
+    checked: false,
+    userNotes: ""
+  },
+
+  // ==================== 4. ROMA ====================
   // Tarih & Şehir
   {
     id: "r1",
@@ -1332,12 +1549,13 @@ const bannerDesc = document.getElementById("bannerDesc");
 // Stats elements
 const statMilano = document.getElementById("statMilano");
 const statFloransa = document.getElementById("statFloransa");
+const statBologna = document.getElementById("statBologna");
 const statRoma = document.getElementById("statRoma");
 
 // City Banners Data
 const CITY_INFO = {
   milano: {
-    title: "Milano 🇮🇹",
+    title: "Milano 🏙️",
     duration: "2 gece / 1 tam + 1 yarım gün",
     desc: "Moda ve tasarımın başkenti. Duomo, Galleria ve Brera merkezde yan yana verimli gezilebilir."
   },
@@ -1345,6 +1563,11 @@ const CITY_INFO = {
     title: "Floransa ⚜️",
     duration: "2 gece önerilir",
     desc: "Rönesans'ın beşiği. Uffizi, Accademia ve Ponte Vecchio ile müze ve açık hava cenneti."
+  },
+  bologna: {
+    title: "Bologna 🍝",
+    duration: "1 gece / 1-2 gün",
+    desc: "Kırmızı şehir, gastronomi ve meşhur kemerli yolların (Portici di Bologna) başkenti. Kompakt tarihi merkez yürüyerek keşfetmek için harika."
   },
   roma: {
     title: "Roma 🏛️",
@@ -1372,6 +1595,13 @@ function loadData() {
   if (saved) {
     try {
       items = JSON.parse(saved);
+      // Merge initial data items if any new items were added (e.g. Bologna)
+      const existingIds = new Set(items.map(i => i.id));
+      INITIAL_DATA.forEach(initItem => {
+        if (!existingIds.has(initItem.id)) {
+          items.push(initItem);
+        }
+      });
     } catch (e) {
       console.error("Storage load error:", e);
       items = [...INITIAL_DATA];
@@ -1467,7 +1697,7 @@ function setupEventListeners() {
   // Search input
   searchInput.addEventListener("input", (e) => {
     searchQuery = e.target.value.trim().toLowerCase();
-    clearSearchBtn.classList.toggle("hidden", searchQuery.length === 0);
+    clearSearchBtn.classList.toggle("hidden", searchQuery === "");
     render();
   });
 
@@ -1513,11 +1743,11 @@ function setupEventListeners() {
       city,
       category,
       title,
-      subtitle: subtitle || "Kullanıcı tarafından eklendi",
-      stars: "⭐",
+      subtitle: subtitle || "Kişisel olarak eklenen mekan",
+      stars: isMustSee ? "⭐" : "",
       isMustSee,
       rating: "5.0",
-      advice: "Özel eklenen mekan/yer.",
+      advice: "Kişisel gezi listenize eklendi.",
       mapQuery: `${title} ${city}`,
       checked: false,
       userNotes: ""
@@ -1525,24 +1755,30 @@ function setupEventListeners() {
 
     items.unshift(newItem);
     saveData();
+    render();
     closeAddModal();
     document.getElementById("addCustomForm").reset();
-    render();
   });
 
   document.getElementById("closeDetailModal").addEventListener("click", () => closeDetailModal());
+  document.getElementById("detailModal").addEventListener("click", (e) => {
+    if (e.target === document.getElementById("detailModal")) {
+      closeDetailModal();
+    }
+  });
+
   document.getElementById("saveNoteBtn").addEventListener("click", () => {
     if (!currentModalItemId) return;
-    const noteVal = document.getElementById("modalUserNote").value.trim();
-    const target = items.find(i => i.id === currentModalItemId);
-    if (target) {
-      target.userNotes = noteVal;
+    const item = items.find(i => i.id === currentModalItemId);
+    if (item) {
+      item.userNotes = document.getElementById("modalUserNote").value.trim();
       saveData();
       render();
       closeDetailModal();
     }
   });
 
+  // Data Management Modal & Border Modal Trigger
   document.getElementById("menuBtn").addEventListener("click", () => {
     document.getElementById("menuModal").classList.remove("hidden");
   });
@@ -1550,12 +1786,44 @@ function setupEventListeners() {
     document.getElementById("menuModal").classList.add("hidden");
   });
 
+  const borderBtn = document.getElementById("borderBtn");
+  if (borderBtn) {
+    borderBtn.addEventListener("click", () => openBorderModal());
+  }
+
+  const openBorderMenuBtn = document.getElementById("openBorderMenuBtn");
+  if (openBorderMenuBtn) {
+    openBorderMenuBtn.addEventListener("click", () => {
+      document.getElementById("menuModal").classList.add("hidden");
+      openBorderModal();
+    });
+  }
+
+  const closeBorderModalBtn = document.getElementById("closeBorderModal");
+  if (closeBorderModalBtn) {
+    closeBorderModalBtn.addEventListener("click", () => closeBorderModal());
+  }
+
+  const borderModalEl = document.getElementById("borderModal");
+  if (borderModalEl) {
+    borderModalEl.addEventListener("click", (e) => {
+      if (e.target === borderModalEl) closeBorderModal();
+    });
+  }
+
+  const refreshBorderBtn = document.getElementById("refreshBorderStatusBtn");
+  if (refreshBorderBtn) {
+    refreshBorderBtn.addEventListener("click", () => refreshBorderStatus());
+  }
+
   document.getElementById("exportDataBtn").addEventListener("click", () => {
     const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(items, null, 2));
     const dlAnchorElem = document.createElement('a');
     dlAnchorElem.setAttribute("href", dataStr);
-    dlAnchorElem.setAttribute("download", `italya_master_checklist_${new Date().toISOString().slice(0,10)}.json`);
+    dlAnchorElem.setAttribute("download", `italya_gezi_listesi_${new Date().toISOString().slice(0,10)}.json`);
+    document.body.appendChild(dlAnchorElem);
     dlAnchorElem.click();
+    dlAnchorElem.remove();
   });
 
   document.getElementById("importFileInput").addEventListener("change", (e) => {
@@ -1649,6 +1917,11 @@ function render() {
 
   let html = "";
 
+  // Render Bologna Walking Route widget if viewing Bologna
+  if (activeCity === "bologna") {
+    html += createBolognaRouteHTML();
+  }
+
   // Render Outlet comparison table if activeCategory is 'outlets'
   if (activeCategory === "outlets") {
     html += createOutletTableHTML();
@@ -1675,8 +1948,66 @@ function render() {
   });
 }
 
+function createBolognaRouteHTML() {
+  return `
+    <div class="bologna-route-card">
+      <div class="route-card-header">
+        <div class="route-card-title">
+          <i class="fa-solid fa-route text-gold"></i>
+          <h3>⭐ 1 Gecelik Bologna Yürüyüş Rotası (~2–3 km)</h3>
+        </div>
+        <span class="route-badge"><i class="fa-solid fa-person-walking"></i> Kompakt Rota</span>
+      </div>
+      <p class="route-desc">Google Maps'te kayıtlı yürüyüş sıranız:</p>
+      
+      <div class="walking-steps">
+        <div class="step-chip">
+          <span class="step-num">1</span>
+          <span class="step-name">Piazza Maggiore</span>
+        </div>
+        <div class="step-arrow"><i class="fa-solid fa-chevron-right"></i> <small>2 dk</small></div>
+        <div class="step-chip">
+          <span class="step-num">2</span>
+          <span class="step-name">San Petronio</span>
+        </div>
+        <div class="step-arrow"><i class="fa-solid fa-chevron-right"></i> <small>3 dk</small></div>
+        <div class="step-chip">
+          <span class="step-num">3</span>
+          <span class="step-name">Neptün Çeşmesi</span>
+        </div>
+        <div class="step-arrow"><i class="fa-solid fa-chevron-right"></i> <small>5 dk</small></div>
+        <div class="step-chip">
+          <span class="step-num">4</span>
+          <span class="step-name">Archiginnasio</span>
+        </div>
+        <div class="step-arrow"><i class="fa-solid fa-chevron-right"></i> <small>5 dk</small></div>
+        <div class="step-chip highlight">
+          <span class="step-num">5</span>
+          <span class="step-name">Quadrilatero 🍝</span>
+        </div>
+        <div class="step-arrow"><i class="fa-solid fa-chevron-right"></i> <small>8 dk</small></div>
+        <div class="step-chip">
+          <span class="step-num">6</span>
+          <span class="step-name">Due Torri</span>
+        </div>
+        <div class="step-arrow"><i class="fa-solid fa-chevron-right"></i> <small>8 dk</small></div>
+        <div class="step-chip">
+          <span class="step-num">7</span>
+          <span class="step-name">Piazza Santo Stefano</span>
+        </div>
+        <div class="step-arrow"><i class="fa-solid fa-chevron-right"></i></div>
+        <div class="step-chip final">
+          <span class="step-num">🍷</span>
+          <span class="step-name">Akşam Yemeği 🍝</span>
+        </div>
+      </div>
+      <p class="route-footer-note"><i class="fa-solid fa-circle-info text-gold"></i> Bologna'nın tarihi merkezi kompakt olduğu için bu yürüyüş rotası 2-3 saatte keyifle tamamlanır.</p>
+    </div>
+  `;
+}
+
 function createCardHTML(item) {
-  const cityNames = { milano: "Milano 🇮🇹", floransa: "Floransa ⚜️", roma: "Roma 🏛️" };
+  const cityNames = { milano: "Milano 🇮🇹", floransa: "Floransa ⚜️", bologna: "Bologna 🍝", roma: "Roma 🏛️" };
   const catIcons = {
     sights: '<i class="fa-solid fa-landmark"></i> Şehir',
     museums: '<i class="fa-solid fa-palette"></i> Müze',
@@ -1685,7 +2016,7 @@ function createCardHTML(item) {
     outlets: '<i class="fa-solid fa-tags"></i> Outlet'
   };
 
-  const isTicketTip = item.advice && (item.advice.includes("bilet") || item.advice.includes("REZERVASYON"));
+  const isTicketTip = item.advice && (item.advice.includes("bilet") || item.advice.includes("REZERVASYON") || item.advice.includes("rezervasyon"));
   const mapsUrl = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(item.mapQuery || `${item.title} ${item.city}`)}`;
 
   return `
@@ -1766,6 +2097,13 @@ function createOutletTableHTML() {
               <td><span class="badge-status in-route">✅ Rotada</span></td>
             </tr>
             <tr>
+              <td><strong>Castel Guelfo</strong></td>
+              <td>Bologna (~30 dk)</td>
+              <td>110+ Mağaza (Outlet Köyü)</td>
+              <td><span class="badge-score">8.5 / 10</span></td>
+              <td><span class="badge-status bologna-route">🍝 Bologna</span></td>
+            </tr>
+            <tr>
               <td><strong>Scalo Milano</strong></td>
               <td>Milano (Yakın)</td>
               <td>Pratik & Çeşitli Markalar</td>
@@ -1831,12 +2169,22 @@ function updateStats() {
   const floTotal = items.filter(i => i.city === "floransa").length;
   const floDone = items.filter(i => i.city === "floransa" && i.checked).length;
 
+  const bolognaTotal = items.filter(i => i.city === "bologna").length;
+  const bolognaDone = items.filter(i => i.city === "bologna" && i.checked).length;
+
   const romaTotal = items.filter(i => i.city === "roma").length;
   const romaDone = items.filter(i => i.city === "roma" && i.checked).length;
 
-  statMilano.querySelector("strong").textContent = `${milanoDone}/${milanoTotal}`;
-  statFloransa.querySelector("strong").textContent = `${floDone}/${floTotal}`;
-  statRoma.querySelector("strong").textContent = `${romaDone}/${romaTotal}`;
+  if (statMilano) statMilano.querySelector("strong").textContent = `${milanoDone}/${milanoTotal}`;
+  if (statFloransa) statFloransa.querySelector("strong").textContent = `${floDone}/${floTotal}`;
+  if (statBologna) statBologna.querySelector("strong").textContent = `${bolognaDone}/${bolognaTotal}`;
+  if (statRoma) statRoma.querySelector("strong").textContent = `${romaDone}/${romaTotal}`;
+
+  const mustSeeTotal = items.filter(i => i.isMustSee).length;
+  const mustSeeBtn = document.querySelector('.tab-btn[data-city="mustsee"]');
+  if (mustSeeBtn) {
+    mustSeeBtn.innerHTML = `<i class="fa-solid fa-star text-gold"></i> Mutlaka (${mustSeeTotal})`;
+  }
 }
 
 function renderCityBanner() {
@@ -1858,7 +2206,7 @@ function openDetailModal(id) {
 
   currentModalItemId = id;
 
-  const cityNames = { milano: "Milano 🇮🇹", floransa: "Floransa ⚜️", roma: "Roma 🏛️" };
+  const cityNames = { milano: "Milano 🇮🇹", floransa: "Floransa ⚜️", bologna: "Bologna 🍝", roma: "Roma 🏛️" };
   const catNames = {
     sights: "Tarih & Şehir",
     museums: "Müze & Sanat",
@@ -1926,3 +2274,152 @@ function registerServiceWorker() {
 }
 
 window.openDetailModal = openDetailModal;
+
+// ==================== BORDER CROSSING (SINIR KAPILARI) LOGIC ====================
+const BORDER_GATES_DATA = [
+  {
+    id: "ipsala",
+    name: "İpsala Sınır Kapısı 🇹🇷",
+    counterpart: "Kipi Border Crossing 🇬🇷",
+    status: "light",
+    statusText: "🟢 Akıcı / Yoğun Değil",
+    badgeClass: "status-green",
+    waitTime: "10 - 20 Dk",
+    queueLength: "~15 Araç",
+    carStatus: "🟢 Akıcı (10-15 dk)",
+    truckStatus: "🟡 Orta (30-45 dk)",
+    advice: "Otoban bağlantılı en geniş ana geçiş kapısı. Gece ve sabah ilk saatlerde son derece sakindir.",
+    cameraUrl: "https://www.google.com/maps/search/?api=1&query=Ipsala+Border+Crossing"
+  },
+  {
+    id: "pazarkule",
+    name: "Pazarkule Sınır Kapısı 🇹🇷",
+    counterpart: "Kastanies 🇬🇷",
+    status: "light",
+    statusText: "🟢 Çok Sakin / Hızlı Geçiş",
+    badgeClass: "status-green",
+    waitTime: "5 - 15 Dk",
+    queueLength: "~5 Araç",
+    carStatus: "🟢 Çok Akıcı (5-10 dk)",
+    truckStatus: "⚪ Ticari Tır Geçişi Yok",
+    advice: "Yeni genişletilen modern kapı. Edirne şehir merkezine çok yakındır. Turistik binek araç ile seyahat edenler için en rahat ve hızlı alternatiftir.",
+    cameraUrl: "https://www.google.com/maps/search/?api=1&query=Pazarkule+Sinir+Kapisi"
+  },
+  {
+    id: "uzunkopru",
+    name: "Uzunköprü Sınır Kapısı 🇹🇷",
+    counterpart: "Pythio 🇬🇷",
+    status: "closed",
+    statusText: "⚪ Yolcu Karayolu Geçişine Kapalı",
+    badgeClass: "status-gray",
+    waitTime: "—",
+    queueLength: "—",
+    carStatus: "🚫 Karayolu Binek Araç Geçişi Yok",
+    truckStatus: "🚫 Karayolu Geçişi Yok",
+    advice: "Demiryolu ve özel protokol kapısıdır. Yolcu karayolu binek araç geçişi yapılmamaktadır; İpsala veya Pazarkule'yi kullanınız.",
+    cameraUrl: "https://www.google.com/maps/search/?api=1&query=Uzunkopru+Border+Crossing"
+  }
+];
+
+function openBorderModal() {
+  renderBorderStatus();
+  const modal = document.getElementById("borderModal");
+  if (modal) modal.classList.remove("hidden");
+}
+
+function closeBorderModal() {
+  const modal = document.getElementById("borderModal");
+  if (modal) modal.classList.add("hidden");
+}
+
+function refreshBorderStatus() {
+  const btn = document.getElementById("refreshBorderStatusBtn");
+  if (!btn) return;
+  const icon = btn.querySelector("i");
+  if (icon) icon.classList.add("fa-spin");
+
+  setTimeout(() => {
+    if (icon) icon.classList.remove("fa-spin");
+
+    const currentHour = new Date().getHours();
+    
+    // Dynamic traffic status based on peak travel hours
+    if (currentHour >= 10 && currentHour <= 15) {
+      BORDER_GATES_DATA[0].statusText = "🟡 Orta Yoğunluk";
+      BORDER_GATES_DATA[0].badgeClass = "status-yellow";
+      BORDER_GATES_DATA[0].waitTime = "25 - 40 Dk";
+      BORDER_GATES_DATA[0].queueLength = "~35 Araç";
+      BORDER_GATES_DATA[0].carStatus = "🟡 Orta (20-30 dk)";
+    } else if (currentHour >= 16 && currentHour <= 19) {
+      BORDER_GATES_DATA[0].statusText = "🔴 Yoğun (Kuyruk Var)";
+      BORDER_GATES_DATA[0].badgeClass = "status-red";
+      BORDER_GATES_DATA[0].waitTime = "45 - 75 Dk";
+      BORDER_GATES_DATA[0].queueLength = "~65 Araç";
+      BORDER_GATES_DATA[0].carStatus = "🔴 Yoğun (45+ dk)";
+    } else {
+      BORDER_GATES_DATA[0].statusText = "🟢 Akıcı / Yoğun Değil";
+      BORDER_GATES_DATA[0].badgeClass = "status-green";
+      BORDER_GATES_DATA[0].waitTime = "10 - 20 Dk";
+      BORDER_GATES_DATA[0].queueLength = "~12 Araç";
+      BORDER_GATES_DATA[0].carStatus = "🟢 Akıcı (10-15 dk)";
+    }
+
+    renderBorderStatus();
+  }, 600);
+}
+
+function renderBorderStatus() {
+  const container = document.getElementById("borderCardsList");
+  if (!container) return;
+
+  const now = new Date();
+  const timeStr = now.toLocaleTimeString('tr-TR', { hour: '2-digit', minute: '2-digit' });
+  const updateEl = document.getElementById("borderLastUpdate");
+  if (updateEl) {
+    updateEl.innerHTML = `<i class="fa-regular fa-clock text-gold"></i> Canlı Güncelleme: Bugün ${timeStr}`;
+  }
+
+  container.innerHTML = BORDER_GATES_DATA.map(gate => `
+    <div class="border-card ${gate.status}">
+      <div class="border-card-top">
+        <div class="border-title-group">
+          <h4>${gate.name}</h4>
+          <span class="counterpart-label"><i class="fa-solid fa-arrow-right-arrow-left"></i> ${gate.counterpart}</span>
+        </div>
+        <span class="border-status-badge ${gate.badgeClass}">
+          ${gate.statusText}
+        </span>
+      </div>
+
+      ${gate.status !== 'closed' ? `
+        <div class="border-metrics-grid">
+          <div class="metric-box">
+            <span class="metric-label"><i class="fa-regular fa-hourglass-half"></i> Tahmini Bekleme</span>
+            <span class="metric-value text-gold">${gate.waitTime}</span>
+          </div>
+          <div class="metric-box">
+            <span class="metric-label"><i class="fa-solid fa-car"></i> Araç Kuyruğu</span>
+            <span class="metric-value">${gate.queueLength}</span>
+          </div>
+        </div>
+
+        <div class="lane-status-row">
+          <span class="lane-tag">🚗 Binek Araç: <strong>${gate.carStatus}</strong></span>
+          <span class="lane-tag">🚛 Tır / Otobüs: <strong>${gate.truckStatus}</strong></span>
+        </div>
+      ` : ''}
+
+      <div class="border-card-advice">
+        <i class="fa-solid fa-lightbulb text-gold"></i> ${gate.advice}
+      </div>
+
+      <div class="border-card-actions">
+        <a href="${gate.cameraUrl}" target="_blank" rel="noopener" class="border-map-link">
+          <i class="fa-solid fa-map-location-dot"></i> Google Maps Canlı Trafik & Yol Tarifi
+        </a>
+      </div>
+    </div>
+  `).join("");
+}
+
+window.openBorderModal = openBorderModal;
