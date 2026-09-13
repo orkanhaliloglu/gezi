@@ -291,10 +291,17 @@
 
       <div class="modal-body border-modal-body">
         <div class="border-refresh-bar">
-          <span class="live-indicator"><span class="live-dot"></span> Canlı Anlık Akış</span>
+          <span class="live-indicator">
+            <span class="live-dot"></span> Canlı Akış <small class="auto-refresh-label">(30 dk'da bir otomatik yenilenir)</small>
+          </span>
           <button id="refreshBorderStatusBtn" class="refresh-btn">
-            <i class="fa-solid fa-arrows-rotate"></i> Durumu Yenile
+            <i class="fa-solid fa-arrows-rotate"></i> Şimdi Yenile
           </button>
+        </div>
+
+        <!-- Dynamic Best Gate Recommendation Box -->
+        <div id="borderRecommendationBox" class="border-recommendation-box">
+          <!-- Rendered dynamically by app.js -->
         </div>
 
         <div class="border-cards-list" id="borderCardsList">

@@ -2326,11 +2326,24 @@ function openBorderModal() {
   const modal = document.getElementById("borderModal");
   if (modal) modal.classList.remove("hidden");
   refreshBorderStatus();
+  startBorderAutoRefresh();
 }
 
 function closeBorderModal() {
   const modal = document.getElementById("borderModal");
   if (modal) modal.classList.add("hidden");
+}
+
+let borderAutoRefreshTimer = null;
+
+function startBorderAutoRefresh() {
+  if (!borderAutoRefreshTimer) {
+    // Auto-refresh every 30 minutes (30 * 60 * 1000 ms)
+    borderAutoRefreshTimer = setInterval(() => {
+      console.log("30-min auto refresh triggering border status update...");
+      refreshBorderStatus();
+    }, 30 * 60 * 1000);
+  }
 }
 
 async function fetchLiveOSRMData() {
@@ -2402,6 +2415,58 @@ async function refreshBorderStatus() {
   renderBorderStatus();
 }
 
+function renderBorderRecommendation() {
+  const box = document.getElementById("borderRecommendationBox");
+  if (!box) return;
+
+  const ipsala = BORDER_GATES_DATA.find(g => g.id === "ipsala");
+  const pazarkule = BORDER_GATES_DATA.find(g => g.id === "pazarkule");
+
+  let rec = null;
+
+  if (pazarkule && pazarkule.badgeClass === "status-green" && ipsala && (ipsala.badgeClass === "status-red" || ipsala.badgeClass === "status-yellow")) {
+    rec = {
+      title: "Pazarkule Sınır Kapısı 🇹🇷 ➔ 🇬🇷",
+      badge: "⚡ EN HIZLI & SAKİN SEÇENEK",
+      badgeClass: "rec-green",
+      icon: "fa-bolt",
+      desc: "İpsala Sınır Kapısı'nda yoğunluk / bekleme riski var. Pazarkule'de şu an binek araçlar için beklemesiz ve çok akıcı geçiş var. Binek aracınızla Edirne üzerinden Pazarkule'yi tercih etmek zamandan tasarruf sağlar."
+    };
+  } else if (ipsala && ipsala.badgeClass === "status-green") {
+    rec = {
+      title: "İpsala Sınır Kapısı 🇹🇷 ➔ 🇬🇷",
+      badge: "⭐ EN KONFORLU OTOBAN ROTASI",
+      badgeClass: "rec-gold",
+      icon: "fa-road",
+      desc: "İpsala'da şu an trafik akıcı ve bekleme süresi minimum. Geniş otoban bağlantısı ve yüksek geçiş kapasitesi nedeniyle ilk tercihiniz İpsala olmalı."
+    };
+  } else {
+    rec = {
+      title: "Pazarkule Sınır Kapısı (Binek Araç İdeal)",
+      badge: "💡 SAKİN KAPI ALTERNATİFİ",
+      badgeClass: "rec-blue",
+      icon: "fa-car",
+      desc: "Binek araçla seyahat ediyorsanız Edirne Pazarkule Kapısı turistik araç geçişlerinde daha hızlı ve rahat bir tercih olacaktır."
+    };
+  }
+
+  box.innerHTML = `
+    <div class="recommendation-card ${rec.badgeClass}">
+      <div class="rec-card-header">
+        <div class="rec-title-group">
+          <i class="fa-solid ${rec.icon} rec-icon"></i>
+          <div>
+            <span class="rec-subtitle">Şu An Anlık En Mantıklı Geçiş Kapısı</span>
+            <h4 class="rec-title">${rec.title}</h4>
+          </div>
+        </div>
+        <span class="rec-badge">${rec.badge}</span>
+      </div>
+      <p class="rec-desc">${rec.desc}</p>
+    </div>
+  `;
+}
+
 function renderBorderStatus() {
   const container = document.getElementById("borderCardsList");
   if (!container) return;
@@ -2412,6 +2477,8 @@ function renderBorderStatus() {
   if (updateEl) {
     updateEl.innerHTML = `<i class="fa-regular fa-clock text-gold"></i> Canlı Sunucu Verisi: ${timeStr}`;
   }
+
+  renderBorderRecommendation();
 
   container.innerHTML = BORDER_GATES_DATA.map(gate => `
     <div class="border-card ${gate.status}">
