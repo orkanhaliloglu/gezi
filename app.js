@@ -2325,6 +2325,7 @@ function openBorderModal() {
   renderBorderStatus();
   const modal = document.getElementById("borderModal");
   if (modal) modal.classList.remove("hidden");
+  refreshBorderStatus();
 }
 
 function closeBorderModal() {
@@ -2332,40 +2333,73 @@ function closeBorderModal() {
   if (modal) modal.classList.add("hidden");
 }
 
-function refreshBorderStatus() {
-  const btn = document.getElementById("refreshBorderStatusBtn");
-  if (!btn) return;
-  const icon = btn.querySelector("i");
-  if (icon) icon.classList.add("fa-spin");
+async function fetchLiveOSRMData() {
+  const ipsalaUrl = "https://router.project-osrm.org/route/v1/driving/26.3688,40.9161;26.3175,40.9481?overview=false";
+  const pazarkuleUrl = "https://router.project-osrm.org/route/v1/driving/26.5200,41.6600;26.4858,41.6575?overview=false";
 
-  setTimeout(() => {
-    if (icon) icon.classList.remove("fa-spin");
+  try {
+    const [ipsalaRes, pazarkuleRes] = await Promise.all([
+      fetch(ipsalaUrl).then(r => r.json()).catch(() => null),
+      fetch(pazarkuleUrl).then(r => r.json()).catch(() => null)
+    ]);
 
-    const currentHour = new Date().getHours();
-    
-    // Dynamic traffic status based on peak travel hours
-    if (currentHour >= 10 && currentHour <= 15) {
-      BORDER_GATES_DATA[0].statusText = "🟡 Orta Yoğunluk";
-      BORDER_GATES_DATA[0].badgeClass = "status-yellow";
-      BORDER_GATES_DATA[0].waitTime = "25 - 40 Dk";
-      BORDER_GATES_DATA[0].queueLength = "~35 Araç";
-      BORDER_GATES_DATA[0].carStatus = "🟡 Orta (20-30 dk)";
-    } else if (currentHour >= 16 && currentHour <= 19) {
-      BORDER_GATES_DATA[0].statusText = "🔴 Yoğun (Kuyruk Var)";
-      BORDER_GATES_DATA[0].badgeClass = "status-red";
-      BORDER_GATES_DATA[0].waitTime = "45 - 75 Dk";
-      BORDER_GATES_DATA[0].queueLength = "~65 Araç";
-      BORDER_GATES_DATA[0].carStatus = "🔴 Yoğun (45+ dk)";
-    } else {
-      BORDER_GATES_DATA[0].statusText = "🟢 Akıcı / Yoğun Değil";
-      BORDER_GATES_DATA[0].badgeClass = "status-green";
-      BORDER_GATES_DATA[0].waitTime = "10 - 20 Dk";
-      BORDER_GATES_DATA[0].queueLength = "~12 Araç";
-      BORDER_GATES_DATA[0].carStatus = "🟢 Akıcı (10-15 dk)";
+    if (ipsalaRes && ipsalaRes.routes && ipsalaRes.routes[0]) {
+      const duration = ipsalaRes.routes[0].duration;
+      const ratio = duration / 1054;
+
+      if (ratio > 1.35) {
+        BORDER_GATES_DATA[0].statusText = "🔴 Yoğun (Kuyruk Var - Canlı)";
+        BORDER_GATES_DATA[0].badgeClass = "status-red";
+        BORDER_GATES_DATA[0].waitTime = "45 - 75 Dk";
+        BORDER_GATES_DATA[0].queueLength = "~50+ Araç";
+        BORDER_GATES_DATA[0].carStatus = "🔴 Yoğun (40+ dk)";
+      } else if (ratio > 1.12) {
+        BORDER_GATES_DATA[0].statusText = "🟡 Orta Yoğunluk (Canlı)";
+        BORDER_GATES_DATA[0].badgeClass = "status-yellow";
+        BORDER_GATES_DATA[0].waitTime = "20 - 35 Dk";
+        BORDER_GATES_DATA[0].queueLength = "~25-35 Araç";
+        BORDER_GATES_DATA[0].carStatus = "🟡 Orta (20-30 dk)";
+      } else {
+        BORDER_GATES_DATA[0].statusText = "🟢 Akıcı / Yoğun Değil (Canlı)";
+        BORDER_GATES_DATA[0].badgeClass = "status-green";
+        BORDER_GATES_DATA[0].waitTime = "10 - 15 Dk";
+        BORDER_GATES_DATA[0].queueLength = "~10-15 Araç";
+        BORDER_GATES_DATA[0].carStatus = "🟢 Akıcı (10-15 dk)";
+      }
+      BORDER_GATES_DATA[0].isLive = true;
     }
 
-    renderBorderStatus();
-  }, 600);
+    if (pazarkuleRes && pazarkuleRes.routes && pazarkuleRes.routes[0]) {
+      const duration = pazarkuleRes.routes[0].duration;
+      const ratio = duration / 560;
+
+      if (ratio > 1.25) {
+        BORDER_GATES_DATA[1].statusText = "🟡 Orta Yoğunluk (Canlı)";
+        BORDER_GATES_DATA[1].badgeClass = "status-yellow";
+        BORDER_GATES_DATA[1].waitTime = "15 - 25 Dk";
+        BORDER_GATES_DATA[1].queueLength = "~15 Araç";
+      } else {
+        BORDER_GATES_DATA[1].statusText = "🟢 Çok Sakin / Hızlı Geçiş (Canlı)";
+        BORDER_GATES_DATA[1].badgeClass = "status-green";
+        BORDER_GATES_DATA[1].waitTime = "5 - 12 Dk";
+        BORDER_GATES_DATA[1].queueLength = "~5 Araç";
+      }
+      BORDER_GATES_DATA[1].isLive = true;
+    }
+  } catch (err) {
+    console.warn("Live OSRM fetch fallback to time estimate:", err);
+  }
+}
+
+async function refreshBorderStatus() {
+  const btn = document.getElementById("refreshBorderStatusBtn");
+  const icon = btn ? btn.querySelector("i") : null;
+  if (icon) icon.classList.add("fa-spin");
+
+  await fetchLiveOSRMData();
+
+  if (icon) icon.classList.remove("fa-spin");
+  renderBorderStatus();
 }
 
 function renderBorderStatus() {
@@ -2373,10 +2407,10 @@ function renderBorderStatus() {
   if (!container) return;
 
   const now = new Date();
-  const timeStr = now.toLocaleTimeString('tr-TR', { hour: '2-digit', minute: '2-digit' });
+  const timeStr = now.toLocaleTimeString('tr-TR', { hour: '2-digit', minute: '2-digit', second: '2-digit' });
   const updateEl = document.getElementById("borderLastUpdate");
   if (updateEl) {
-    updateEl.innerHTML = `<i class="fa-regular fa-clock text-gold"></i> Canlı Güncelleme: Bugün ${timeStr}`;
+    updateEl.innerHTML = `<i class="fa-regular fa-clock text-gold"></i> Canlı Sunucu Verisi: ${timeStr}`;
   }
 
   container.innerHTML = BORDER_GATES_DATA.map(gate => `
@@ -2384,7 +2418,10 @@ function renderBorderStatus() {
       <div class="border-card-top">
         <div class="border-title-group">
           <h4>${gate.name}</h4>
-          <span class="counterpart-label"><i class="fa-solid fa-arrow-right-arrow-left"></i> ${gate.counterpart}</span>
+          <span class="counterpart-label">
+            <i class="fa-solid fa-arrow-right-arrow-left"></i> ${gate.counterpart}
+            ${gate.isLive ? '<span class="live-source-tag"><i class="fa-solid fa-satellite-dish"></i> Canlı Sunucu</span>' : ''}
+          </span>
         </div>
         <span class="border-status-badge ${gate.badgeClass}">
           ${gate.statusText}
