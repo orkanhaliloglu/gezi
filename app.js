@@ -1586,6 +1586,7 @@ document.addEventListener("DOMContentLoaded", () => {
   loadData();
   setupEventListeners();
   render();
+  initTravelSketch();
   registerServiceWorker();
 });
 
@@ -2658,3 +2659,116 @@ function renderBorderStatus() {
 }
 
 window.openBorderModal = openBorderModal;
+
+// ==================== SEYAHAT KROKİSİ (TRAVEL ROUTE SKETCH) ANIMATION ====================
+const SKETCH_STEPS = [
+  { city: "istanbul", label: "🇹🇷 İstanbul", desc: "Başlangıç / Çıkış Noktası", index: 0 },
+  { city: "selanik", label: "🇬🇷 Selanik", desc: "Transit & Mola Durak", index: 1 },
+  { city: "roma", label: "🏛️ Roma", desc: "İtalya Başkenti & Tarih", index: 2 },
+  { city: "floransa", label: "⚜️ Floransa", desc: "Rönesans & Sanat", index: 3 },
+  { city: "milano", label: "🏙️ Milano", desc: "Moda & Tasarım", index: 4 },
+  { city: "bologna", label: "🍝 Bologna", desc: "Gastronomi & Kuleler", index: 5 },
+  { city: "roma", label: "🏛️ Roma", desc: "Güney Dönüş Rotası", index: 6 },
+  { city: "selanik", label: "🇬🇷 Selanik", desc: "Dönüş Molası", index: 7 },
+  { city: "istanbul", label: "🇹🇷 İstanbul", desc: "Tur Sonu / Varış", index: 8 }
+];
+
+let currentSketchIndex = 0;
+let sketchAnimInterval = null;
+let isSketchAnimPlaying = true;
+
+function initTravelSketch() {
+  const nodes = document.querySelectorAll("#sketchNodes .sketch-node");
+  if (!nodes.length) return;
+
+  // Node click handlers
+  nodes.forEach(node => {
+    node.addEventListener("click", () => {
+      const idx = parseInt(node.dataset.index, 10);
+      const city = node.dataset.city;
+
+      jumpToSketchIndex(idx);
+
+      // If matching city tab exists, switch to that city tab!
+      if (city && city !== "istanbul" && city !== "selanik") {
+        const cityTabBtn = document.querySelector(`.city-tabs .tab-btn[data-city="${city}"]`);
+        if (cityTabBtn) {
+          cityTabBtn.click();
+        }
+      }
+    });
+  });
+
+  // Toggle button click
+  const toggleBtn = document.getElementById("toggleSketchAnimBtn");
+  if (toggleBtn) {
+    toggleBtn.addEventListener("click", () => {
+      isSketchAnimPlaying = !isSketchAnimPlaying;
+      if (isSketchAnimPlaying) {
+        startSketchAnim();
+        toggleBtn.innerHTML = '<i class="fa-solid fa-pause"></i> <span class="btn-txt">Durdur</span>';
+      } else {
+        stopSketchAnim();
+        toggleBtn.innerHTML = '<i class="fa-solid fa-play"></i> <span class="btn-txt">Oynat</span>';
+      }
+    });
+  }
+
+  setTimeout(() => {
+    jumpToSketchIndex(0);
+    startSketchAnim();
+  }, 100);
+}
+
+function startSketchAnim() {
+  if (sketchAnimInterval) clearInterval(sketchAnimInterval);
+  sketchAnimInterval = setInterval(() => {
+    currentSketchIndex = (currentSketchIndex + 1) % SKETCH_STEPS.length;
+    jumpToSketchIndex(currentSketchIndex);
+  }, 2500);
+}
+
+function stopSketchAnim() {
+  if (sketchAnimInterval) {
+    clearInterval(sketchAnimInterval);
+    sketchAnimInterval = null;
+  }
+}
+
+function jumpToSketchIndex(index) {
+  currentSketchIndex = index;
+  const nodes = document.querySelectorAll("#sketchNodes .sketch-node");
+  const vehicle = document.getElementById("movingVehicle");
+  const stepText = document.getElementById("sketchStepText");
+
+  if (!nodes.length || !vehicle) return;
+
+  const targetNode = nodes[index];
+  if (!targetNode) return;
+
+  nodes.forEach((n, i) => {
+    n.classList.toggle("active", i === index);
+    n.classList.toggle("visited", i < index);
+  });
+
+  // Position vehicle indicator over active node
+  const nodeOffsetLeft = targetNode.offsetLeft;
+  const nodeWidth = targetNode.offsetWidth;
+  const vehicleWidth = vehicle.offsetWidth || 34;
+
+  const newLeft = nodeOffsetLeft + (nodeWidth / 2) - (vehicleWidth / 2);
+  vehicle.style.left = `${newLeft}px`;
+
+  // Scroll track smoothly to keep target node in view on mobile screens
+  const trackWrapper = document.querySelector(".sketch-track-container");
+  if (trackWrapper) {
+    const scrollTarget = newLeft - (trackWrapper.offsetWidth / 2) + (vehicleWidth / 2);
+    trackWrapper.scrollTo({ left: Math.max(0, scrollTarget), behavior: 'smooth' });
+  }
+
+  // Update step text info
+  const stepInfo = SKETCH_STEPS[index];
+  if (stepText && stepInfo) {
+    stepText.innerHTML = `<i class="fa-solid fa-circle-dot text-gold"></i> Canlı Rota: <strong>${index + 1} / 9 — ${stepInfo.label}</strong> (${stepInfo.desc})`;
+  }
+}

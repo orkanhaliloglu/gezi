@@ -1432,3 +1432,190 @@ body {
   color: #0f1015;
   box-shadow: 0 2px 10px var(--accent-gold-glow);
 }
+
+/* Animated Travel Route Sketch Card (Seyahat Krokisi) */
+.travel-sketch-card {
+  background: linear-gradient(135deg, rgba(229, 171, 72, 0.1), rgba(59, 130, 246, 0.08));
+  border: 1px solid var(--accent-gold-glow);
+  border-radius: 18px;
+  padding: 16px;
+  margin-bottom: 18px;
+  box-shadow: var(--shadow-sm);
+  overflow: hidden;
+}
+
+.sketch-card-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 14px;
+  flex-wrap: wrap;
+  gap: 10px;
+}
+
+.sketch-title-group {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.animated-route-icon {
+  font-size: 1.4rem;
+  animation: pulseGlow 2s infinite;
+}
+
+.sketch-title-group h3 {
+  font-family: var(--font-heading);
+  font-size: 1.08rem;
+  font-weight: 700;
+  color: var(--text-main);
+}
+
+.sketch-subtitle {
+  font-size: 0.76rem;
+  color: var(--text-muted);
+  display: block;
+}
+
+.sketch-controls {
+  display: flex;
+  gap: 6px;
+}
+
+.sketch-ctrl-btn {
+  background: rgba(255, 255, 255, 0.06);
+  border: 1px solid var(--card-border);
+  color: var(--text-main);
+  padding: 5px 12px;
+  border-radius: 99px;
+  font-size: 0.78rem;
+  font-weight: 600;
+  cursor: pointer;
+  display: inline-flex;
+  align-items: center;
+  gap: 6px;
+  transition: all 0.2s ease;
+}
+.sketch-ctrl-btn:active { transform: scale(0.95); }
+
+.sketch-track-wrapper {
+  position: relative;
+  margin-bottom: 14px;
+}
+
+.sketch-track-container {
+  position: relative;
+  overflow-x: auto;
+  padding: 24px 8px 12px 8px;
+  scrollbar-width: none;
+}
+.sketch-track-container::-webkit-scrollbar { display: none; }
+
+.moving-vehicle {
+  position: absolute;
+  top: 0px;
+  left: 10px;
+  transition: left 0.6s cubic-bezier(0.34, 1.56, 0.64, 1);
+  z-index: 10;
+  pointer-events: none;
+}
+
+.vehicle-icon {
+  background: var(--accent-gold);
+  color: #0f1015;
+  width: 32px;
+  height: 32px;
+  border-radius: 50%;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  font-size: 0.85rem;
+  box-shadow: 0 0 14px var(--accent-gold);
+  animation: bounceVehicle 1.2s infinite ease-in-out;
+}
+
+@keyframes bounceVehicle {
+  0%, 100% { transform: translateY(0); }
+  50% { transform: translateY(-4px); }
+}
+
+.sketch-nodes {
+  display: flex;
+  align-items: center;
+  gap: 4px;
+  min-width: max-content;
+}
+
+.sketch-node {
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: 12px;
+  padding: 8px 12px;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  gap: 2px;
+  cursor: pointer;
+  transition: all 0.3s ease;
+  user-select: none;
+  min-width: 78px;
+}
+
+.sketch-node:hover {
+  border-color: var(--accent-gold);
+  transform: translateY(-2px);
+}
+
+.sketch-node.active {
+  border-color: var(--accent-gold);
+  background: rgba(229, 171, 72, 0.18);
+  box-shadow: 0 4px 14px rgba(229, 171, 72, 0.25);
+  transform: translateY(-3px);
+}
+
+.sketch-node.visited {
+  border-color: rgba(52, 211, 153, 0.4);
+  background: rgba(52, 211, 153, 0.08);
+}
+
+.node-badge {
+  font-size: 1.15rem;
+}
+
+.node-name {
+  font-size: 0.8rem;
+  font-weight: 700;
+  color: var(--text-main);
+}
+
+.node-type {
+  font-size: 0.68rem;
+  color: var(--text-muted);
+  font-weight: 500;
+}
+
+.sketch-arrow {
+  color: var(--text-muted);
+  font-size: 0.75rem;
+  opacity: 0.6;
+}
+
+.sketch-footer-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  font-size: 0.78rem;
+  color: var(--text-sub);
+  border-top: 1px dashed rgba(255, 255, 255, 0.1);
+  padding-top: 10px;
+  flex-wrap: wrap;
+  gap: 6px;
+}
+
+.route-dist-tag {
+  background: rgba(255, 255, 255, 0.05);
+  padding: 3px 8px;
+  border-radius: 6px;
+  border: 1px solid var(--card-border);
+  font-size: 0.75rem;
+}

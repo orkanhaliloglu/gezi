@@ -18,7 +18,7 @@
   <!-- FontAwesome icons (via cdn) -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   
-  <link rel="stylesheet" href="style.css?v=6">
+  <link rel="stylesheet" href="style.css?v=7">
 </head>
 <body>
 
@@ -66,6 +66,106 @@
         <div class="mini-stat" id="statFloransa"><span>⚜️ Floransa:</span> <strong>0/0</strong></div>
         <div class="mini-stat" id="statBologna"><span>🍝 Bologna:</span> <strong>0/0</strong></div>
         <div class="mini-stat" id="statRoma"><span>🏛️ Roma:</span> <strong>0/0</strong></div>
+      </div>
+    </div>
+
+    <!-- Animated Travel Route Sketch Card (Seyahat Krokisi) -->
+    <div class="travel-sketch-card" id="travelSketchCard">
+      <div class="sketch-card-header">
+        <div class="sketch-title-group">
+          <i class="fa-solid fa-route text-gold animated-route-icon"></i>
+          <div>
+            <h3>🗺️ Seyahat Krokisi & Tur Rotası</h3>
+            <span class="sketch-subtitle">İstanbul ➔ Selanik ➔ Roma ➔ Floransa ➔ Milano ➔ Bologna ➔ Roma ➔ Selanik ➔ İstanbul</span>
+          </div>
+        </div>
+        <div class="sketch-controls">
+          <button id="toggleSketchAnimBtn" class="sketch-ctrl-btn" title="Animasyonu Oynat / Durdur">
+            <i class="fa-solid fa-pause"></i> <span class="btn-txt">Durdur</span>
+          </button>
+        </div>
+      </div>
+
+      <!-- Animated Motion Route Track -->
+      <div class="sketch-track-wrapper">
+        <div class="sketch-track-container">
+          <!-- Animated Vehicle Dot / Beam -->
+          <div class="moving-vehicle" id="movingVehicle">
+            <span class="vehicle-icon"><i class="fa-solid fa-car"></i></span>
+            <span class="vehicle-glow"></span>
+          </div>
+
+          <!-- Connected Route Path Nodes -->
+          <div class="sketch-nodes" id="sketchNodes">
+            <div class="sketch-node active" data-city="istanbul" data-index="0">
+              <span class="node-badge">🇹🇷</span>
+              <span class="node-name">İstanbul</span>
+              <span class="node-type">Başlangıç</span>
+            </div>
+            <div class="sketch-arrow"><i class="fa-solid fa-chevron-right"></i></div>
+            
+            <div class="sketch-node" data-city="selanik" data-index="1">
+              <span class="node-badge">🇬🇷</span>
+              <span class="node-name">Selanik</span>
+              <span class="node-type">Mola</span>
+            </div>
+            <div class="sketch-arrow"><i class="fa-solid fa-chevron-right"></i></div>
+            
+            <div class="sketch-node" data-city="roma" data-index="2">
+              <span class="node-badge">🏛️</span>
+              <span class="node-name">Roma</span>
+              <span class="node-type">Tarih</span>
+            </div>
+            <div class="sketch-arrow"><i class="fa-solid fa-chevron-right"></i></div>
+            
+            <div class="sketch-node" data-city="floransa" data-index="3">
+              <span class="node-badge">⚜️</span>
+              <span class="node-name">Floransa</span>
+              <span class="node-type">Sanat</span>
+            </div>
+            <div class="sketch-arrow"><i class="fa-solid fa-chevron-right"></i></div>
+            
+            <div class="sketch-node" data-city="milano" data-index="4">
+              <span class="node-badge">🏙️</span>
+              <span class="node-name">Milano</span>
+              <span class="node-type">Moda</span>
+            </div>
+            <div class="sketch-arrow"><i class="fa-solid fa-chevron-right"></i></div>
+            
+            <div class="sketch-node" data-city="bologna" data-index="5">
+              <span class="node-badge">🍝</span>
+              <span class="node-name">Bologna</span>
+              <span class="node-type">Lezzet</span>
+            </div>
+            <div class="sketch-arrow"><i class="fa-solid fa-chevron-right"></i></div>
+            
+            <div class="sketch-node" data-city="roma" data-index="6">
+              <span class="node-badge">🏛️</span>
+              <span class="node-name">Roma</span>
+              <span class="node-type">Güney</span>
+            </div>
+            <div class="sketch-arrow"><i class="fa-solid fa-chevron-right"></i></div>
+            
+            <div class="sketch-node" data-city="selanik" data-index="7">
+              <span class="node-badge">🇬🇷</span>
+              <span class="node-name">Selanik</span>
+              <span class="node-type">Dönüş</span>
+            </div>
+            <div class="sketch-arrow"><i class="fa-solid fa-chevron-right"></i></div>
+            
+            <div class="sketch-node" data-city="istanbul" data-index="8">
+              <span class="node-badge">🇹🇷</span>
+              <span class="node-name">İstanbul</span>
+              <span class="node-type">Varış</span>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Route Footer Info -->
+      <div class="sketch-footer-info">
+        <span id="sketchStepText"><i class="fa-solid fa-circle-dot text-gold"></i> Canlı Rota: <strong>1 / 9 — 🇹🇷 İstanbul (Başlangıç)</strong></span>
+        <span class="route-dist-tag"><i class="fa-solid fa-route"></i> Toplam ~3.400 km Rota</span>
       </div>
     </div>
 
@@ -334,6 +434,6 @@
     </div>
   </div>
 
-  <script src="app.js?v=6"></script>
+  <script src="app.js?v=7"></script>
 </body>
 </html>
