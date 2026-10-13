@@ -2699,7 +2699,7 @@ function initTravelSketch() {
     });
   });
 
-  // Toggle button click
+  // Toggle animation button click
   const toggleBtn = document.getElementById("toggleSketchAnimBtn");
   if (toggleBtn) {
     toggleBtn.addEventListener("click", () => {
@@ -2711,6 +2711,19 @@ function initTravelSketch() {
         stopSketchAnim();
         toggleBtn.innerHTML = '<i class="fa-solid fa-play"></i> <span class="btn-txt">Oynat</span>';
       }
+    });
+  }
+
+  // Collapse / Expand sketch card
+  const collapseBtn = document.getElementById("collapseSketchBtn");
+  const sketchCard = document.getElementById("travelSketchCard");
+  if (collapseBtn && sketchCard) {
+    collapseBtn.addEventListener("click", () => {
+      sketchCard.classList.toggle("collapsed");
+      const isCollapsed = sketchCard.classList.contains("collapsed");
+      collapseBtn.innerHTML = isCollapsed
+        ? '<i class="fa-solid fa-chevron-down"></i> <span class="btn-txt">Göster</span>'
+        : '<i class="fa-solid fa-chevron-up"></i> <span class="btn-txt">Kapat</span>';
     });
   }
 

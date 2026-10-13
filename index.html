@@ -18,7 +18,7 @@
   <!-- FontAwesome icons (via cdn) -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   
-  <link rel="stylesheet" href="style.css?v=11">
+  <link rel="stylesheet" href="style.css?v=14">
 </head>
 <body>
 
@@ -120,7 +120,7 @@
     </div>
 
     <!-- Animated Travel Route Sketch Card (Seyahat Krokisi) -->
-    <div class="travel-sketch-card" id="travelSketchCard">
+    <div class="travel-sketch-card collapsed" id="travelSketchCard">
       <div class="sketch-card-header">
         <div class="sketch-title-group">
           <i class="fa-solid fa-route text-gold animated-route-icon"></i>
@@ -132,6 +132,9 @@
         <div class="sketch-controls">
           <button id="toggleSketchAnimBtn" class="sketch-ctrl-btn" title="Animasyonu Oynat / Durdur">
             <i class="fa-solid fa-pause"></i> <span class="btn-txt">Durdur</span>
+          </button>
+          <button id="collapseSketchBtn" class="sketch-ctrl-btn" title="Krokiyi Küçült / Büyüt">
+            <i class="fa-solid fa-chevron-down"></i> <span class="btn-txt">Göster</span>
           </button>
         </div>
       </div>
@@ -433,6 +436,6 @@
     </div>
   </div>
 
-  <script src="app.js?v=7"></script>
+  <script src="app.js?v=14"></script>
 </body>
 </html>
