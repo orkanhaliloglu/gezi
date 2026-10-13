@@ -62,9 +62,7 @@
 }
 
 html {
-  overflow-x: hidden;
-  overflow-y: auto;
-  -webkit-overflow-scrolling: touch;
+  -webkit-text-size-adjust: 100%;
 }
 
 body {
@@ -74,6 +72,7 @@ body {
   min-height: 100vh;
   padding-bottom: calc(80px + var(--safe-area-bottom));
   line-height: 1.5;
+  overflow-x: clip;
 }
 
 .text-gold { color: var(--accent-gold) !important; }
