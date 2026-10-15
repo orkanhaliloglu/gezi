@@ -1540,11 +1540,13 @@ function renderTransportTickets() {
 function setupEventListeners() {
   const ticketManagerToggle = document.getElementById("ticketManagerToggle");
   const ticketManagerContent = document.getElementById("ticketManagerContent");
+  const ticketManagerAction = document.getElementById("ticketManagerAction");
   if (ticketManagerToggle && ticketManagerContent) {
     ticketManagerToggle.addEventListener("click", () => {
       const isExpanded = ticketManagerToggle.getAttribute("aria-expanded") === "true";
       ticketManagerToggle.setAttribute("aria-expanded", String(!isExpanded));
       ticketManagerContent.hidden = isExpanded;
+      if (ticketManagerAction) ticketManagerAction.textContent = isExpanded ? "Göster" : "Gizle";
     });
   }
 

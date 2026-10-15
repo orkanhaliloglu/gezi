@@ -129,8 +129,8 @@ body {
   background: rgba(255, 255, 255, 0.05);
   border: 1px solid var(--card-border);
   color: var(--text-main);
-  width: 38px;
-  height: 38px;
+  width: 44px;
+  height: 44px;
   border-radius: 12px;
   display: flex;
   align-items: center;
@@ -221,6 +221,7 @@ body {
   scrollbar-width: none;
   touch-action: pan-y pan-x;
   overscroll-behavior-y: auto;
+  scroll-snap-type: x proximity;
 }
 .city-tabs::-webkit-scrollbar { display: none; }
 
@@ -229,6 +230,8 @@ body {
   border: 1px solid var(--card-border);
   color: var(--text-muted);
   padding: 8px 14px;
+  min-height: 44px;
+  scroll-snap-align: start;
   border-radius: 12px;
   font-size: 0.82rem;
   font-weight: 600;
@@ -277,6 +280,7 @@ body {
   border: 1px solid var(--card-border);
   border-radius: 12px;
   padding: 8px 36px 8px 34px;
+  min-height: 44px;
   color: var(--text-main);
   font-size: 0.85rem;
   outline: none;
@@ -306,6 +310,7 @@ body {
   scrollbar-width: none;
   touch-action: pan-y pan-x;
   overscroll-behavior-y: auto;
+  scroll-snap-type: x proximity;
 }
 .category-pills::-webkit-scrollbar { display: none; }
 
@@ -313,7 +318,9 @@ body {
   background: transparent;
   border: 1px solid var(--card-border);
   color: var(--text-muted);
-  padding: 5px 10px;
+  padding: 8px 12px;
+  min-height: 44px;
+  scroll-snap-align: start;
   border-radius: 20px;
   font-size: 0.75rem;
   font-weight: 500;
@@ -344,7 +351,8 @@ body {
   background: none;
   border: none;
   color: var(--text-muted);
-  padding: 3px 8px;
+  padding: 8px 10px;
+  min-height: 44px;
   border-radius: 6px;
   font-size: 0.75rem;
   cursor: pointer;
@@ -693,6 +701,7 @@ body {
   cursor: pointer;
   transition: all 0.2s;
   flex: 1;
+  min-height: 44px;
 }
 
 .bottom-nav-item i { font-size: 1.2rem; }
@@ -1546,6 +1555,8 @@ body {
 .ticket-manager-title h2 { font: 700 1.1rem var(--font-heading); }
 .ticket-manager-description { display: block; margin-top: 3px; color: var(--text-muted); font-size: .8rem; }
 .ticket-manager-summary { display: flex; align-items: center; gap: 10px; }
+.ticket-manager-action-group { display: inline-flex; align-items: center; gap: 6px; }
+.ticket-manager-action { color: var(--text-muted); font-size: .75rem; font-weight: 700; white-space: nowrap; }
 .ticket-manager-chevron { color: var(--text-muted); transition: transform .2s ease; }
 .ticket-manager-toggle[aria-expanded="true"] .ticket-manager-chevron { transform: rotate(180deg); }
 .ticket-manager-content { margin-top: 14px; }
@@ -1593,12 +1604,54 @@ body {
 .ticket-route { font-weight: 700; overflow-wrap: anywhere; }
 .ticket-meta, .ticket-reminder, .ticket-code { color: var(--text-muted); font-size: .78rem; margin-top: 3px; overflow-wrap: anywhere; }
 .ticket-row-actions { flex: 0 0 auto; }
-.ticket-delete { border: 0; background: transparent; color: var(--text-muted); cursor: pointer; padding: 5px 8px; border-radius: 8px; }
+.ticket-delete { border: 0; background: transparent; color: var(--text-muted); cursor: pointer; min-width: 44px; min-height: 44px; padding: 8px; border-radius: 8px; }
 .ticket-delete:hover { color: var(--accent-terracotta); background: var(--card-border); }
 
 @media (max-width: 600px) {
+  .app-header { padding: 8px 12px 6px; }
+  .header-top { margin-bottom: 8px; }
+  .brand { gap: 8px; }
+  .flag-icon { font-size: 1.7rem; }
+  .brand h1 { font-size: 1.2rem; }
+  .brand .subtitle { font-size: .7rem; }
+  .header-actions { gap: 5px; }
+  .icon-btn { width: 44px; height: 44px; border-radius: 11px; }
+  .overall-progress-card { padding: 8px 10px; margin-bottom: 8px; border-radius: 13px; }
+  .progress-info { margin-bottom: 4px; }
+  .progress-label .title { font-size: .76rem; }
+  .progress-label .count { font-size: .78rem; }
+  .progress-percentage { font-size: 1rem; }
+  .progress-bar-container { height: 6px; margin-bottom: 5px; }
+  .city-mini-stats { padding-top: 5px; gap: 3px 6px; font-size: .68rem; }
+  .city-tabs, .category-pills {
+    margin-right: -12px;
+    padding-right: 18px;
+    mask-image: linear-gradient(to right, #000 0%, #000 88%, transparent 100%);
+    -webkit-mask-image: linear-gradient(to right, #000 0%, #000 88%, transparent 100%);
+  }
+  .status-filters {
+    gap: 2px;
+    overflow-x: auto;
+    padding-right: 16px;
+    scrollbar-width: none;
+    mask-image: linear-gradient(to right, #000 0%, #000 88%, transparent 100%);
+    -webkit-mask-image: linear-gradient(to right, #000 0%, #000 88%, transparent 100%);
+  }
+  .status-filters::-webkit-scrollbar { display: none; }
+  .filter-label { margin-right: 2px; }
+  .status-btn { padding: 7px 8px; font-size: .72rem; }
+  .bottom-nav { padding-left: 8px; padding-right: 8px; }
+  .bottom-nav-item { gap: 3px; font-size: .72rem; }
   .ticket-manager { padding: 14px; }
+  .ticket-manager-heading { align-items: flex-start; gap: 8px; }
+  .ticket-manager-title h2 { font-size: 1rem; }
+  .ticket-manager-description { font-size: .74rem; line-height: 1.35; }
+  .ticket-manager-summary { flex-direction: column; align-items: flex-end; gap: 3px; }
+  .ticket-count { font-size: .68rem; padding: 3px 7px; }
+  .ticket-manager-action-group { gap: 6px; }
+  .ticket-manager-action { font-size: .72rem; }
   .ticket-form-grid { grid-template-columns: 1fr; }
   .ticket-reminder-field { grid-column: auto; }
   .ticket-row { gap: 6px; }
+  .ticket-row-main input[type="checkbox"] { width: 24px; height: 24px; margin: 0 2px 0 0; }
 }
