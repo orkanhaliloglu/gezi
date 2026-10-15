@@ -1538,6 +1538,16 @@ function renderTransportTickets() {
 
 // Setup Event Listeners
 function setupEventListeners() {
+  const ticketManagerToggle = document.getElementById("ticketManagerToggle");
+  const ticketManagerContent = document.getElementById("ticketManagerContent");
+  if (ticketManagerToggle && ticketManagerContent) {
+    ticketManagerToggle.addEventListener("click", () => {
+      const isExpanded = ticketManagerToggle.getAttribute("aria-expanded") === "true";
+      ticketManagerToggle.setAttribute("aria-expanded", String(!isExpanded));
+      ticketManagerContent.hidden = isExpanded;
+    });
+  }
+
   document.getElementById("ticketForm").addEventListener("submit", (event) => {
     event.preventDefault();
     const route = document.getElementById("ticketRoute").value.trim();

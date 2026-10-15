@@ -18,7 +18,7 @@
   <!-- FontAwesome icons (via cdn) -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   
-  <link rel="stylesheet" href="style.css?v=16">
+  <link rel="stylesheet" href="style.css?v=17">
 </head>
 <body>
 
@@ -211,14 +211,19 @@
     </div>
 
     <section class="ticket-manager" aria-labelledby="ticketManagerTitle">
-      <div class="ticket-manager-heading">
-        <div>
-          <h2 id="ticketManagerTitle"><i class="fa-solid fa-ticket text-gold"></i> Uçak & Tren Biletleri</h2>
-          <p>Bilet bilgilerini, yolculuk saatini ve hazırlık hatırlatmalarını kaydedin.</p>
-        </div>
-        <span class="ticket-count" id="ticketCount">0 bilet</span>
-      </div>
-
+      <button type="button" class="ticket-manager-toggle" id="ticketManagerToggle" aria-expanded="false" aria-controls="ticketManagerContent">
+        <span class="ticket-manager-heading">
+          <span class="ticket-manager-title">
+            <h2 id="ticketManagerTitle"><i class="fa-solid fa-ticket text-gold"></i> Uçak & Tren Biletleri</h2>
+            <span class="ticket-manager-description">Bilet bilgilerini, yolculuk saatini ve hazırlık hatırlatmalarını kaydedin.</span>
+          </span>
+          <span class="ticket-manager-summary">
+            <span class="ticket-count" id="ticketCount">0 bilet</span>
+            <i class="fa-solid fa-chevron-down ticket-manager-chevron" aria-hidden="true"></i>
+          </span>
+        </span>
+      </button>
+      <div id="ticketManagerContent" class="ticket-manager-content" hidden>
       <form id="ticketForm" class="ticket-form">
         <div class="ticket-form-grid">
           <label class="ticket-field">Ulaşım türü
@@ -243,6 +248,7 @@
         <button type="submit" class="primary-btn"><i class="fa-solid fa-plus"></i> Bileti Ekle</button>
       </form>
       <div id="ticketList" class="ticket-list" aria-live="polite"></div>
+      </div>
     </section>
 
     <!-- City Info Card Banner (Dynamic based on selected city) -->
@@ -459,6 +465,6 @@
     </div>
   </div>
 
-  <script src="app.js?v=16"></script>
+  <script src="app.js?v=17"></script>
 </body>
 </html>
