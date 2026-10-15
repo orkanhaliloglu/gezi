@@ -1375,6 +1375,7 @@ body {
   font-weight: 700;
   color: var(--text-main);
 }
+.sketch-title-compact { display: none; }
 
 .sketch-subtitle {
   font-size: 0.76rem;
@@ -1660,4 +1661,14 @@ body {
   .travel-sketch-card.collapsed .sketch-subtitle { display: none; }
   .travel-sketch-card.collapsed .sketch-controls { flex: 0 0 auto; }
   .travel-sketch-card.collapsed .sketch-ctrl-btn { min-height: 44px; padding: 7px 10px; }
+}
+
+@media (max-width: 360px) {
+  .header-actions #borderBtn,
+  .header-actions #addCustomBtn { display: none; }
+  .brand { gap: 5px; }
+  .brand h1 { font-size: 1.05rem; }
+  .brand .subtitle { font-size: .62rem; }
+  .travel-sketch-card.collapsed .sketch-title-full { display: none; }
+  .travel-sketch-card.collapsed .sketch-title-compact { display: inline; }
 }
