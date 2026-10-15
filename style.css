@@ -879,131 +879,6 @@ body {
   .app-main { padding: 24px; }
 }
 
-/* Bologna Route Card */
-.bologna-route-card {
-  background: linear-gradient(135deg, rgba(224, 90, 71, 0.12), rgba(229, 171, 72, 0.1));
-  border: 1px solid var(--accent-gold-glow);
-  border-radius: 16px;
-  padding: 16px;
-  margin-bottom: 18px;
-  box-shadow: var(--shadow-sm);
-}
-
-.route-card-header {
-  display: flex;
-  justify-content: space-between;
-  align-items: center;
-  margin-bottom: 8px;
-  flex-wrap: wrap;
-  gap: 8px;
-}
-
-.route-card-title {
-  display: flex;
-  align-items: center;
-  gap: 8px;
-}
-
-.route-card-title h3 {
-  font-family: var(--font-heading);
-  font-size: 1.05rem;
-  color: var(--text-main);
-  font-weight: 700;
-}
-
-.route-badge {
-  background: var(--accent-gold);
-  color: #0f1015;
-  font-size: 0.72rem;
-  font-weight: 700;
-  padding: 3px 10px;
-  border-radius: 99px;
-  display: inline-flex;
-  align-items: center;
-  gap: 4px;
-}
-
-.route-desc {
-  font-size: 0.82rem;
-  color: var(--text-muted);
-  margin-bottom: 14px;
-}
-
-.walking-steps {
-  display: flex;
-  align-items: center;
-  flex-wrap: wrap;
-  gap: 6px;
-  margin-bottom: 12px;
-  background: rgba(0, 0, 0, 0.2);
-  padding: 12px;
-  border-radius: 12px;
-  border: 1px solid var(--card-border);
-}
-
-.step-chip {
-  background: var(--card-bg);
-  border: 1px solid var(--card-border);
-  padding: 6px 10px;
-  border-radius: 10px;
-  display: flex;
-  align-items: center;
-  gap: 6px;
-  font-size: 0.8rem;
-  font-weight: 600;
-  color: var(--text-main);
-}
-
-.step-chip.highlight {
-  border-color: var(--accent-gold);
-  background: rgba(229, 171, 72, 0.18);
-}
-
-.step-chip.final {
-  border-color: var(--accent-terracotta);
-  background: rgba(224, 90, 71, 0.18);
-}
-
-.step-num {
-  background: var(--accent-gold);
-  color: #0f1015;
-  width: 20px;
-  height: 20px;
-  border-radius: 50%;
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  font-size: 0.72rem;
-  font-weight: 800;
-}
-
-.step-arrow {
-  color: var(--text-muted);
-  font-size: 0.75rem;
-  display: flex;
-  align-items: center;
-  gap: 2px;
-}
-
-.step-arrow small {
-  font-size: 0.68rem;
-  opacity: 0.8;
-}
-
-.route-footer-note {
-  font-size: 0.76rem;
-  color: var(--text-muted);
-  display: flex;
-  align-items: center;
-  gap: 6px;
-}
-
-.badge-status.bologna-route {
-  background: rgba(224, 90, 71, 0.2);
-  color: #f87171;
-  border: 1px solid rgba(248, 113, 113, 0.3);
-}
-
 /* Sınır Kapıları (Border Checkpoints) Modal & Cards */
 .border-btn {
   position: relative;
@@ -1644,4 +1519,68 @@ body {
   border-radius: 6px;
   border: 1px solid var(--card-border);
   font-size: 0.75rem;
+}
+
+/* Transport ticket checklist */
+.ticket-manager {
+  background: var(--card-bg);
+  border: 1px solid var(--card-border);
+  border-radius: 18px;
+  padding: 18px;
+  margin-bottom: 14px;
+  box-shadow: var(--shadow-sm);
+}
+
+.ticket-manager-heading,
+.ticket-row,
+.ticket-row-main,
+.ticket-row-actions {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 12px;
+}
+
+.ticket-manager-heading { margin-bottom: 14px; }
+.ticket-manager-heading h2 { font: 700 1.1rem var(--font-heading); }
+.ticket-manager-heading p { margin-top: 3px; color: var(--text-muted); font-size: .8rem; }
+.ticket-count, .ticket-type-badge {
+  color: var(--accent-gold);
+  background: var(--accent-gold-glow);
+  border: 1px solid var(--card-border);
+  border-radius: 999px;
+  padding: 4px 10px;
+  font-size: .75rem;
+  font-weight: 700;
+  white-space: nowrap;
+}
+
+.ticket-form { border-top: 1px solid var(--card-border); padding-top: 14px; }
+.ticket-form-grid { display: grid; grid-template-columns: repeat(2, minmax(0, 1fr)); gap: 10px; margin-bottom: 12px; }
+.ticket-field { display: flex; flex-direction: column; gap: 5px; color: var(--text-sub); font-size: .78rem; font-weight: 600; }
+.ticket-field input, .ticket-field select {
+  width: 100%; min-height: 42px; padding: 9px 11px;
+  border: 1px solid var(--card-border); border-radius: 10px;
+  background: var(--bg-secondary); color: var(--text-main); font: inherit;
+}
+.ticket-reminder-field { grid-column: 1 / -1; }
+.ticket-list { display: grid; gap: 9px; margin-top: 14px; }
+.ticket-empty { color: var(--text-muted); font-size: .85rem; padding: 5px 0; }
+.ticket-row { align-items: flex-start; padding: 12px; border: 1px solid var(--card-border); border-radius: 12px; background: var(--bg-secondary); }
+.ticket-row.is-done { opacity: .68; }
+.ticket-row.is-done .ticket-route { text-decoration: line-through; }
+.ticket-row-main { justify-content: flex-start; align-items: flex-start; min-width: 0; }
+.ticket-row-main input[type="checkbox"] { width: 20px; height: 20px; margin-top: 2px; accent-color: var(--accent-green); flex: 0 0 auto; }
+.ticket-details { min-width: 0; }
+.ticket-route { font-weight: 700; overflow-wrap: anywhere; }
+.ticket-meta, .ticket-reminder, .ticket-code { color: var(--text-muted); font-size: .78rem; margin-top: 3px; overflow-wrap: anywhere; }
+.ticket-row-actions { flex: 0 0 auto; }
+.ticket-delete { border: 0; background: transparent; color: var(--text-muted); cursor: pointer; padding: 5px 8px; border-radius: 8px; }
+.ticket-delete:hover { color: var(--accent-terracotta); background: var(--card-border); }
+
+@media (max-width: 600px) {
+  .ticket-manager { padding: 14px; }
+  .ticket-form-grid { grid-template-columns: 1fr; }
+  .ticket-reminder-field { grid-column: auto; }
+  .ticket-row { gap: 6px; }
 }

@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover">
-  <title>İtalya Gezisi — Milano, Floransa, Bologna, Roma Rehberi & Checklist</title>
-  <meta name="description" content="Milano, Floransa, Bologna ve Roma için interaktif gezilecek yerler, müzeler, alışveriş noktaları ve yeme içme rehberi ve checklist.">
+  <title>İtalya Gezisi — Milano, Floransa ve Roma Rehberi & Checklist</title>
+  <meta name="description" content="Milano, Floransa ve Roma için interaktif gezilecek yerler, müzeler, alışveriş noktaları ve yeme içme rehberi ve checklist.">
   <meta name="theme-color" content="#121216">
   <link rel="manifest" href="manifest.json">
   <link rel="apple-touch-icon" href="https://fav.farm/🇮🇹">
@@ -29,7 +29,7 @@
         <span class="flag-icon">🇮🇹</span>
         <div>
           <h1>İtalya Turu</h1>
-          <span class="subtitle">Milano • Floransa • Bologna • Roma</span>
+          <span class="subtitle">Milano • Floransa • Roma</span>
         </div>
       </div>
       <div class="header-actions">
@@ -62,9 +62,6 @@
       </button>
       <button class="tab-btn" data-city="floransa">
         <span class="tab-icon">⚜️</span> Floransa
-      </button>
-      <button class="tab-btn" data-city="bologna">
-        <span class="tab-icon">🍝</span> Bologna
       </button>
       <button class="tab-btn" data-city="roma">
         <span class="tab-icon">🏛️</span> Roma
@@ -114,7 +111,6 @@
       <div class="city-mini-stats">
         <div class="mini-stat" id="statMilano"><span>🇮🇹 Milano:</span> <strong>0/0</strong></div>
         <div class="mini-stat" id="statFloransa"><span>⚜️ Floransa:</span> <strong>0/0</strong></div>
-        <div class="mini-stat" id="statBologna"><span>🍝 Bologna:</span> <strong>0/0</strong></div>
         <div class="mini-stat" id="statRoma"><span>🏛️ Roma:</span> <strong>0/0</strong></div>
       </div>
     </div>
@@ -126,7 +122,7 @@
           <i class="fa-solid fa-route text-gold animated-route-icon"></i>
           <div>
             <h3>🗺️ Seyahat Krokisi & Tur Rotası</h3>
-            <span class="sketch-subtitle">İstanbul ➔ Selanik ➔ Roma ➔ Floransa ➔ Milano ➔ Bologna ➔ Roma ➔ Selanik ➔ İstanbul</span>
+            <span class="sketch-subtitle">İstanbul ➔ Selanik ➔ Roma ➔ Floransa ➔ Milano ➔ Roma ➔ Selanik ➔ İstanbul</span>
           </div>
         </div>
         <div class="sketch-controls">
@@ -185,28 +181,21 @@
             </div>
             <div class="sketch-arrow"><i class="fa-solid fa-chevron-right"></i></div>
             
-            <div class="sketch-node" data-city="bologna" data-index="5">
-              <span class="node-badge">🍝</span>
-              <span class="node-name">Bologna</span>
-              <span class="node-type">Lezzet</span>
-            </div>
-            <div class="sketch-arrow"><i class="fa-solid fa-chevron-right"></i></div>
-            
-            <div class="sketch-node" data-city="roma" data-index="6">
+            <div class="sketch-node" data-city="roma" data-index="5">
               <span class="node-badge">🏛️</span>
               <span class="node-name">Roma</span>
               <span class="node-type">Güney</span>
             </div>
             <div class="sketch-arrow"><i class="fa-solid fa-chevron-right"></i></div>
             
-            <div class="sketch-node" data-city="selanik" data-index="7">
+            <div class="sketch-node" data-city="selanik" data-index="6">
               <span class="node-badge">🇬🇷</span>
               <span class="node-name">Selanik</span>
               <span class="node-type">Dönüş</span>
             </div>
             <div class="sketch-arrow"><i class="fa-solid fa-chevron-right"></i></div>
             
-            <div class="sketch-node" data-city="istanbul" data-index="8">
+            <div class="sketch-node" data-city="istanbul" data-index="7">
               <span class="node-badge">🇹🇷</span>
               <span class="node-name">İstanbul</span>
               <span class="node-type">Varış</span>
@@ -217,10 +206,45 @@
 
       <!-- Route Footer Info -->
       <div class="sketch-footer-info">
-        <span id="sketchStepText"><i class="fa-solid fa-circle-dot text-gold"></i> Canlı Rota: <strong>1 / 9 — 🇹🇷 İstanbul (Başlangıç)</strong></span>
-        <span class="route-dist-tag"><i class="fa-solid fa-route"></i> Toplam ~3.400 km Rota</span>
+        <span id="sketchStepText"><i class="fa-solid fa-circle-dot text-gold"></i> Canlı Rota: <strong>1 / 8 — 🇹🇷 İstanbul (Başlangıç)</strong></span>
       </div>
     </div>
+
+    <section class="ticket-manager" aria-labelledby="ticketManagerTitle">
+      <div class="ticket-manager-heading">
+        <div>
+          <h2 id="ticketManagerTitle"><i class="fa-solid fa-ticket text-gold"></i> Uçak & Tren Biletleri</h2>
+          <p>Bilet bilgilerini, yolculuk saatini ve hazırlık hatırlatmalarını kaydedin.</p>
+        </div>
+        <span class="ticket-count" id="ticketCount">0 bilet</span>
+      </div>
+
+      <form id="ticketForm" class="ticket-form">
+        <div class="ticket-form-grid">
+          <label class="ticket-field">Ulaşım türü
+            <select id="ticketType" required>
+              <option value="flight">✈️ Uçak</option>
+              <option value="train">🚆 Tren</option>
+            </select>
+          </label>
+          <label class="ticket-field">Güzergâh
+            <input id="ticketRoute" type="text" maxlength="100" placeholder="Örn: İstanbul → Roma" required>
+          </label>
+          <label class="ticket-field">Tarih ve saat
+            <input id="ticketDate" type="datetime-local">
+          </label>
+          <label class="ticket-field">Bilet / rezervasyon kodu
+            <input id="ticketCode" type="text" maxlength="80" placeholder="İsteğe bağlı">
+          </label>
+          <label class="ticket-field ticket-reminder-field">Hatırlatma
+            <input id="ticketReminder" type="text" maxlength="180" placeholder="Örn: Online check-in yap, istasyona 30 dk önce var">
+          </label>
+        </div>
+        <button type="submit" class="primary-btn"><i class="fa-solid fa-plus"></i> Bileti Ekle</button>
+      </form>
+      <div id="ticketList" class="ticket-list" aria-live="polite"></div>
+    </section>
+
     <!-- City Info Card Banner (Dynamic based on selected city) -->
     <div id="cityBanner" class="city-banner hidden">
       <div class="banner-content">
@@ -309,7 +333,6 @@
           <select id="newCity" required>
             <option value="milano">Milano 🇮🇹</option>
             <option value="floransa">Floransa ⚜️</option>
-            <option value="bologna">Bologna 🍝</option>
             <option value="roma">Roma 🏛️</option>
           </select>
         </div>

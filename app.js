@@ -315,7 +315,7 @@ const INITIAL_DATA = [
     stars: "⭐⭐⭐⭐",
     isMustSee: false,
     rating: "4.4",
-    advice: "Milano-Bologna arasında. Yıl boyu %70'e varan indirimler.",
+    advice: "Milano-Parma arasında. Yıl boyu %70'e varan indirimler.",
     mapQuery: "Fidenza Village",
     checked: false,
     userNotes: ""
@@ -855,223 +855,6 @@ const INITIAL_DATA = [
     userNotes: ""
   },
 
-  // ==================== 3. BOLOGNA ====================
-  // Tarih & Şehir
-  {
-    id: "b1",
-    city: "bologna",
-    category: "sights",
-    title: "Piazza Maggiore",
-    subtitle: "Bologna'nın ana meydanı ve şehir merkezinin kalbi",
-    stars: "⭐⭐⭐",
-    isMustSee: true,
-    rating: "4.8",
-    advice: "Bologna'nın kalbi. Buradan yürüyüş rotasına başlamak en mantıklısı.",
-    mapQuery: "Piazza Maggiore Bologna",
-    checked: false,
-    userNotes: ""
-  },
-  {
-    id: "b2",
-    city: "bologna",
-    category: "sights",
-    title: "Basilica di San Petronio",
-    subtitle: "Piazza Maggiore'deki devasa Gotik bazilika",
-    stars: "⭐⭐",
-    isMustSee: true,
-    rating: "4.7",
-    advice: "Dünyanın en büyük tuğla Gotik bazilikalarından biri. İçi büyüleyici.",
-    mapQuery: "Basilica di San Petronio Bologna",
-    checked: false,
-    userNotes: ""
-  },
-  {
-    id: "b3",
-    city: "bologna",
-    category: "sights",
-    title: "Fontana del Nettuno",
-    subtitle: "Neptün Çeşmesi; Piazza Maggiore'nin hemen yanında",
-    stars: "⭐⭐",
-    isMustSee: false,
-    rating: "4.6",
-    advice: "Piazza Maggiore'nin hemen yanında yer alan simge Neptün Çeşmesi.",
-    mapQuery: "Fontana del Nettuno Bologna",
-    checked: false,
-    userNotes: ""
-  },
-  {
-    id: "b4",
-    city: "bologna",
-    category: "sights",
-    title: "The Two Towers (Due Torri): Garisenda & Asinelli",
-    subtitle: "Bologna'nın sembolü olan Orta Çağ kuleleri",
-    stars: "⭐⭐⭐",
-    isMustSee: true,
-    rating: "4.7",
-    advice: "⚠️ Not: Asinelli şu anda bakım nedeniyle ziyarete kapalı; Garisenda da erişilebilir değil. Bu nedenle bu seyahatte dışarıdan görmek şeklinde planlayalım.",
-    mapQuery: "Due Torri Bologna",
-    checked: false,
-    userNotes: ""
-  },
-  {
-    id: "b5",
-    city: "bologna",
-    category: "sights",
-    title: "Archiginnasio Municipal Library",
-    subtitle: "Bologna Üniversitesi'nin tarihi binası; Anatomical Theatre",
-    stars: "⭐⭐",
-    isMustSee: true,
-    rating: "4.7",
-    advice: "Anatomical Theatre özellikle görülmeye değer. Ziyaret için Anatomical Theatre'a önceden online rezervasyon gerekiyor.",
-    mapQuery: "Archiginnasio Municipal Library Bologna",
-    checked: false,
-    userNotes: ""
-  },
-  {
-    id: "b6",
-    city: "bologna",
-    category: "sights",
-    title: "Piazza Santo Stefano",
-    subtitle: "Bologna'nın en güzel ve atmosferik meydanlarından biri",
-    stars: "⭐⭐",
-    isMustSee: true,
-    rating: "4.8",
-    advice: "Tarihi atmosferi ve cafe'leriyle yürüyüş rotasının keyifli durak noktası.",
-    mapQuery: "Piazza Santo Stefano Bologna",
-    checked: false,
-    userNotes: ""
-  },
-  {
-    id: "b7",
-    city: "bologna",
-    category: "sights",
-    title: "Basilica Santuario Santo Stefano",
-    subtitle: "\"Yedi Kilise\" (Le Sette Chiese) kompleksi",
-    stars: "⭐⭐",
-    isMustSee: false,
-    rating: "4.8",
-    advice: "\"Yedi Kilise\" kompleksi; tarihi ve ruhani atmosferi çok güzel.",
-    mapQuery: "Basilica Santuario Santo Stefano Bologna",
-    checked: false,
-    userNotes: ""
-  },
-  {
-    id: "b8",
-    city: "bologna",
-    category: "sights",
-    title: "Portici di Bologna",
-    subtitle: "Şehrin meşhur kemerli yürüyüş yolları (UNESCO Dünya Mirası)",
-    stars: "⭐⭐⭐",
-    isMustSee: true,
-    rating: "4.9",
-    advice: "Bologna'nın en karakteristik özelliklerinden ve UNESCO Dünya Mirası. Toplam 62 km kemerli yol.",
-    mapQuery: "Portici di Bologna",
-    checked: false,
-    userNotes: ""
-  },
-
-  // Yemek & Pazar
-  {
-    id: "b9",
-    city: "bologna",
-    category: "food",
-    title: "Quadrilatero",
-    subtitle: "Bologna'nın tarihi gastronomi bölgesi",
-    stars: "⭐⭐⭐",
-    isMustSee: true,
-    rating: "4.8",
-    advice: "Bologna'nın kalbinde tarihi gastronomi bölgesi. Akşam yemeği ve aperitivo için mutlaka uğranmalı.",
-    mapQuery: "Quadrilatero Bologna",
-    checked: false,
-    userNotes: ""
-  },
-  {
-    id: "b10",
-    city: "bologna",
-    category: "food",
-    title: "Mercato delle Erbe",
-    subtitle: "Tarihi kapalı pazar",
-    stars: "⭐⭐",
-    isMustSee: false,
-    rating: "4.6",
-    advice: "Tarihi kapalı pazar; yemek ve aperitivo için güzel yerel alternatif.",
-    mapQuery: "Mercato delle Erbe Bologna",
-    checked: false,
-    userNotes: ""
-  },
-  {
-    id: "b11",
-    city: "bologna",
-    category: "food",
-    title: "Via dell'Indipendenza",
-    subtitle: "Ana alışveriş ve yürüyüş caddelerinden biri",
-    stars: "",
-    isMustSee: false,
-    rating: "4.5",
-    advice: "Tren istasyonundan Piazza Maggiore'ye uzanan harika bir yürüme ve alışveriş caddesi.",
-    mapQuery: "Via dell'Indipendenza Bologna",
-    checked: false,
-    userNotes: ""
-  },
-
-  // Alışveriş & Outlet
-  {
-    id: "b12",
-    city: "bologna",
-    category: "shopping",
-    title: "Galleria Cavour",
-    subtitle: "Bologna'nın lüks alışveriş noktası",
-    stars: "",
-    isMustSee: false,
-    rating: "4.6",
-    advice: "Dünyaca ünlü lüks markaların bulunduğu şık kapalı pasaj.",
-    mapQuery: "Galleria Cavour Bologna",
-    checked: false,
-    userNotes: ""
-  },
-  {
-    id: "b13",
-    city: "bologna",
-    category: "shopping",
-    title: "Via Rizzoli",
-    subtitle: "Piazza Maggiore → Due Torri arasındaki merkezi alışveriş caddesi",
-    stars: "",
-    isMustSee: false,
-    rating: "4.6",
-    advice: "Piazza Maggiore ile İki Kule arasındaki ana hareketli yürüyüş caddesi.",
-    mapQuery: "Via Rizzoli Bologna",
-    checked: false,
-    userNotes: ""
-  },
-  {
-    id: "b14",
-    city: "bologna",
-    category: "shopping",
-    title: "Shopville Gran Reno",
-    subtitle: "Büyük AVM",
-    stars: "",
-    isMustSee: false,
-    rating: "4.4",
-    advice: "Geniş kapalı AVM arayanlar için zengin seçenek sunan merkez.",
-    mapQuery: "Shopville Gran Reno Bologna",
-    checked: false,
-    userNotes: ""
-  },
-  {
-    id: "b15",
-    city: "bologna",
-    category: "outlets",
-    title: "Castel Guelfo The Style Outlets",
-    subtitle: "Bologna civarındaki outlet seçeneği",
-    stars: "",
-    isMustSee: false,
-    rating: "4.3",
-    advice: "Bologna civarındaki outlet seçeneği. Eğer alışverişi özellikle önceliklendirirseniz değerlendirilebilir.",
-    mapQuery: "Castel Guelfo The Style Outlets",
-    checked: false,
-    userNotes: ""
-  },
-
   // ==================== 4. ROMA ====================
   // Tarih & Şehir
   {
@@ -1083,7 +866,7 @@ const INITIAL_DATA = [
     stars: "⭐⭐⭐⭐⭐",
     isMustSee: true,
     rating: "4.8",
-    advice: "⚠️ BİLET ÖNCEDEN KESİNLİKLE ALINMALI! Kapıda bilet bulamazsınız.",
+    advice: "⚠️ Biletinizi önceden alın. Seyahat notunuzdaki 19 Kasım 12.30 Kolezyum turu için Forum ve Palatino erişiminin bilette dahil olduğunu doğrulayın. PASS SUPER, Kolezyum giriş bileti yerine geçmez; özel alanları özellikle görmek istemiyorsanız ayrıca almanız gerekmez.",
     mapQuery: "Colosseum Rome",
     checked: false,
     userNotes: ""
@@ -1125,7 +908,7 @@ const INITIAL_DATA = [
     stars: "⭐⭐⭐⭐",
     isMustSee: true,
     rating: "4.8",
-    advice: "Dünyanın en büyük desteksiz beton kubbesi.",
+    advice: "Kubbe ve oculus için içeride yaklaşık 30–45 dakika ayırın. 19 Kasım 11.00 seansı, aynı gün 12.30 Kolezyum turunuza çok yakın; iki giriş arasındaki yürüyüş ve kontroller nedeniyle bu saatleri arka arkaya planlamayın. Pantheon'u Kolezyum ziyaretinden sonraki şehir merkezi yürüyüşüne veya başka bir güne alın. Bilet ve güncel koşulları resmî siteden kontrol edin.",
     mapQuery: "Pantheon Rome",
     checked: false,
     userNotes: ""
@@ -1167,7 +950,7 @@ const INITIAL_DATA = [
     stars: "⭐⭐⭐",
     isMustSee: true,
     rating: "4.8",
-    advice: "💡 Kalabalıktan kaçınmak için sabah 07:30 veya gece geç saatte gidin. Para atmayı unutmayın!",
+    advice: "Pantheon ve Piazza Navona ile şehir merkezi yürüyüşüne ekleyin. Pantheon'dan yürüyerek yaklaşık 10–15 dakika; kalabalığı azaltmak için sabah erken ya da gece geç saatleri tercih edin.",
     mapQuery: "Trevi Fountain Rome",
     checked: false,
     userNotes: ""
@@ -1181,7 +964,7 @@ const INITIAL_DATA = [
     stars: "⭐⭐⭐",
     isMustSee: true,
     rating: "4.7",
-    advice: "Meydandaki sokak sanatçıları ve kafeler çok canlıdır.",
+    advice: "Pantheon'dan yaklaşık 5–7 dakikalık yürüyüşle ulaşılır. Pantheon ziyaretinden sonra meydanda kahve molası verip Trevi Çeşmesi'ne devam edebilirsiniz.",
     mapQuery: "Piazza Navona Rome",
     checked: false,
     userNotes: ""
@@ -1532,6 +1315,7 @@ let activeCategory = "all";
 let activeStatus = "all";
 let searchQuery = "";
 let currentModalItemId = null;
+let transportTickets = [];
 
 // DOM Elements
 const itemsContainer = document.getElementById("itemsContainer");
@@ -1549,7 +1333,6 @@ const bannerDesc = document.getElementById("bannerDesc");
 // Stats elements
 const statMilano = document.getElementById("statMilano");
 const statFloransa = document.getElementById("statFloransa");
-const statBologna = document.getElementById("statBologna");
 const statRoma = document.getElementById("statRoma");
 
 // City Banners Data
@@ -1563,11 +1346,6 @@ const CITY_INFO = {
     title: "Floransa ⚜️",
     duration: "2 gece önerilir",
     desc: "Rönesans'ın beşiği. Uffizi, Accademia ve Ponte Vecchio ile müze ve açık hava cenneti."
-  },
-  bologna: {
-    title: "Bologna 🍝",
-    duration: "1 gece / 1-2 gün",
-    desc: "Kırmızı şehir, gastronomi ve meşhur kemerli yolların (Portici di Bologna) başkenti. Kompakt tarihi merkez yürüyerek keşfetmek için harika."
   },
   roma: {
     title: "Roma 🏛️",
@@ -1584,8 +1362,10 @@ const CITY_INFO = {
 // Initialize App
 document.addEventListener("DOMContentLoaded", () => {
   loadData();
+  loadTransportTickets();
   setupEventListeners();
   render();
+  renderTransportTickets();
   initTravelSketch();
   registerServiceWorker();
 });
@@ -1596,7 +1376,7 @@ function loadData() {
   if (saved) {
     try {
       items = JSON.parse(saved);
-      // Merge initial data items if any new items were added (e.g. Bologna)
+      // Merge any new seed items into existing saved data.
       const existingIds = new Set(items.map(i => i.id));
       INITIAL_DATA.forEach(initItem => {
         if (!existingIds.has(initItem.id)) {
@@ -1611,6 +1391,23 @@ function loadData() {
     items = [...INITIAL_DATA];
   }
 
+  // Keep these editorial itinerary updates in sync for existing local backups too.
+  // Personal notes and checked state remain untouched.
+  const romaAdviceUpdates = {
+    r1: "⚠️ Biletinizi önceden alın. Seyahat notunuzdaki 19 Kasım 12.30 Kolezyum turu için Forum ve Palatino erişiminin bilette dahil olduğunu doğrulayın. PASS SUPER, Kolezyum giriş bileti yerine geçmez; özel alanları özellikle görmek istemiyorsanız ayrıca almanız gerekmez.",
+    r4: "Kubbe ve oculus için içeride yaklaşık 30–45 dakika ayırın. 19 Kasım 11.00 seansı, aynı gün 12.30 Kolezyum turunuza çok yakın; iki giriş arasındaki yürüyüş ve kontroller nedeniyle bu saatleri arka arkaya planlamayın. Pantheon'u Kolezyum ziyaretinden sonraki şehir merkezi yürüyüşüne veya başka bir güne alın. Bilet ve güncel koşulları resmî siteden kontrol edin.",
+    r7: "Pantheon ve Piazza Navona ile şehir merkezi yürüyüşüne ekleyin. Pantheon'dan yürüyerek yaklaşık 10–15 dakika; kalabalığı azaltmak için sabah erken ya da gece geç saatleri tercih edin.",
+    r8: "Pantheon'dan yaklaşık 5–7 dakikalık yürüyüşle ulaşılır. Pantheon ziyaretinden sonra meydanda kahve molası verip Trevi Çeşmesi'ne devam edebilirsiniz."
+  };
+  items.forEach(item => {
+    if (Object.prototype.hasOwnProperty.call(romaAdviceUpdates, item.id)) {
+      item.advice = romaAdviceUpdates[item.id];
+    }
+  });
+
+  // Remove Bologna entries from previously saved browser data.
+  items = items.filter(item => item && item.city !== "bologna");
+
   const savedTheme = localStorage.getItem("italy_checklist_theme") || "dark";
   document.documentElement.setAttribute("data-theme", savedTheme);
   updateThemeIcon(savedTheme);
@@ -1622,8 +1419,101 @@ function saveData() {
   updateStats();
 }
 
+function loadTransportTickets() {
+  try {
+    const saved = localStorage.getItem("italy_transport_tickets_v1");
+    const parsed = saved ? JSON.parse(saved) : [];
+    transportTickets = Array.isArray(parsed) ? parsed.filter(ticket =>
+      ticket && typeof ticket.id === "string" &&
+      ["flight", "train"].includes(ticket.type) &&
+      typeof ticket.route === "string"
+    ) : [];
+  } catch (error) {
+    console.warn("Bilet listesi yüklenemedi:", error);
+    transportTickets = [];
+  }
+}
+
+function saveTransportTickets() {
+  localStorage.setItem("italy_transport_tickets_v1", JSON.stringify(transportTickets));
+}
+
+function renderTransportTickets() {
+  const list = document.getElementById("ticketList");
+  const count = document.getElementById("ticketCount");
+  if (!list || !count) return;
+
+  const pending = transportTickets.filter(ticket => !ticket.checked).length;
+  count.textContent = `${pending} / ${transportTickets.length} tamamlanmadı`;
+  if (!transportTickets.length) {
+    list.innerHTML = '<p class="ticket-empty">Henüz bilet eklenmedi. Uçak veya tren biletinizi yukarıdan kaydedin.</p>';
+    return;
+  }
+
+  list.innerHTML = transportTickets.map(ticket => {
+    const isFlight = ticket.type === "flight";
+    const dateLabel = ticket.date
+      ? new Date(ticket.date).toLocaleString("tr-TR", { dateStyle: "medium", timeStyle: "short" })
+      : "Tarih eklenmedi";
+    return `
+      <article class="ticket-row ${ticket.checked ? "is-done" : ""}">
+        <div class="ticket-row-main">
+          <input type="checkbox" data-ticket-check="${escapeHTML(ticket.id)}" ${ticket.checked ? "checked" : ""} aria-label="${escapeHTML(ticket.route)} biletini tamamlandı olarak işaretle">
+          <div class="ticket-details">
+            <span class="ticket-type-badge">${isFlight ? "✈️ Uçak" : "🚆 Tren"}</span>
+            <div class="ticket-route">${escapeHTML(ticket.route)}</div>
+            <div class="ticket-meta"><i class="fa-regular fa-clock"></i> ${escapeHTML(dateLabel)}</div>
+            ${ticket.code ? `<div class="ticket-code"><i class="fa-solid fa-ticket"></i> Kod: ${escapeHTML(ticket.code)}</div>` : ""}
+            ${ticket.reminder ? `<div class="ticket-reminder"><i class="fa-regular fa-bell"></i> ${escapeHTML(ticket.reminder)}</div>` : ""}
+          </div>
+        </div>
+        <div class="ticket-row-actions">
+          <button type="button" class="ticket-delete" data-ticket-delete="${escapeHTML(ticket.id)}" aria-label="${escapeHTML(ticket.route)} biletini sil" title="Bileti sil"><i class="fa-solid fa-trash"></i></button>
+        </div>
+      </article>
+    `;
+  }).join("");
+}
+
 // Setup Event Listeners
 function setupEventListeners() {
+  document.getElementById("ticketForm").addEventListener("submit", (event) => {
+    event.preventDefault();
+    const route = document.getElementById("ticketRoute").value.trim();
+    if (!route) return;
+
+    transportTickets.unshift({
+      id: `ticket_${Date.now()}_${Math.random().toString(36).slice(2, 8)}`,
+      type: document.getElementById("ticketType").value,
+      route,
+      date: document.getElementById("ticketDate").value,
+      code: document.getElementById("ticketCode").value.trim(),
+      reminder: document.getElementById("ticketReminder").value.trim(),
+      checked: false
+    });
+    saveTransportTickets();
+    renderTransportTickets();
+    event.currentTarget.reset();
+  });
+
+  const ticketList = document.getElementById("ticketList");
+  ticketList.addEventListener("change", (event) => {
+    const checkbox = event.target.closest("[data-ticket-check]");
+    if (!checkbox) return;
+    const ticket = transportTickets.find(item => item.id === checkbox.dataset.ticketCheck);
+    if (!ticket) return;
+    ticket.checked = checkbox.checked;
+    saveTransportTickets();
+    renderTransportTickets();
+  });
+  ticketList.addEventListener("click", (event) => {
+    const button = event.target.closest("[data-ticket-delete]");
+    if (!button) return;
+    transportTickets = transportTickets.filter(item => item.id !== button.dataset.ticketDelete);
+    saveTransportTickets();
+    renderTransportTickets();
+  });
+
   document.getElementById("themeToggleBtn").addEventListener("click", () => {
     const current = document.documentElement.getAttribute("data-theme") || "dark";
     const next = current === "dark" ? "light" : "dark";
@@ -1844,7 +1734,7 @@ function setupEventListeners() {
       try {
         const importedData = JSON.parse(event.target.result);
         if (Array.isArray(importedData)) {
-          items = importedData;
+          items = importedData.filter(item => item && item.city !== "bologna");
           saveData();
           render();
           alert("Verileriniz başarıyla yüklendi!");
@@ -1927,11 +1817,6 @@ function render() {
 
   let html = "";
 
-  // Render Bologna Walking Route widget if viewing Bologna
-  if (activeCity === "bologna") {
-    html += createBolognaRouteHTML();
-  }
-
   // Render Outlet comparison table if activeCategory is 'outlets'
   if (activeCategory === "outlets") {
     html += createOutletTableHTML();
@@ -1958,66 +1843,8 @@ function render() {
   });
 }
 
-function createBolognaRouteHTML() {
-  return `
-    <div class="bologna-route-card">
-      <div class="route-card-header">
-        <div class="route-card-title">
-          <i class="fa-solid fa-route text-gold"></i>
-          <h3>⭐ 1 Gecelik Bologna Yürüyüş Rotası (~2–3 km)</h3>
-        </div>
-        <span class="route-badge"><i class="fa-solid fa-person-walking"></i> Kompakt Rota</span>
-      </div>
-      <p class="route-desc">Google Maps'te kayıtlı yürüyüş sıranız:</p>
-      
-      <div class="walking-steps">
-        <div class="step-chip">
-          <span class="step-num">1</span>
-          <span class="step-name">Piazza Maggiore</span>
-        </div>
-        <div class="step-arrow"><i class="fa-solid fa-chevron-right"></i> <small>2 dk</small></div>
-        <div class="step-chip">
-          <span class="step-num">2</span>
-          <span class="step-name">San Petronio</span>
-        </div>
-        <div class="step-arrow"><i class="fa-solid fa-chevron-right"></i> <small>3 dk</small></div>
-        <div class="step-chip">
-          <span class="step-num">3</span>
-          <span class="step-name">Neptün Çeşmesi</span>
-        </div>
-        <div class="step-arrow"><i class="fa-solid fa-chevron-right"></i> <small>5 dk</small></div>
-        <div class="step-chip">
-          <span class="step-num">4</span>
-          <span class="step-name">Archiginnasio</span>
-        </div>
-        <div class="step-arrow"><i class="fa-solid fa-chevron-right"></i> <small>5 dk</small></div>
-        <div class="step-chip highlight">
-          <span class="step-num">5</span>
-          <span class="step-name">Quadrilatero 🍝</span>
-        </div>
-        <div class="step-arrow"><i class="fa-solid fa-chevron-right"></i> <small>8 dk</small></div>
-        <div class="step-chip">
-          <span class="step-num">6</span>
-          <span class="step-name">Due Torri</span>
-        </div>
-        <div class="step-arrow"><i class="fa-solid fa-chevron-right"></i> <small>8 dk</small></div>
-        <div class="step-chip">
-          <span class="step-num">7</span>
-          <span class="step-name">Piazza Santo Stefano</span>
-        </div>
-        <div class="step-arrow"><i class="fa-solid fa-chevron-right"></i></div>
-        <div class="step-chip final">
-          <span class="step-num">🍷</span>
-          <span class="step-name">Akşam Yemeği 🍝</span>
-        </div>
-      </div>
-      <p class="route-footer-note"><i class="fa-solid fa-circle-info text-gold"></i> Bologna'nın tarihi merkezi kompakt olduğu için bu yürüyüş rotası 2-3 saatte keyifle tamamlanır.</p>
-    </div>
-  `;
-}
-
 function createCardHTML(item) {
-  const cityNames = { milano: "Milano 🇮🇹", floransa: "Floransa ⚜️", bologna: "Bologna 🍝", roma: "Roma 🏛️" };
+  const cityNames = { milano: "Milano 🇮🇹", floransa: "Floransa ⚜️", roma: "Roma 🏛️" };
   const catIcons = {
     sights: '<i class="fa-solid fa-landmark"></i> Şehir',
     museums: '<i class="fa-solid fa-palette"></i> Müze',
@@ -2107,13 +1934,6 @@ function createOutletTableHTML() {
               <td><span class="badge-status in-route">✅ Rotada</span></td>
             </tr>
             <tr>
-              <td><strong>Castel Guelfo</strong></td>
-              <td>Bologna (~30 dk)</td>
-              <td>110+ Mağaza (Outlet Köyü)</td>
-              <td><span class="badge-score">8.5 / 10</span></td>
-              <td><span class="badge-status bologna-route">🍝 Bologna</span></td>
-            </tr>
-            <tr>
               <td><strong>Scalo Milano</strong></td>
               <td>Milano (Yakın)</td>
               <td>Pratik & Çeşitli Markalar</td>
@@ -2122,7 +1942,7 @@ function createOutletTableHTML() {
             </tr>
             <tr>
               <td><strong>Fidenza Village</strong></td>
-              <td>Milano/Bologna</td>
+              <td>Milano/Parma</td>
               <td>120+ Butik (Premium)</td>
               <td><span class="badge-score">8.5 / 10</span></td>
               <td><span class="badge-status alt-route">🟡 Alternatif</span></td>
@@ -2179,15 +1999,12 @@ function updateStats() {
   const floTotal = items.filter(i => i.city === "floransa").length;
   const floDone = items.filter(i => i.city === "floransa" && i.checked).length;
 
-  const bolognaTotal = items.filter(i => i.city === "bologna").length;
-  const bolognaDone = items.filter(i => i.city === "bologna" && i.checked).length;
 
   const romaTotal = items.filter(i => i.city === "roma").length;
   const romaDone = items.filter(i => i.city === "roma" && i.checked).length;
 
   if (statMilano) statMilano.querySelector("strong").textContent = `${milanoDone}/${milanoTotal}`;
   if (statFloransa) statFloransa.querySelector("strong").textContent = `${floDone}/${floTotal}`;
-  if (statBologna) statBologna.querySelector("strong").textContent = `${bolognaDone}/${bolognaTotal}`;
   if (statRoma) statRoma.querySelector("strong").textContent = `${romaDone}/${romaTotal}`;
 
   const mustSeeTotal = items.filter(i => i.isMustSee).length;
@@ -2216,7 +2033,7 @@ function openDetailModal(id) {
 
   currentModalItemId = id;
 
-  const cityNames = { milano: "Milano 🇮🇹", floransa: "Floransa ⚜️", bologna: "Bologna 🍝", roma: "Roma 🏛️" };
+  const cityNames = { milano: "Milano 🇮🇹", floransa: "Floransa ⚜️", roma: "Roma 🏛️" };
   const catNames = {
     sights: "Tarih & Şehir",
     museums: "Müze & Sanat",
@@ -2667,10 +2484,9 @@ const SKETCH_STEPS = [
   { city: "roma", label: "🏛️ Roma", desc: "İtalya Başkenti & Tarih", index: 2 },
   { city: "floransa", label: "⚜️ Floransa", desc: "Rönesans & Sanat", index: 3 },
   { city: "milano", label: "🏙️ Milano", desc: "Moda & Tasarım", index: 4 },
-  { city: "bologna", label: "🍝 Bologna", desc: "Gastronomi & Kuleler", index: 5 },
-  { city: "roma", label: "🏛️ Roma", desc: "Güney Dönüş Rotası", index: 6 },
-  { city: "selanik", label: "🇬🇷 Selanik", desc: "Dönüş Molası", index: 7 },
-  { city: "istanbul", label: "🇹🇷 İstanbul", desc: "Tur Sonu / Varış", index: 8 }
+  { city: "roma", label: "🏛️ Roma", desc: "Güney Dönüş Rotası", index: 5 },
+  { city: "selanik", label: "🇬🇷 Selanik", desc: "Dönüş Molası", index: 6 },
+  { city: "istanbul", label: "🇹🇷 İstanbul", desc: "Tur Sonu / Varış", index: 7 }
 ];
 
 let currentSketchIndex = 0;
@@ -2782,6 +2598,6 @@ function jumpToSketchIndex(index) {
   // Update step text info
   const stepInfo = SKETCH_STEPS[index];
   if (stepText && stepInfo) {
-    stepText.innerHTML = `<i class="fa-solid fa-circle-dot text-gold"></i> Canlı Rota: <strong>${index + 1} / 9 — ${stepInfo.label}</strong> (${stepInfo.desc})`;
+    stepText.innerHTML = `<i class="fa-solid fa-circle-dot text-gold"></i> Canlı Rota: <strong>${index + 1} / ${SKETCH_STEPS.length} — ${stepInfo.label}</strong> (${stepInfo.desc})`;
   }
 }
