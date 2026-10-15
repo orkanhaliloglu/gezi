@@ -2550,62 +2550,62 @@ function renderBorderStatus() {
 
 window.openBorderModal = openBorderModal;
 
-// ==================== SEYAHAT KROKİSİ (TRAVEL ROUTE SKETCH) ANIMATION ====================
+// ==================== SEYAHAT ROTASI CHECKLIST ====================
 const SKETCH_STEPS = [
-  { city: "istanbul", label: "🇹🇷 İstanbul", desc: "Başlangıç / Çıkış Noktası", index: 0 },
-  { city: "selanik", label: "🇬🇷 Selanik", desc: "Transit & Mola Durak", index: 1 },
-  { city: "roma", label: "🏛️ Roma", desc: "İtalya Başkenti & Tarih", index: 2 },
-  { city: "floransa", label: "⚜️ Floransa", desc: "Rönesans & Sanat", index: 3 },
-  { city: "milano", label: "🏙️ Milano", desc: "Moda & Tasarım", index: 4 },
-  { city: "roma", label: "🏛️ Roma", desc: "Güney Dönüş Rotası", index: 5 },
-  { city: "selanik", label: "🇬🇷 Selanik", desc: "Dönüş Molası", index: 6 },
-  { city: "istanbul", label: "🇹🇷 İstanbul", desc: "Tur Sonu / Varış", index: 7 }
+  { city: "istanbul", label: "İstanbul", badge: "🇹🇷", desc: "Başlangıç · yola çıkış" },
+  { city: "selanik", label: "Selanik", badge: "🇬🇷", desc: "Transit ve mola" },
+  { city: "roma", label: "Roma", badge: "🏛️", desc: "İlk durak" },
+  { city: "floransa", label: "Floransa", badge: "⚜️", desc: "Sanat ve tarih" },
+  { city: "milano", label: "Milano", badge: "🏙️", desc: "Moda ve tasarım" },
+  { city: "roma", label: "Roma", badge: "🏛️", desc: "Dönüş rotası" },
+  { city: "selanik", label: "Selanik", badge: "🇬🇷", desc: "Dönüş molası" },
+  { city: "istanbul", label: "İstanbul", badge: "🇹🇷", desc: "Varış · tur sonu" }
 ];
 
-let currentSketchIndex = 0;
-let sketchAnimInterval = null;
-let isSketchAnimPlaying = true;
+const SKETCH_PROGRESS_KEY = "italy_route_progress_v1";
+let sketchCompletedSteps = Array(SKETCH_STEPS.length).fill(false);
 
 function initTravelSketch() {
-  const nodes = document.querySelectorAll("#sketchNodes .sketch-node");
-  if (!nodes.length) return;
-
-  // Node click handlers
-  nodes.forEach(node => {
-    node.addEventListener("click", () => {
-      const idx = parseInt(node.dataset.index, 10);
-      const city = node.dataset.city;
-
-      jumpToSketchIndex(idx);
-
-      // If matching city tab exists, switch to that city tab!
-      if (city && city !== "istanbul" && city !== "selanik") {
-        const cityTabBtn = document.querySelector(`.city-tabs .tab-btn[data-city="${city}"]`);
-        if (cityTabBtn) {
-          cityTabBtn.click();
-        }
-      }
-    });
-  });
-
-  // Toggle animation button click
-  const toggleBtn = document.getElementById("toggleSketchAnimBtn");
-  if (toggleBtn) {
-    toggleBtn.addEventListener("click", () => {
-      isSketchAnimPlaying = !isSketchAnimPlaying;
-      if (isSketchAnimPlaying) {
-        startSketchAnim();
-        toggleBtn.innerHTML = '<i class="fa-solid fa-pause"></i> <span class="btn-txt">Durdur</span>';
-      } else {
-        stopSketchAnim();
-        toggleBtn.innerHTML = '<i class="fa-solid fa-play"></i> <span class="btn-txt">Oynat</span>';
-      }
-    });
-  }
-
-  // Collapse / Expand sketch card
+  const checklist = document.getElementById("sketchNodes");
   const collapseBtn = document.getElementById("collapseSketchBtn");
   const sketchCard = document.getElementById("travelSketchCard");
+  if (!checklist) return;
+
+  try {
+    const savedProgress = JSON.parse(localStorage.getItem(SKETCH_PROGRESS_KEY) || "null");
+    if (Array.isArray(savedProgress) && savedProgress.length === SKETCH_STEPS.length) {
+      sketchCompletedSteps = savedProgress.map(Boolean);
+    }
+  } catch (error) {
+    console.warn("Rota ilerlemesi yüklenemedi:", error);
+  }
+
+  checklist.innerHTML = SKETCH_STEPS.map((step, index) => `
+    <label class="route-check-item ${sketchCompletedSteps[index] ? "is-done" : ""}">
+      <input type="checkbox" data-route-check="${index}" ${sketchCompletedSteps[index] ? "checked" : ""} aria-label="${step.label} — ${step.desc} tamamlandı">
+      <span class="route-step-badge" aria-hidden="true">${step.badge}</span>
+      <span class="route-step-copy">
+        <span class="route-step-name">${step.label}</span>
+        <span class="route-step-desc">${step.desc}</span>
+      </span>
+    </label>
+  `).join("");
+
+  checklist.addEventListener("change", event => {
+    const checkbox = event.target.closest("input[data-route-check]");
+    if (!checkbox) return;
+
+    const index = Number(checkbox.dataset.routeCheck);
+    sketchCompletedSteps[index] = checkbox.checked;
+    checkbox.closest(".route-check-item")?.classList.toggle("is-done", checkbox.checked);
+    try {
+      localStorage.setItem(SKETCH_PROGRESS_KEY, JSON.stringify(sketchCompletedSteps));
+    } catch (error) {
+      console.warn("Rota ilerlemesi kaydedilemedi:", error);
+    }
+    updateSketchProgress();
+  });
+
   if (collapseBtn && sketchCard) {
     collapseBtn.addEventListener("click", () => {
       sketchCard.classList.toggle("collapsed");
@@ -2616,61 +2616,17 @@ function initTravelSketch() {
     });
   }
 
-  setTimeout(() => {
-    jumpToSketchIndex(0);
-    startSketchAnim();
-  }, 100);
+  updateSketchProgress();
 }
 
-function startSketchAnim() {
-  if (sketchAnimInterval) clearInterval(sketchAnimInterval);
-  sketchAnimInterval = setInterval(() => {
-    currentSketchIndex = (currentSketchIndex + 1) % SKETCH_STEPS.length;
-    jumpToSketchIndex(currentSketchIndex);
-  }, 2500);
-}
-
-function stopSketchAnim() {
-  if (sketchAnimInterval) {
-    clearInterval(sketchAnimInterval);
-    sketchAnimInterval = null;
-  }
-}
-
-function jumpToSketchIndex(index) {
-  currentSketchIndex = index;
-  const nodes = document.querySelectorAll("#sketchNodes .sketch-node");
-  const vehicle = document.getElementById("movingVehicle");
+function updateSketchProgress() {
+  const completeCount = sketchCompletedSteps.filter(Boolean).length;
   const stepText = document.getElementById("sketchStepText");
-
-  if (!nodes.length || !vehicle) return;
-
-  const targetNode = nodes[index];
-  if (!targetNode) return;
-
-  nodes.forEach((n, i) => {
-    n.classList.toggle("active", i === index);
-    n.classList.toggle("visited", i < index);
-  });
-
-  // Position vehicle indicator over active node
-  const nodeOffsetLeft = targetNode.offsetLeft;
-  const nodeWidth = targetNode.offsetWidth;
-  const vehicleWidth = vehicle.offsetWidth || 34;
-
-  const newLeft = nodeOffsetLeft + (nodeWidth / 2) - (vehicleWidth / 2);
-  vehicle.style.left = `${newLeft}px`;
-
-  // Scroll track smoothly to keep target node in view on mobile screens
-  const trackWrapper = document.querySelector(".sketch-track-container");
-  if (trackWrapper) {
-    const scrollTarget = newLeft - (trackWrapper.offsetWidth / 2) + (vehicleWidth / 2);
-    trackWrapper.scrollTo({ left: Math.max(0, scrollTarget), behavior: 'smooth' });
-  }
-
-  // Update step text info
-  const stepInfo = SKETCH_STEPS[index];
-  if (stepText && stepInfo) {
-    stepText.innerHTML = `<i class="fa-solid fa-circle-dot text-gold"></i> Canlı Rota: <strong>${index + 1} / ${SKETCH_STEPS.length} — ${stepInfo.label}</strong> (${stepInfo.desc})`;
-  }
+  const completionChip = document.getElementById("sketchCompletionChip");
+  const progressBar = document.getElementById("sketchProgressBar");
+  const progressFill = document.getElementById("sketchProgressFill");
+  if (stepText) stepText.textContent = `${completeCount} / ${SKETCH_STEPS.length} durak tamamlandı`;
+  if (completionChip) completionChip.textContent = `${completeCount} / ${SKETCH_STEPS.length}`;
+  if (progressBar) progressBar.setAttribute("aria-valuenow", String(completeCount));
+  if (progressFill) progressFill.style.width = `${(completeCount / SKETCH_STEPS.length) * 100}%`;
 }
