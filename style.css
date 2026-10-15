@@ -1613,10 +1613,10 @@ body {
   .brand { gap: 8px; }
   .flag-icon { font-size: 1.7rem; }
   .brand h1 { font-size: 1.2rem; }
-  .brand .subtitle { font-size: .7rem; }
+  .brand .subtitle { font-size: .66rem; white-space: nowrap; }
   .header-actions { gap: 5px; }
   .icon-btn { width: 44px; height: 44px; border-radius: 11px; }
-  .overall-progress-card { padding: 8px 10px; margin-bottom: 8px; border-radius: 13px; }
+  .overall-progress-card { padding: 7px 9px; margin-bottom: 7px; border-radius: 13px; }
   .progress-info { margin-bottom: 4px; }
   .progress-label .title { font-size: .76rem; }
   .progress-label .count { font-size: .78rem; }
@@ -1644,7 +1644,7 @@ body {
   .bottom-nav-item { gap: 3px; font-size: .72rem; }
   .ticket-manager { padding: 14px; }
   .ticket-manager-heading { align-items: flex-start; gap: 8px; }
-  .ticket-manager-title h2 { font-size: 1rem; }
+  .ticket-manager-title h2 { font-size: .9rem; }
   .ticket-manager-description { font-size: .74rem; line-height: 1.35; }
   .ticket-manager-summary { flex-direction: column; align-items: flex-end; gap: 3px; }
   .ticket-count { font-size: .68rem; padding: 3px 7px; }
@@ -1654,4 +1654,10 @@ body {
   .ticket-reminder-field { grid-column: auto; }
   .ticket-row { gap: 6px; }
   .ticket-row-main input[type="checkbox"] { width: 24px; height: 24px; margin: 0 2px 0 0; }
+  .travel-sketch-card.collapsed .sketch-card-header { flex-wrap: nowrap; }
+  .travel-sketch-card.collapsed .sketch-title-group { flex: 1; min-width: 0; }
+  .travel-sketch-card.collapsed .sketch-title-group h3 { font-size: .94rem; white-space: nowrap; }
+  .travel-sketch-card.collapsed .sketch-subtitle { display: none; }
+  .travel-sketch-card.collapsed .sketch-controls { flex: 0 0 auto; }
+  .travel-sketch-card.collapsed .sketch-ctrl-btn { min-height: 44px; padding: 7px 10px; }
 }
