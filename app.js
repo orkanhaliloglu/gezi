@@ -1984,7 +1984,7 @@ function createCardHTML(item) {
     outlets: '<i class="fa-solid fa-tags"></i> Outlet'
   };
 
-  const isTicketTip = item.advice && (item.advice.includes("bilet") || item.advice.includes("REZERVASYON") || item.advice.includes("rezervasyon"));
+  const isTicketTip = item.category !== "food" && item.advice && (item.advice.includes("bilet") || item.advice.includes("REZERVASYON") || item.advice.includes("rezervasyon"));
   const mapsUrl = `https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(item.mapQuery || `${item.title} ${item.city}`)}`;
 
   return `
