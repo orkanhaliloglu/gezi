@@ -1317,6 +1317,45 @@ let searchQuery = "";
 let currentModalItemId = null;
 let transportTickets = [];
 
+const DEFAULT_TRANSPORT_TICKETS = [
+  {
+    id: "trip-flight-arrival",
+    type: "flight",
+    route: "Selanik (SKG) → Milano Malpensa (MXP) · 16:40–17:55 · Aegean A3552",
+    date: "2026-11-14T16:40",
+    code: "",
+    reminder: "",
+    checked: false
+  },
+  {
+    id: "trip-train-milan-florence",
+    type: "train",
+    route: "Milano Porta Garibaldi → Firenze S. M. Novella · 14:48–16:50 · Frecciarossa 9321",
+    date: "2026-11-16T14:48",
+    code: "",
+    reminder: "",
+    checked: false
+  },
+  {
+    id: "trip-train-florence-rome",
+    type: "train",
+    route: "Firenze S. M. Novella → Roma Termini · 14:48–16:24 · Frecciarossa 8419",
+    date: "2026-11-18T14:48",
+    code: "",
+    reminder: "",
+    checked: false
+  },
+  {
+    id: "trip-flight-return",
+    type: "flight",
+    route: "Roma Fiumicino (FCO) → Selanik (SKG) · 19:50–22:30 · Aegean A3551",
+    date: "2026-11-20T19:50",
+    code: "",
+    reminder: "",
+    checked: false
+  }
+];
+
 // DOM Elements
 const itemsContainer = document.getElementById("itemsContainer");
 const emptyState = document.getElementById("emptyState");
@@ -1428,6 +1467,28 @@ function loadTransportTickets() {
       ["flight", "train"].includes(ticket.type) &&
       typeof ticket.route === "string"
     ) : [];
+
+    // Add the trip's public itinerary details without exposing booking references.
+    DEFAULT_TRANSPORT_TICKETS.forEach(defaultTicket => {
+      const existing = transportTickets.find(ticket =>
+        ticket.id === defaultTicket.id || (
+          ticket.type === defaultTicket.type &&
+          ticket.date === defaultTicket.date &&
+          ticket.route.startsWith(defaultTicket.route.split(" → ")[0])
+        )
+      );
+      if (existing) {
+        existing.id = defaultTicket.id;
+        existing.type = defaultTicket.type;
+        existing.route = defaultTicket.route;
+        existing.date = defaultTicket.date;
+        existing.code = "";
+        existing.reminder = "";
+      } else {
+        transportTickets.push({ ...defaultTicket });
+      }
+    });
+    saveTransportTickets();
   } catch (error) {
     console.warn("Bilet listesi yüklenemedi:", error);
     transportTickets = [];
