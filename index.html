@@ -18,7 +18,7 @@
   <!-- FontAwesome icons (via cdn) -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   
-  <link rel="stylesheet" href="style.css?v=23">
+  <link rel="stylesheet" href="style.css?v=24">
 </head>
 <body>
 
@@ -183,6 +183,57 @@
         <button type="submit" class="primary-btn"><i class="fa-solid fa-plus"></i> Bileti Ekle</button>
       </form>
       <div id="ticketList" class="ticket-list" aria-live="polite"></div>
+      </div>
+    </section>
+
+    <section class="expense-manager" aria-labelledby="expenseManagerTitle">
+      <button type="button" class="expense-manager-toggle" id="expenseManagerToggle" aria-expanded="false" aria-controls="expenseManagerContent">
+        <span class="expense-manager-heading">
+          <span class="expense-manager-title">
+            <h2 id="expenseManagerTitle"><i class="fa-solid fa-wallet text-gold"></i> Harcamalarım</h2>
+            <span class="expense-manager-description">Seyahat harcamalarını kaydet, toplamını takip et.</span>
+          </span>
+          <span class="expense-manager-summary">
+            <strong id="expenseGrandTotal">€0,00</strong>
+            <span class="expense-manager-action-group"><span id="expenseManagerAction">Göster</span><i class="fa-solid fa-chevron-down expense-manager-chevron" aria-hidden="true"></i></span>
+          </span>
+        </span>
+      </button>
+      <div id="expenseManagerContent" class="expense-manager-content" hidden>
+        <div class="expense-city-totals" id="expenseCityTotals" aria-live="polite"></div>
+        <form id="expenseForm" class="expense-form">
+          <div class="expense-form-grid">
+            <label class="expense-field">Tutar (€)
+              <input id="expenseAmount" type="number" min="0.01" step="0.01" inputmode="decimal" placeholder="0,00" required>
+            </label>
+            <label class="expense-field">Harcama
+              <input id="expenseDescription" type="text" maxlength="80" placeholder="Örn: Akşam yemeği" required>
+            </label>
+            <label class="expense-field">Kategori
+              <select id="expenseCategory" required>
+                <option value="food">Yeme & içme</option>
+                <option value="transport">Ulaşım</option>
+                <option value="stay">Konaklama</option>
+                <option value="shopping">Alışveriş</option>
+                <option value="tickets">Bilet / giriş</option>
+                <option value="other">Diğer</option>
+              </select>
+            </label>
+            <label class="expense-field">Şehir
+              <select id="expenseCity" required>
+                <option value="milano">Milano</option>
+                <option value="floransa">Floransa</option>
+                <option value="roma">Roma</option>
+                <option value="general">Şehir dışı / genel</option>
+              </select>
+            </label>
+            <label class="expense-field">Tarih
+              <input id="expenseDate" type="date" required>
+            </label>
+          </div>
+          <button type="submit" class="primary-btn"><i class="fa-solid fa-plus"></i> Harcama Ekle</button>
+        </form>
+        <div id="expenseList" class="expense-list" aria-live="polite"></div>
       </div>
     </section>
 
@@ -400,6 +451,6 @@
     </div>
   </div>
 
-  <script src="app.js?v=23"></script>
+  <script src="app.js?v=24"></script>
 </body>
 </html>

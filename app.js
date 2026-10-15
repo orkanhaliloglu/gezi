@@ -181,69 +181,13 @@ const INITIAL_DATA = [
     id: "m13",
     city: "milano",
     category: "shopping",
-    title: "Quadrilatero della Moda",
-    subtitle: "Dünyaca ünlü lüks moda dörtgeni",
+    title: "Quadrilatero della Moda (Montenapoleone & Spiga)",
+    subtitle: "Milano'nun lüks moda bölgesi; sokaklar tek yürüyüş rotasında",
     stars: "⭐⭐⭐",
     isMustSee: true,
     rating: "4.8",
-    advice: "Milano moda dünyasının merkezi.",
+    advice: "Via Montenapoleone, Via della Spiga ve Via Sant'Andrea aynı bölgede; hepsini tek rota olarak gezin.",
     mapQuery: "Quadrilatero della Moda Milano",
-    checked: false,
-    userNotes: ""
-  },
-  {
-    id: "m14",
-    city: "milano",
-    category: "shopping",
-    title: "Via Montenapoleone",
-    subtitle: "Milano'nun 1 numaralı lüks mağazalar caddesi",
-    stars: "⭐⭐⭐",
-    isMustSee: true,
-    rating: "4.8",
-    advice: "Gucci, Prada, Dior, Louis Vuitton vitrinleri.",
-    mapQuery: "Via Montenapoleone Milano",
-    checked: false,
-    userNotes: ""
-  },
-  {
-    id: "m15",
-    city: "milano",
-    category: "shopping",
-    title: "Via della Spiga",
-    subtitle: "Piyasalara kapalı lüks butikler caddesi",
-    stars: "⭐⭐",
-    isMustSee: false,
-    rating: "4.7",
-    advice: "Sadece yaya trafiğine açık şık alışveriş sokağı.",
-    mapQuery: "Via della Spiga Milano",
-    checked: false,
-    userNotes: ""
-  },
-  {
-    id: "m16",
-    city: "milano",
-    category: "shopping",
-    title: "Via Sant'Andrea",
-    subtitle: "Lüks butikler ve tasarımcı mağazaları",
-    stars: "",
-    isMustSee: false,
-    rating: "4.6",
-    advice: "Montenapoleone paralelindeki prestijli cadde.",
-    mapQuery: "Via Sant'Andrea Milano",
-    checked: false,
-    userNotes: ""
-  },
-  {
-    id: "m17",
-    city: "milano",
-    category: "shopping",
-    title: "Corso Venezia",
-    subtitle: "Görkemli binalar ve markalar",
-    stars: "",
-    isMustSee: false,
-    rating: "4.5",
-    advice: "Parka uzanan geniş cadde.",
-    mapQuery: "Corso Venezia Milano",
     checked: false,
     userNotes: ""
   },
@@ -262,29 +206,15 @@ const INITIAL_DATA = [
     userNotes: ""
   },
   {
-    id: "m19",
-    city: "milano",
-    category: "shopping",
-    title: "Corso Vittorio Emanuele II",
-    subtitle: "Duomo yakınındaki popüler cadde",
-    stars: "",
-    isMustSee: false,
-    rating: "4.6",
-    advice: "High-street moda markaları.",
-    mapQuery: "Corso Vittorio Emanuele II Milano",
-    checked: false,
-    userNotes: ""
-  },
-  {
     id: "m20",
     city: "milano",
     category: "shopping",
-    title: "Rinascente Milano",
-    subtitle: "Duomo'nun yanında büyük premium department store",
+    title: "Duomo alışverişi: Corso Vittorio Emanuele II & Rinascente",
+    subtitle: "High-street mağazaları ve Duomo yanındaki department store",
     stars: "⭐⭐",
     isMustSee: true,
     rating: "4.6",
-    advice: "7 katlı lüks alışveriş ve teras restoran alanı.",
+    advice: "Corso Vittorio Emanuele II ile birlikte gezin; Rinascente terasında yemek molası verilebilir.",
     mapQuery: "Rinascente Milano Piazza Duomo",
     checked: false,
     userNotes: ""
@@ -295,57 +225,14 @@ const INITIAL_DATA = [
     id: "m21",
     city: "milano",
     category: "outlets",
-    title: "🥇 Serravalle Designer Outlet",
-    subtitle: "200+ lüks mağaza, büyük outlet village (Puan: 9.5/10)",
+    title: "Scalo Milano Outlet & More",
+    subtitle: "Milano'da zaman kazandıran pratik outlet",
     stars: "⭐⭐⭐⭐⭐",
     isMustSee: true,
     rating: "4.4",
-    phone: "0143 609000",
-    advice: "🏆 Milano çevresindeki 1 NUMARA. ~1 saat mesafede. Tam gün ayırmaya değer.",
-    mapQuery: "Serravalle Designer Outlet",
-    checked: false,
-    userNotes: ""
-  },
-  {
-    id: "m22",
-    city: "milano",
-    category: "outlets",
-    title: "🥈 Fidenza Village",
-    subtitle: "120+ butik (Armani, BOSS, D&G, Furla, Coach) (Puan: 8.5/10)",
-    stars: "⭐⭐⭐⭐",
-    isMustSee: false,
-    rating: "4.4",
-    advice: "Milano-Parma arasında. Yıl boyu %70'e varan indirimler.",
-    mapQuery: "Fidenza Village",
-    checked: false,
-    userNotes: ""
-  },
-  {
-    id: "m23",
-    city: "milano",
-    category: "outlets",
-    title: "🥉 Scalo Milano Outlet & More",
-    subtitle: "Milano'ya çok yakın pratik outlet (Puan: 8.5/10)",
-    stars: "⭐⭐⭐⭐",
-    isMustSee: false,
-    rating: "4.3",
     phone: "02 9047 0350",
-    advice: "Çok zaman kaybetmeden pratik alışveriş için ideal.",
+    advice: "Şehir merkezinden S13 treni veya shuttle ile ulaşılabilir; kısa Milano konaklamasında en pratik outlet seçeneği.",
     mapQuery: "Scalo Milano Outlet",
-    checked: false,
-    userNotes: ""
-  },
-  {
-    id: "m24",
-    city: "milano",
-    category: "outlets",
-    title: "Vicolungo The Style Outlets",
-    subtitle: "Milano–Torino yönünde geniş outlet (Puan: 7.5/10)",
-    stars: "⭐⭐⭐",
-    isMustSee: false,
-    rating: "4.3",
-    advice: "Spor ve günlük markalar ağırlıklı.",
-    mapQuery: "Vicolungo The Style Outlets",
     checked: false,
     userNotes: ""
   },
@@ -728,13 +615,13 @@ const INITIAL_DATA = [
     id: "f20",
     city: "floransa",
     category: "shopping",
-    title: "San Lorenzo Market & Mercato Centrale",
-    subtitle: "Deri ürünleri pazarı ve üst kat gurme yemek alanı",
+    title: "San Lorenzo Açık Pazarı",
+    subtitle: "Deri ürünleri, hediyelikler ve yerel tezgâhlar; Mercato Centrale ayrı bir gıda pazarıdır",
     stars: "⭐",
     isMustSee: true,
     rating: "4.6",
-    advice: "Deri ceket, çanta ve hediyelik alışverişi.",
-    mapQuery: "Mercato Centrale Firenze",
+    advice: "Deri ürünleri ve hediyelikler için uğrayın. Kapalı gıda pazarı Mercato Centrale hemen yakındadır.",
+    mapQuery: "San Lorenzo Market Florence",
     checked: false,
     userNotes: ""
   },
@@ -766,21 +653,6 @@ const INITIAL_DATA = [
     phone: "055 865 7775",
     advice: "🏆 Floransa için 1 NUMARA KESİN TAVSİYE! Açılış: 10:00–19:00.",
     mapQuery: "The Mall Firenze Outlet",
-    checked: false,
-    userNotes: ""
-  },
-  {
-    id: "f23",
-    city: "floransa",
-    category: "outlets",
-    title: "🥈 Barberino Designer Outlet",
-    subtitle: "100+ marka (Spor, günlük, premium markalar) (Puan: 8.0/10)",
-    stars: "⭐⭐⭐⭐",
-    isMustSee: false,
-    rating: "4.4",
-    phone: "055 842161",
-    advice: "Mugello bölgesinde geniş outlet village atmosferi.",
-    mapQuery: "Barberino Designer Outlet",
     checked: false,
     userNotes: ""
   },
@@ -1123,27 +995,13 @@ const INITIAL_DATA = [
     id: "r17",
     city: "roma",
     category: "shopping",
-    title: "Via Condotti",
-    subtitle: "Roma'nın 1 numaralı lüks caddesi",
+    title: "İspanyol Merdivenleri alışveriş rotası (Via Condotti & çevresi)",
+    subtitle: "Via Condotti, Borgognona ve Frattina'daki lüks butik sokakları",
     stars: "⭐⭐⭐",
     isMustSee: true,
     rating: "4.7",
-    advice: "İspanyol merdivenlerinin tam karşısında yer alır.",
+    advice: "Via Condotti ve paralelindeki Via Borgognona ile Via Frattina aynı kısa yürüyüş rotasında.",
     mapQuery: "Via Condotti Rome",
-    checked: false,
-    userNotes: ""
-  },
-  {
-    id: "r18",
-    city: "roma",
-    category: "shopping",
-    title: "Via Borgognona & Via Frattina",
-    subtitle: "Şık lüks butikler ve ayakkabı mağazaları",
-    stars: "",
-    isMustSee: false,
-    rating: "4.6",
-    advice: "Via Condotti paralelindeki sakin sokaklar.",
-    mapQuery: "Via Borgognona Rome",
     checked: false,
     userNotes: ""
   },
@@ -1158,36 +1016,6 @@ const INITIAL_DATA = [
     rating: "4.6",
     advice: "Piazza del Popolo'dan Piazza Venezia'ya uzanır.",
     mapQuery: "Via del Corso Rome",
-    checked: false,
-    userNotes: ""
-  },
-  {
-    id: "r20",
-    city: "roma",
-    category: "shopping",
-    title: "Galleria Alberto Sordi",
-    subtitle: "Tarihi ve şık alışveriş PASAJI / AVM",
-    stars: "⭐⭐",
-    isMustSee: false,
-    rating: "4.3",
-    phone: "06 6919 0769",
-    advice: "Via del Corso üzerinde tarihi mimari.",
-    mapQuery: "Galleria Alberto Sordi Rome",
-    checked: false,
-    userNotes: ""
-  },
-  {
-    id: "r21",
-    city: "roma",
-    category: "shopping",
-    title: "Porta di Roma AVM",
-    subtitle: "Roma'nın en büyük modern alışveriş merkezi",
-    stars: "⭐⭐",
-    isMustSee: false,
-    rating: "4.4",
-    phone: "06 8707 0275",
-    advice: "220+ mağaza.",
-    mapQuery: "Shopping Mall Porta di Roma",
     checked: false,
     userNotes: ""
   },
@@ -1335,21 +1163,6 @@ const INITIAL_DATA = [
     userNotes: ""
   },
 
-  // ==================== 4. BONUS OUTLET KARŞILAŞTIRMA & VENEDİK ====================
-  {
-    id: "o1",
-    city: "roma",
-    category: "outlets",
-    title: "Noventa di Piave Designer Outlet (Venedik)",
-    subtitle: "158 lüks mağaza (Venedik yakını alternatif) (Puan: 9.0/10)",
-    stars: "⭐⭐⭐⭐⭐",
-    isMustSee: false,
-    rating: "4.5",
-    advice: "🔵 Eğer rotaya Venedik dahil edilirse 1 numaralı outlet alternatifi.",
-    mapQuery: "Noventa di Piave Designer Outlet",
-    checked: false,
-    userNotes: ""
-  }
 ];
 
 // State variables
@@ -1360,6 +1173,7 @@ let activeStatus = "all";
 let searchQuery = "";
 let currentModalItemId = null;
 let transportTickets = [];
+let expenses = [];
 
 const DEFAULT_TRANSPORT_TICKETS = [
   {
@@ -1446,9 +1260,11 @@ const CITY_INFO = {
 document.addEventListener("DOMContentLoaded", () => {
   loadData();
   loadTransportTickets();
+  loadExpenses();
   setupEventListeners();
   render();
   renderTransportTickets();
+  renderExpenses();
   initTravelSketch();
   registerServiceWorker();
 });
@@ -1474,6 +1290,16 @@ function loadData() {
     items = [...INITIAL_DATA];
   }
 
+  // Keep the shopping list editorial changes in sync for returning visitors.
+  const shoppingIdsToSync = new Set(["m13", "m18", "m20", "m21", "f20", "r17"]);
+  items.forEach(item => {
+    if (!shoppingIdsToSync.has(item.id)) return;
+    const updatedItem = INITIAL_DATA.find(seed => seed.id === item.id);
+    if (!updatedItem) return;
+    const { checked, userNotes } = item;
+    Object.assign(item, updatedItem, { checked, userNotes });
+  });
+
   // Keep these editorial itinerary updates in sync for existing local backups too.
   // Personal notes and checked state remain untouched.
   const romaAdviceUpdates = {
@@ -1490,6 +1316,13 @@ function loadData() {
 
   // Remove Bologna entries from previously saved browser data.
   items = items.filter(item => item && item.city !== "bologna");
+
+  // Remove redundant shopping stops and off-route outlet alternatives from saved copies too.
+  const retiredShoppingIds = new Set([
+    "m14", "m15", "m16", "m17", "m19", "m22", "m23", "m24",
+    "f23", "r18", "r20", "r21", "o1"
+  ]);
+  items = items.filter(item => !retiredShoppingIds.has(item.id));
 
   // Dish names are not venues; remove the old fabricated place ratings from saved copies.
   const dishOnlyFoodIds = new Set([
@@ -1594,8 +1427,133 @@ function renderTransportTickets() {
   }).join("");
 }
 
+const EXPENSE_CATEGORIES = {
+  food: "Yeme & içme",
+  transport: "Ulaşım",
+  stay: "Konaklama",
+  shopping: "Alışveriş",
+  tickets: "Bilet / giriş",
+  other: "Diğer"
+};
+
+const EXPENSE_CITIES = {
+  milano: "Milano",
+  floransa: "Floransa",
+  roma: "Roma",
+  general: "Genel"
+};
+
+function loadExpenses() {
+  try {
+    const saved = JSON.parse(localStorage.getItem("italy_expenses_v1") || "[]");
+    expenses = Array.isArray(saved) ? saved.filter(expense =>
+      expense && typeof expense.id === "string" &&
+      Number.isFinite(Number(expense.amount)) &&
+      typeof expense.description === "string"
+    ) : [];
+  } catch (error) {
+    console.warn("Harcama kayıtları yüklenemedi:", error);
+    expenses = [];
+  }
+}
+
+function saveExpenses() {
+  localStorage.setItem("italy_expenses_v1", JSON.stringify(expenses));
+}
+
+function formatExpenseAmount(amount) {
+  return new Intl.NumberFormat("tr-TR", { style: "currency", currency: "EUR" }).format(Number(amount) || 0);
+}
+
+function renderExpenses() {
+  const total = document.getElementById("expenseGrandTotal");
+  const cityTotals = document.getElementById("expenseCityTotals");
+  const list = document.getElementById("expenseList");
+  if (!total || !cityTotals || !list) return;
+
+  const sum = expenses.reduce((runningTotal, expense) => runningTotal + Number(expense.amount), 0);
+  total.textContent = formatExpenseAmount(sum);
+  const cityOrder = ["milano", "floransa", "roma", "general"];
+  cityTotals.innerHTML = cityOrder.map(city => {
+    const citySum = expenses
+      .filter(expense => expense.city === city)
+      .reduce((runningTotal, expense) => runningTotal + Number(expense.amount), 0);
+    return `<div class="expense-city-total"><span>${EXPENSE_CITIES[city]}</span><strong>${formatExpenseAmount(citySum)}</strong></div>`;
+  }).join("");
+
+  if (!expenses.length) {
+    list.innerHTML = '<p class="expense-empty">Henüz harcama eklenmedi. İlk kaydını yukarıdan ekleyebilirsin.</p>';
+    return;
+  }
+
+  const sortedExpenses = [...expenses].sort((a, b) => (b.date || "").localeCompare(a.date || ""));
+  list.innerHTML = sortedExpenses.map(expense => {
+    const dateLabel = expense.date
+      ? new Date(`${expense.date}T12:00:00`).toLocaleDateString("tr-TR", { day: "numeric", month: "short", year: "numeric" })
+      : "Tarih yok";
+    return `
+      <article class="expense-row">
+        <div class="expense-row-main">
+          <div class="expense-row-title">${escapeHTML(expense.description)}</div>
+          <div class="expense-row-meta">${escapeHTML(EXPENSE_CATEGORIES[expense.category] || EXPENSE_CATEGORIES.other)} · ${escapeHTML(EXPENSE_CITIES[expense.city] || EXPENSE_CITIES.general)} · ${escapeHTML(dateLabel)}</div>
+        </div>
+        <strong class="expense-row-amount">${formatExpenseAmount(expense.amount)}</strong>
+        <button type="button" class="expense-delete" data-expense-delete="${escapeHTML(expense.id)}" aria-label="${escapeHTML(expense.description)} harcamasını sil" title="Harcama kaydını sil"><i class="fa-solid fa-trash"></i></button>
+      </article>
+    `;
+  }).join("");
+}
+
 // Setup Event Listeners
 function setupEventListeners() {
+  const expenseToggle = document.getElementById("expenseManagerToggle");
+  const expenseContent = document.getElementById("expenseManagerContent");
+  const expenseAction = document.getElementById("expenseManagerAction");
+  if (expenseToggle && expenseContent) {
+    expenseToggle.addEventListener("click", () => {
+      const isExpanded = expenseToggle.getAttribute("aria-expanded") === "true";
+      expenseToggle.setAttribute("aria-expanded", String(!isExpanded));
+      expenseContent.hidden = isExpanded;
+      if (expenseAction) expenseAction.textContent = isExpanded ? "Göster" : "Gizle";
+    });
+  }
+
+  const expenseForm = document.getElementById("expenseForm");
+  if (expenseForm) {
+    document.getElementById("expenseDate").value = new Date().toLocaleDateString("sv-SE");
+    expenseForm.addEventListener("submit", event => {
+      event.preventDefault();
+      const amount = Number(document.getElementById("expenseAmount").value);
+      const description = document.getElementById("expenseDescription").value.trim();
+      if (!Number.isFinite(amount) || amount <= 0 || !description) return;
+
+      expenses.unshift({
+        id: `expense_${Date.now()}_${Math.random().toString(36).slice(2, 8)}`,
+        amount: Math.round(amount * 100) / 100,
+        description,
+        category: document.getElementById("expenseCategory").value,
+        city: document.getElementById("expenseCity").value,
+        date: document.getElementById("expenseDate").value
+      });
+      saveExpenses();
+      renderExpenses();
+      expenseForm.reset();
+      document.getElementById("expenseDate").value = new Date().toLocaleDateString("sv-SE");
+      document.getElementById("expenseAmount").focus();
+    });
+  }
+
+  const expenseList = document.getElementById("expenseList");
+  if (expenseList) {
+    expenseList.addEventListener("click", event => {
+      const button = event.target.closest("[data-expense-delete]");
+      if (!button) return;
+      expenses = expenses.filter(expense => expense.id !== button.dataset.expenseDelete);
+      saveExpenses();
+      renderExpenses();
+    });
+  }
+
   const ticketManagerToggle = document.getElementById("ticketManagerToggle");
   const ticketManagerContent = document.getElementById("ticketManagerContent");
   const ticketManagerAction = document.getElementById("ticketManagerAction");
@@ -1848,7 +1806,8 @@ function setupEventListeners() {
   });
 
   document.getElementById("exportDataBtn").addEventListener("click", () => {
-    const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(items, null, 2));
+    const backupData = { version: 2, items, expenses, transportTickets };
+    const dataStr = "data:text/json;charset=utf-8," + encodeURIComponent(JSON.stringify(backupData, null, 2));
     const dlAnchorElem = document.createElement('a');
     dlAnchorElem.setAttribute("href", dataStr);
     dlAnchorElem.setAttribute("download", `italya_gezi_listesi_${new Date().toISOString().slice(0,10)}.json`);
@@ -1864,9 +1823,24 @@ function setupEventListeners() {
     reader.onload = (event) => {
       try {
         const importedData = JSON.parse(event.target.result);
-        if (Array.isArray(importedData)) {
-          items = importedData.filter(item => item && item.city !== "bologna");
+        const importedItems = Array.isArray(importedData) ? importedData : importedData.items;
+        if (Array.isArray(importedItems)) {
+          items = importedItems.filter(item => item && item.city !== "bologna");
           saveData();
+          if (!Array.isArray(importedData) && Array.isArray(importedData.expenses)) {
+            expenses = importedData.expenses.filter(expense =>
+              expense && typeof expense.id === "string" &&
+              Number.isFinite(Number(expense.amount)) &&
+              typeof expense.description === "string"
+            );
+            saveExpenses();
+            renderExpenses();
+          }
+          if (!Array.isArray(importedData) && Array.isArray(importedData.transportTickets)) {
+            transportTickets = importedData.transportTickets;
+            saveTransportTickets();
+            renderTransportTickets();
+          }
           render();
           alert("Verileriniz başarıyla yüklendi!");
           document.getElementById("menuModal").classList.add("hidden");
@@ -2029,76 +2003,15 @@ function createOutletTableHTML() {
     <div class="outlet-table-wrapper">
       <div class="outlet-table-header">
         <i class="fa-solid fa-tags text-gold"></i>
-        <h3>🏆 Outlet Karşılaştırma & Değerlendirme Tablosu</h3>
+        <h3>Rotanızdaki Outlet Seçenekleri</h3>
       </div>
       <div class="table-responsive">
         <table class="outlet-table">
-          <thead>
-            <tr>
-              <th>Outlet</th>
-              <th>Şehir / Konum</th>
-              <th>Tarz / Markalar</th>
-              <th>Puan</th>
-              <th>Rotadaki Durum</th>
-            </tr>
-          </thead>
+          <thead><tr><th>Outlet</th><th>Şehir</th><th>Öne çıkan</th><th>Öneri</th></tr></thead>
           <tbody>
-            <tr>
-              <td><strong>⭐ Serravalle</strong></td>
-              <td>Milano (~1 st)</td>
-              <td>200+ Mağaza (Büyük Lüks)</td>
-              <td><span class="badge-score">9.5 / 10</span></td>
-              <td><span class="badge-status in-route">✅ Rotada</span></td>
-            </tr>
-            <tr>
-              <td><strong>⭐ The Mall Firenze</strong></td>
-              <td>Floransa (~40 dk)</td>
-              <td>Exclusive Luxury (Gucci, Prada, Armani)</td>
-              <td><span class="badge-score">9.5 / 10</span></td>
-              <td><span class="badge-status in-route">✅ Rotada</span></td>
-            </tr>
-            <tr>
-              <td><strong>Castel Romano</strong></td>
-              <td>Roma (~35 dk)</td>
-              <td>146 Mağaza (Lüks & Premium)</td>
-              <td><span class="badge-score">9.0 / 10</span></td>
-              <td><span class="badge-status in-route">✅ Rotada</span></td>
-            </tr>
-            <tr>
-              <td><strong>Scalo Milano</strong></td>
-              <td>Milano (Yakın)</td>
-              <td>Pratik & Çeşitli Markalar</td>
-              <td><span class="badge-score">8.5 / 10</span></td>
-              <td><span class="badge-status fast-route">🟢 Pratik</span></td>
-            </tr>
-            <tr>
-              <td><strong>Fidenza Village</strong></td>
-              <td>Milano/Parma</td>
-              <td>120+ Butik (Premium)</td>
-              <td><span class="badge-score">8.5 / 10</span></td>
-              <td><span class="badge-status alt-route">🟡 Alternatif</span></td>
-            </tr>
-            <tr>
-              <td><strong>Barberino</strong></td>
-              <td>Floransa (Kuzey)</td>
-              <td>100+ Mağaza (Geniş Spor/Moda)</td>
-              <td><span class="badge-score">8.0 / 10</span></td>
-              <td><span class="badge-status alt-route">🟡 Alternatif</span></td>
-            </tr>
-            <tr>
-              <td><strong>Noventa di Piave</strong></td>
-              <td>Venedik</td>
-              <td>158 Mağaza (Büyük Lüks)</td>
-              <td><span class="badge-score">9.0 / 10</span></td>
-              <td><span class="badge-status venice-route">🔵 Venedik</span></td>
-            </tr>
-            <tr>
-              <td><strong>Vicolungo</strong></td>
-              <td>Milano/Torino</td>
-              <td>Geniş Spor/Giyim</td>
-              <td><span class="badge-score">7.5 / 10</span></td>
-              <td><span class="badge-status alt-route">🟡 Alternatif</span></td>
-            </tr>
+            <tr><td><strong>Scalo Milano</strong></td><td>Milano</td><td>Şehre yakın, pratik</td><td><span class="badge-status in-route">Öncelikli</span></td></tr>
+            <tr><td><strong>The Mall Firenze</strong></td><td>Floransa</td><td>Lüks markalar</td><td><span class="badge-status in-route">Öncelikli</span></td></tr>
+            <tr><td><strong>Castel Romano</strong></td><td>Roma</td><td>Roma çevresinde outlet</td><td><span class="badge-status alt-route">Zaman kalırsa</span></td></tr>
           </tbody>
         </table>
       </div>
