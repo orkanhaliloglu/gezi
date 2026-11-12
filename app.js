@@ -1440,8 +1440,6 @@ const EXPENSE_CITIES = {
   milano: "Milano",
   floransa: "Floransa",
   roma: "Roma",
-  dedeagac: "Dedeağaç",
-  selanik: "Selanik",
   general: "Genel"
 };
 
@@ -1475,7 +1473,7 @@ function renderExpenses() {
 
   const sum = expenses.reduce((runningTotal, expense) => runningTotal + Number(expense.amount), 0);
   total.textContent = formatExpenseAmount(sum);
-  const cityOrder = ["milano", "floransa", "roma", "dedeagac", "selanik", "general"];
+  const cityOrder = ["milano", "floransa", "roma", "general"];
   cityTotals.innerHTML = cityOrder.map(city => {
     const citySum = expenses
       .filter(expense => expense.city === city)
