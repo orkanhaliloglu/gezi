@@ -1174,6 +1174,15 @@ let searchQuery = "";
 let currentModalItemId = null;
 let transportTickets = [];
 let expenses = [];
+let supabaseClient = null;
+let syncUser = null;
+let syncReady = false;
+let syncHydrating = false;
+let syncTimer = null;
+let syncChannel = null;
+let lastCloudState = null;
+let lastCloudUpdatedAt = null;
+let syncPollTimer = null;
 
 const DEFAULT_TRANSPORT_TICKETS = [
   {
@@ -1266,6 +1275,8 @@ document.addEventListener("DOMContentLoaded", () => {
   renderTransportTickets();
   renderExpenses();
   initTravelSketch();
+  setupCloudSyncUI();
+  initializeCloudSync();
   registerServiceWorker();
 });
 
@@ -1346,6 +1357,7 @@ function loadData() {
 // Save state to LocalStorage
 function saveData() {
   localStorage.setItem("italy_checklist_data_v2", JSON.stringify(items));
+  scheduleCloudSave();
   updateStats();
 }
 
@@ -1388,6 +1400,7 @@ function loadTransportTickets() {
 
 function saveTransportTickets() {
   localStorage.setItem("italy_transport_tickets_v1", JSON.stringify(transportTickets));
+  scheduleCloudSave();
 }
 
 function renderTransportTickets() {
@@ -1461,6 +1474,230 @@ function loadExpenses() {
 
 function saveExpenses() {
   localStorage.setItem("italy_expenses_v1", JSON.stringify(expenses));
+  scheduleCloudSave();
+}
+
+function setupCloudSyncUI() {
+  const modal = document.getElementById("syncModal");
+  const open = document.getElementById("cloudSyncBtn");
+  const close = document.getElementById("closeSyncModal");
+  const form = document.getElementById("syncSignInForm");
+  const signOut = document.getElementById("syncSignOutBtn");
+  open?.addEventListener("click", () => modal?.classList.remove("hidden"));
+  close?.addEventListener("click", () => modal?.classList.add("hidden"));
+  modal?.addEventListener("click", event => {
+    if (event.target === modal) modal.classList.add("hidden");
+  });
+  form?.addEventListener("submit", async event => {
+    event.preventDefault();
+    if (!supabaseClient) return setSyncMessage("Eşitleme servisine bağlanılamadı. Sayfayı yenileyip tekrar deneyin.", true);
+    const email = document.getElementById("syncEmail").value.trim();
+    const button = form.querySelector("button[type='submit']");
+    button.disabled = true;
+    setSyncMessage("Giriş bağlantısı gönderiliyor…");
+    const { error } = await supabaseClient.auth.signInWithOtp({
+      email,
+      options: { emailRedirectTo: window.location.href.split("#")[0] }
+    });
+    button.disabled = false;
+    if (error) return setSyncMessage(`Bağlantı gönderilemedi: ${error.message}`, true);
+    setSyncMessage("Giriş bağlantısı e-posta adresinize gönderildi. Bağlantıyı bu cihazda açın.");
+  });
+  signOut?.addEventListener("click", async () => {
+    const { error } = await supabaseClient.auth.signOut();
+    if (error) setSyncMessage(`Çıkış yapılamadı: ${error.message}`, true);
+    else modal?.classList.add("hidden");
+  });
+}
+
+async function initializeCloudSync() {
+  const config = window.TRIP_SUPABASE_CONFIG;
+  if (!config || !window.supabase?.createClient) {
+    setSyncMessage("Eşitleme kütüphanesi yüklenemedi. İnternet bağlantınızı kontrol edin.", true);
+    return;
+  }
+  supabaseClient = window.supabase.createClient(config.url, config.anonKey, {
+    auth: { persistSession: true, autoRefreshToken: true, detectSessionInUrl: true }
+  });
+  supabaseClient.auth.onAuthStateChange((_event, session) => {
+    queueMicrotask(() => handleCloudSession(session));
+  });
+  const { data, error } = await supabaseClient.auth.getSession();
+  if (error) {
+    setSyncMessage(`Oturum bilgisi alınamadı: ${error.message}`, true);
+    return;
+  }
+  await handleCloudSession(data.session);
+}
+
+async function handleCloudSession(session) {
+  const nextUser = session?.user || null;
+  if (!nextUser) {
+    syncUser = null;
+    syncReady = false;
+    clearInterval(syncPollTimer);
+    syncPollTimer = null;
+    if (syncChannel) {
+      await supabaseClient.removeChannel(syncChannel);
+      syncChannel = null;
+    }
+    updateSyncAccountUI();
+    return;
+  }
+  if (syncUser?.id === nextUser.id && (syncReady || syncHydrating)) return;
+  syncUser = nextUser;
+  syncReady = false;
+  syncHydrating = true;
+  updateSyncAccountUI();
+  setSyncMessage("Hesap verileriniz yükleniyor…");
+  const { data, error } = await supabaseClient
+    .from("trip_state")
+    .select("data, updated_at")
+    .eq("user_id", nextUser.id)
+    .maybeSingle();
+  if (error) {
+    syncHydrating = false;
+    setSyncMessage(`Bulut verisi okunamadı: ${error.message}`, true);
+    return;
+  }
+  if (data?.data && typeof data.data === "object") {
+    applyCloudState(data.data);
+    lastCloudState = JSON.stringify(data.data);
+    lastCloudUpdatedAt = data.updated_at;
+  } else {
+    // First sign-in on this account: migrate the current browser's saved data.
+    syncHydrating = false;
+    const migrated = await writeCloudState();
+    syncHydrating = true;
+    if (!migrated) {
+      syncHydrating = false;
+      return;
+    }
+  }
+  syncHydrating = false;
+  syncReady = true;
+  updateSyncAccountUI();
+  if (syncChannel) await supabaseClient.removeChannel(syncChannel);
+  syncChannel = supabaseClient.channel(`trip-state-${nextUser.id}`)
+    .on("postgres_changes", {
+      event: "UPDATE", schema: "public", table: "trip_state", filter: `user_id=eq.${nextUser.id}`
+    }, payload => {
+      const remote = payload.new?.data;
+      if (remote && JSON.stringify(remote) !== lastCloudState) {
+        applyCloudState(remote);
+        lastCloudState = JSON.stringify(remote);
+        lastCloudUpdatedAt = payload.new?.updated_at || lastCloudUpdatedAt;
+        setSyncMessage("Değişiklikler diğer cihazınızdan eşitlendi.");
+      }
+    }).subscribe();
+  clearInterval(syncPollTimer);
+  syncPollTimer = setInterval(refreshCloudState, 30000);
+}
+
+function getCloudState() {
+  return {
+    version: 1,
+    items,
+    expenses,
+    transportTickets,
+    routeProgress: sketchCompletedSteps,
+    theme: document.documentElement.getAttribute("data-theme") || "dark"
+  };
+}
+
+function applyCloudState(state) {
+  const cloudItems = Array.isArray(state.items) ? state.items.filter(item => item && item.city !== "bologna") : [];
+  const knownIds = new Set(cloudItems.map(item => item.id));
+  INITIAL_DATA.forEach(item => { if (!knownIds.has(item.id)) cloudItems.push({ ...item }); });
+  items = cloudItems;
+  expenses = Array.isArray(state.expenses) ? state.expenses : [];
+  transportTickets = Array.isArray(state.transportTickets) ? state.transportTickets : [];
+  if (Array.isArray(state.routeProgress) && state.routeProgress.length === SKETCH_STEPS.length) {
+    sketchCompletedSteps = state.routeProgress.map(Boolean);
+  }
+  const theme = state.theme === "light" ? "light" : "dark";
+  localStorage.setItem("italy_checklist_data_v2", JSON.stringify(items));
+  localStorage.setItem("italy_expenses_v1", JSON.stringify(expenses));
+  localStorage.setItem("italy_transport_tickets_v1", JSON.stringify(transportTickets));
+  localStorage.setItem(SKETCH_PROGRESS_KEY, JSON.stringify(sketchCompletedSteps));
+  localStorage.setItem("italy_checklist_theme", theme);
+  document.documentElement.setAttribute("data-theme", theme);
+  updateThemeIcon(theme);
+  render();
+  renderTransportTickets();
+  renderExpenses();
+  initTravelSketch();
+}
+
+function scheduleCloudSave() {
+  if (!syncUser || !syncReady || syncHydrating) return;
+  clearTimeout(syncTimer);
+  syncTimer = setTimeout(() => {
+    syncTimer = null;
+    writeCloudState();
+  }, 450);
+}
+
+async function writeCloudState() {
+  if (!syncUser || syncHydrating) return false;
+  const data = getCloudState();
+  const { data: saved, error } = await supabaseClient.from("trip_state")
+    .upsert({ user_id: syncUser.id, data }, { onConflict: "user_id" })
+    .select("updated_at")
+    .single();
+  if (error) {
+    setSyncMessage(`Buluta kaydedilemedi: ${error.message}`, true);
+    return false;
+  }
+  lastCloudState = JSON.stringify(data);
+  lastCloudUpdatedAt = saved?.updated_at || lastCloudUpdatedAt;
+  setSyncMessage("Eşitleme açık · Son değişiklik buluta kaydedildi.");
+  return true;
+}
+
+async function refreshCloudState() {
+  if (!syncUser || !syncReady || document.hidden || syncTimer) return;
+  const { data, error } = await supabaseClient.from("trip_state")
+    .select("data, updated_at")
+    .eq("user_id", syncUser.id)
+    .maybeSingle();
+  if (error || !data?.data || data.updated_at === lastCloudUpdatedAt) return;
+  if (lastCloudUpdatedAt && new Date(data.updated_at) <= new Date(lastCloudUpdatedAt)) return;
+  applyCloudState(data.data);
+  lastCloudState = JSON.stringify(data.data);
+  lastCloudUpdatedAt = data.updated_at;
+  setSyncMessage("Değişiklikler diğer cihazınızdan eşitlendi.");
+}
+
+function setSyncMessage(message, isError = false) {
+  const element = document.getElementById("syncMessage");
+  if (element) {
+    element.textContent = message;
+    element.classList.toggle("is-error", isError);
+  }
+  const button = document.getElementById("cloudSyncBtn");
+  if (button) {
+    button.classList.toggle("is-error", isError);
+    button.classList.toggle("is-synced", Boolean(syncUser && !isError));
+    button.title = message;
+  }
+}
+
+function updateSyncAccountUI() {
+  const status = document.getElementById("syncAccountStatus");
+  const signOut = document.getElementById("syncSignOutBtn");
+  const form = document.getElementById("syncSignInForm");
+  if (syncUser) {
+    if (status) status.textContent = `Bağlı hesap: ${syncUser.email || "E-posta hesabı"}`;
+    if (signOut) signOut.classList.remove("hidden");
+    if (form) form.classList.add("hidden");
+    setSyncMessage(syncReady ? "Eşitleme açık. Bu hesapta kayıtlarınız cihazlar arasında güncellenir." : "Bulut verileri yükleniyor…");
+  } else {
+    if (status) status.textContent = "E-posta ile güvenli giriş";
+    if (signOut) signOut.classList.add("hidden");
+    if (form) form.classList.remove("hidden");
+    setSyncMessage("Gelen kutunuza gönderilen bağlantıyı açarak giriş yapın.");
+  }
 }
 
 function formatExpenseAmount(amount) {
@@ -1610,6 +1847,7 @@ function setupEventListeners() {
     const next = current === "dark" ? "light" : "dark";
     document.documentElement.setAttribute("data-theme", next);
     localStorage.setItem("italy_checklist_theme", next);
+    scheduleCloudSave();
     updateThemeIcon(next);
   });
 
@@ -2564,7 +2802,7 @@ function initTravelSketch() {
     </label>
   `).join("");
 
-  checklist.addEventListener("change", event => {
+  checklist.onchange = event => {
     const checkbox = event.target.closest("input[data-route-check]");
     if (!checkbox) return;
 
@@ -2573,20 +2811,21 @@ function initTravelSketch() {
     checkbox.closest(".route-check-item")?.classList.toggle("is-done", checkbox.checked);
     try {
       localStorage.setItem(SKETCH_PROGRESS_KEY, JSON.stringify(sketchCompletedSteps));
+      scheduleCloudSave();
     } catch (error) {
       console.warn("Rota ilerlemesi kaydedilemedi:", error);
     }
     updateSketchProgress();
-  });
+  };
 
   if (collapseBtn && sketchCard) {
-    collapseBtn.addEventListener("click", () => {
+    collapseBtn.onclick = () => {
       sketchCard.classList.toggle("collapsed");
       const isCollapsed = sketchCard.classList.contains("collapsed");
       collapseBtn.innerHTML = isCollapsed
         ? '<i class="fa-solid fa-chevron-down"></i> <span class="btn-txt">Göster</span>'
         : '<i class="fa-solid fa-chevron-up"></i> <span class="btn-txt">Kapat</span>';
-    });
+    };
   }
 
   updateSketchProgress();

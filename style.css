@@ -760,6 +760,18 @@ body {
 
 .modal-body { padding: 16px; }
 
+.sync-modal-card { max-width: 440px; }
+.sync-modal-body > p { color: var(--text-sub); font-size: .9rem; line-height: 1.55; margin-bottom: 14px; }
+.sync-signin-form { display: flex; flex-direction: column; gap: 9px; }
+.sync-signin-form label { color: var(--text-sub); font-size: .82rem; font-weight: 700; }
+.sync-signin-form input { width: 100%; padding: 12px; border-radius: 10px; border: 1px solid var(--card-border); background: rgba(0,0,0,.2); color: var(--text-main); font: inherit; }
+.sync-signin-form input:focus { outline: 1px solid var(--accent-gold); }
+.sync-signin-form .primary-btn { margin-top: 3px; }
+.sync-message { font-size: .8rem !important; margin-top: 13px; }
+.sync-message.is-error { color: var(--accent-terracotta); }
+.cloud-sync-btn.is-synced { color: var(--accent-gold); }
+.cloud-sync-btn.is-error { color: var(--accent-terracotta); }
+
 .modal-subtitle {
   font-size: 0.88rem;
   color: var(--text-muted);

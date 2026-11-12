@@ -18,7 +18,7 @@
   <!-- FontAwesome icons (via cdn) -->
   <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
   
-  <link rel="stylesheet" href="style.css?v=25">
+  <link rel="stylesheet" href="style.css?v=26">
 </head>
 <body>
 
@@ -33,6 +33,9 @@
         </div>
       </div>
       <div class="header-actions">
+        <button id="cloudSyncBtn" class="icon-btn cloud-sync-btn" title="Cihazlar Arası Eşitleme" aria-label="Cihazlar arası eşitleme">
+          <i class="fa-solid fa-cloud"></i>
+        </button>
         <button id="borderBtn" class="icon-btn border-btn" title="🇹🇷 ↔️ 🇬🇷 Sınır Kapıları Canlı Yoğunluk">
           <i class="fa-solid fa-car-side"></i>
           <span class="pulse-dot"></span>
@@ -282,6 +285,29 @@
     </button>
   </footer>
 
+  <!-- Account and cloud sync -->
+  <div id="syncModal" class="modal-backdrop hidden">
+    <div class="modal-card sync-modal-card">
+      <div class="modal-header">
+        <div>
+          <h3><i class="fa-solid fa-cloud text-gold"></i> Cihazlar Arası Eşitleme</h3>
+          <span id="syncAccountStatus" class="modal-sub-label">E-posta ile güvenli giriş</span>
+        </div>
+        <button class="modal-close" id="closeSyncModal" aria-label="Kapat"><i class="fa-solid fa-xmark"></i></button>
+      </div>
+      <div class="modal-body sync-modal-body">
+        <p>Gezi listeniz, notlarınız, biletleriniz ve harcamalarınız hesabınıza kaydedilir; diğer cihazlarınızda aynı e-posta ile açabilirsiniz.</p>
+        <form id="syncSignInForm" class="sync-signin-form">
+          <label for="syncEmail">E-posta adresi</label>
+          <input id="syncEmail" type="email" autocomplete="email" required placeholder="ornek@eposta.com">
+          <button type="submit" class="primary-btn"><i class="fa-solid fa-paper-plane"></i> Giriş bağlantısı gönder</button>
+        </form>
+        <p id="syncMessage" class="sync-message" role="status" aria-live="polite">Gelen kutunuza gönderilen bağlantıyı açarak giriş yapın.</p>
+        <button type="button" id="syncSignOutBtn" class="secondary-btn hidden">Bu cihazdan çıkış yap</button>
+      </div>
+    </div>
+  </div>
+
   <!-- Modal: Item Detail & User Note -->
   <div id="detailModal" class="modal-backdrop hidden">
     <div class="modal-card">
@@ -453,6 +479,8 @@
     </div>
   </div>
 
-  <script src="app.js?v=25"></script>
+  <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+  <script src="supabase/config.js?v=1"></script>
+  <script src="app.js?v=26"></script>
 </body>
 </html>
