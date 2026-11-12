@@ -1572,7 +1572,7 @@ body {
 .expense-manager-toggle[aria-expanded="true"] .expense-manager-chevron { transform: rotate(180deg); }
 .expense-manager-content { margin-top: 14px; }
 .expense-manager-content[hidden] { display: none; }
-.expense-city-totals { display: grid; grid-template-columns: repeat(6, minmax(0, 1fr)); gap: 7px; margin-bottom: 14px; }
+.expense-city-totals { display: grid; grid-template-columns: repeat(4, minmax(0, 1fr)); gap: 7px; margin-bottom: 14px; }
 .expense-city-total { min-width: 0; padding: 9px; border: 1px solid var(--card-border); border-radius: 10px; background: var(--bg-secondary); }
 .expense-city-total span { display: block; color: var(--text-muted); font-size: .68rem; }
 .expense-city-total strong { display: block; margin-top: 2px; color: var(--text-main); font-size: .82rem; overflow-wrap: anywhere; }
@@ -1653,10 +1653,6 @@ body {
   .sketch-controls { gap: 4px; }
   .sketch-completion-chip { padding: 3px 7px; font-size: .68rem; }
   .travel-sketch-card .sketch-ctrl-btn { padding: 7px 8px; }
-}
-
-@media (min-width: 601px) and (max-width: 900px) {
-  .expense-city-totals { grid-template-columns: repeat(3, minmax(0, 1fr)); }
 }
 
 @media (max-width: 360px) {
